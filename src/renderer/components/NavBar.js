@@ -15,6 +15,15 @@ export default function NavBar() {
     dispatch(setMode());
   };
 
+  const pages = [
+    { name: 'HTTP', route: '/', value: 'http' },
+    { name: 'GraphQL', route: '/graphql', value: 'graphQL' },
+    { name: 'WebSocket', route: '/websocket', value: 'ws' },
+    { name: 'SSE', route: '/sse', value: 'sse' },
+    { name: 'Webhook', route: '/webhook', value: 'webhook' },
+  ];
+
+  function reduxPage
   return (
     <AppBar>
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-around' }}>
