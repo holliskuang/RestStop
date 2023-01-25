@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { set } from 'mongoose';
+import { setFdLimit } from 'process';
 
 const initialState = {
   url: '',
@@ -6,6 +8,8 @@ const initialState = {
   headers: '',
   body: '',
   response: '',
+  error: false,
+  loading: true,
 };
 
 const requestSlice = createSlice({
@@ -27,9 +31,15 @@ const requestSlice = createSlice({
         setResponse: (state, action) => {
             state.response = action.payload;
         }
+        setError: (state, action) => {
+            state.error = action.payload;
+        }
+        setLoading: (state, action) => {
+            state.loading = action.payload;
+        }
       },
     },
   );
 
-    export const { setUrl, setMethod, setHeaders, setBody, setResponse } = requestSlice.actions;
+    export const { setUrl, setMethod, setHeaders, setBody, setResponse, setError, setLoading } = requestSlice.actions;
     export default requestSlice.reducer;
