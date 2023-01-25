@@ -4,7 +4,7 @@ const initialState = {
   mode: 'dark',
 };
 
-const lightReducer = createSlice({
+const lightSlice = createSlice({
   name: 'light',
   initialState,
   reducers: {
@@ -15,5 +15,5 @@ const lightReducer = createSlice({
   },
 });
 
-export const { setMode } = lightReducer.actions;
-export default lightReducer.reducer;
+export const { setMode } = lightSlice.actions;
+export default lightSlice.reducer;

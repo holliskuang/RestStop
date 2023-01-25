@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import lightReducer from './lightReducer.js';
+import lightSlice from './lightSlice';
 
 const rootReducer = combineReducers({
-  light: lightReducer,
+  light: lightSlice,
 });
 
 export default rootReducer;
