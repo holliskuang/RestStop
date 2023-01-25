@@ -1,10 +1,12 @@
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { setMode } from '../state/authReducer';
+import { setMode } from '../state/lightReducer';
 import { useLocation } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Button } from '@mui/material';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import DataObjectIcon from '@mui/icons-material/DataObject';
+import { useAppDispatch } from '../state/store';
+
 
 export default function NavBar() {
   const dispatch = useDispatch();
@@ -23,7 +25,8 @@ export default function NavBar() {
     { name: 'Webhook', route: '/webhook', value: 'webhook' },
   ];
 
-  function reduxPage
+  function ReduxPageUpdate() {}
+
   return (
     <AppBar>
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-around' }}>

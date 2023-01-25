@@ -4,8 +4,8 @@ const initialState = {
   mode: 'dark',
 };
 
-export const authSlice = createSlice({
-  name: 'auth',
+const lightReducer = createSlice({
+  name: 'light',
   initialState,
   reducers: {
     setMode: (state) => {
@@ -14,5 +14,5 @@ export const authSlice = createSlice({
   },
 });
 
-export const { setMode } = authSlice.actions;
-export default authSlice.reducer;
+export const { setMode } = lightReducer.actions;
+export default lightReducer.reducer;
