@@ -5,6 +5,10 @@ import { setMode } from '../state/lightSlice';
 import { AppBar, Toolbar, Typography, Button } from '@mui/material';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import DataObjectIcon from '@mui/icons-material/DataObject';
+import HubIcon from '@mui/icons-material/Hub';
+import PowerIcon from '@mui/icons-material/Power';
+import SettingsInputAntennaIcon from '@mui/icons-material/SettingsInputAntenna';
+import WebhookIcon from '@mui/icons-material/Webhook';
 
 export default function NavBar() {
   const dispatch = useDispatch();
@@ -16,14 +20,14 @@ export default function NavBar() {
   };
 
   const pages = [
-    { name: 'HTTP', route: '/', value: 'http' },
-    { name: 'GraphQL', route: '/graphql', value: 'graphQL' },
-    { name: 'WebSocket', route: '/websocket', value: 'ws' },
-    { name: 'SSE', route: '/sse', value: 'sse' },
-    { name: 'Webhook', route: '/webhook', value: 'webhook' },
+    { name: 'HTTP', route: '/', value: 'http' ,endIcon={<DataObjectIcon />}},
+    { name: 'GraphQL', route: '/graphql', value: 'graphQL', endIcon={<HubIcon />} },
+    { name: 'WebSocket', route: '/websocket', value: 'ws', endIcon={<PowerIcon />}},
+    { name: 'SSE', route: '/sse', value: 'sse', endIcon={<SettingsInputAntennaIcon />} },
+    { name: 'Webhook', route: '/webhook', value: 'webhook', endIcon={<WebhookIcon />} },
   ];
 
-  function ReduxPageUpdate() {}
+ function ReduxPageUpdate() {}
 
   return (
     <AppBar>
@@ -33,41 +37,14 @@ export default function NavBar() {
         </Typography>
         <div className="grow" />
         <div className="nav-buttons">
-          <Button
-            color="inherit"
-            variant="outlined"
-            endIcon={<DataObjectIcon />}
-          >
-            HTTP
-          </Button>
-          <Button
-            color="inherit"
-            variant="outlined"
-            endIcon={<DataObjectIcon />}
-          >
-            GraphQL
-          </Button>
-          <Button
-            color="inherit"
-            variant="outlined"
-            endIcon={<DataObjectIcon />}
-          >
-            WebSocket
-          </Button>
-          <Button
-            color="inherit"
-            variant="outlined"
-            endIcon={<DataObjectIcon />}
-          >
-            WebHook
-          </Button>
-          <Button
-            color="inherit"
-            variant="outlined"
-            endIcon={<DataObjectIcon />}
-          >
-            SSE
-          </Button>
+     {pages.map((page) => (return(<Button
+     to={page.route}
+      color="inherit"
+      variant="outlined"
+      endIcon={page.endIcon}
+      onClick={ReduxPageUpdate}
+     ></Button>)))}
+
           <Button
             color="inherit"
             variant="outlined"
