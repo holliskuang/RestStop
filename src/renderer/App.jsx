@@ -9,8 +9,9 @@ import { useSelector } from 'react-redux';
 import NavBar from './components/NavBar';
 
 const Hello = () => {
-  const mode = useSelector((state) => state.mode);
+  const mode = useSelector((state) => state.light.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
+  console.log('hi')
   return (
     <div>
       <ThemeProvider theme={theme}>

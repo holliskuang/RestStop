@@ -1,20 +1,21 @@
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { setMode } from '../state/lightReducer';
 import { useLocation } from 'react-router-dom';
+import { setMode } from '../state/lightReducer';
 import { AppBar, Toolbar, Typography, Button } from '@mui/material';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import DataObjectIcon from '@mui/icons-material/DataObject';
-import { useAppDispatch } from '../state/store';
+
 
 
 export default function NavBar() {
   const dispatch = useDispatch();
-  const mode = useSelector((state) => state.mode);
+  const mode = useSelector((state) => state.light.mode);
   const location = useLocation();
 
   const handleModeChange = () => {
     dispatch(setMode());
+  
   };
 
   const pages = [
