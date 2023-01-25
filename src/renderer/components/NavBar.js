@@ -44,7 +44,7 @@ export default function NavBar() {
       endIcon={page.endIcon}
       onClick={ReduxPageUpdate}
      ></Button>)))}
-
+ 
           <Button
             color="inherit"
             variant="outlined"
