@@ -9,31 +9,38 @@ import {
   setMethod,
   setUrl,
 } from 'C:/Users/Hollis/Desktop/RestStop/src/renderer/state/requestSlice.js';
-import { TextField } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import { setUrl } from 'C:/Users/Hollis/Desktop/RestStop/src/renderer/state/requestSlice.js';
+import { transcode } from 'buffer';
+import Header from './Header';
 
 export default function Request() {
   const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(setMethod(event.target.value));
   };
   const reqState = useSelector((state) => state.request);
 
   return (
     <div className="request">
-      <FormControl fullWidth sx={{
-        display: 'flex',
-        flexDirection: 'row',
-      }}>
+      <FormControl
+        fullWidth
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+        }}
+      >
         <InputLabel id="restReq">Req</InputLabel>
         <Select
           labelId="restReqlabel"
           id="restReq"
           value={reqState.method}
           label="REST"
-          onChange={handleSubmit}
+          onChange={(event) => {
+            dispatch(setMethod(event.target.value));
+          }}
         >
           <MenuItem value="GET">GET</MenuItem>
           <MenuItem value="POST">POST</MenuItem>
@@ -51,6 +58,18 @@ export default function Request() {
             dispatch(setUrl(event.target.value));
           }}
         ></TextField>
+        <Button
+          variant="outlined"
+          type="submit"
+          sx={{
+            color: 'white',
+          }}
+        >
+          Submit Request
+        </Button>
+
+        <Header/>
+
       </FormControl>
     </div>
   );
