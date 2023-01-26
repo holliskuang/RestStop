@@ -10,6 +10,8 @@ import PowerIcon from '@mui/icons-material/Power';
 import SettingsInputAntennaIcon from '@mui/icons-material/SettingsInputAntenna';
 import WebhookIcon from '@mui/icons-material/Webhook';
 
+import React, { useState } from 'react';
+
 export default function NavBar() {
   const dispatch = useDispatch();
   const mode = useSelector((state) => state.light.mode);
@@ -19,15 +21,16 @@ export default function NavBar() {
     dispatch(setMode());
   };
 
-  const pages = [
-    { name: 'HTTP', route: '/', value: 'http' ,endIcon={<DataObjectIcon />}},
-    { name: 'GraphQL', route: '/graphql', value: 'graphQL', endIcon={<HubIcon />} },
-    { name: 'WebSocket', route: '/websocket', value: 'ws', endIcon={<PowerIcon />}},
-    { name: 'SSE', route: '/sse', value: 'sse', endIcon={<SettingsInputAntennaIcon />} },
-    { name: 'Webhook', route: '/webhook', value: 'webhook', endIcon={<WebhookIcon />} },
-  ];
-
- function ReduxPageUpdate() {}
+  /* const pages = [
+    { name: 'HTTP', route: '/', value: 'http' ,endIcon=`DataObjectIcon`},
+    { name: 'GraphQL', route: '/graphql', value: 'graphQL', endIcon=`HubIcon` },
+    { name: 'WebSocket', route: '/websocket', value: 'ws', endIcon=`PowerIcon`},
+    { name: 'SSE', route: '/sse', value: 'sse', endIcon=`SettingsInputAntennaIcon` },
+    { name: 'Webhook', route: '/webhook', value: 'webhook', endIcon=`WebhookIcon` },
+  ]; */
+  function ReduxPageUpdate() {
+    console.log('redux page update');
+  }
 
   return (
     <AppBar>
@@ -37,14 +40,15 @@ export default function NavBar() {
         </Typography>
         <div className="grow" />
         <div className="nav-buttons">
-     {pages.map((page) => (return(<Button
-     to={page.route}
+          
+       { /*{pages.map((page) 
+     =>(<Button 
+      href={page.route}
       color="inherit"
       variant="outlined"
-      endIcon={page.endIcon}
+      endIcon={<page.endIcon/>}
       onClick={ReduxPageUpdate}
-     ></Button>)))}
- 
+     ></Button>))} */}
           <Button
             color="inherit"
             variant="outlined"
