@@ -21,11 +21,10 @@ const requestSlice = createSlice({
       state.method = action.payload;
     },
     addHeaders: (state, action) => {
-      state.headers = {...state.headers, [action.payload.key]: action.payload.value}
     },
     subtractHeaders: (state, action) => {
 
-    }
+    },
     setBody: (state, action) => {
       state.body = action.payload;
     },

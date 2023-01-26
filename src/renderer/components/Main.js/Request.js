@@ -12,7 +12,8 @@ import {
 import { Button, TextField } from '@mui/material';
 import { setUrl } from 'C:/Users/Hollis/Desktop/RestStop/src/renderer/state/requestSlice.js';
 import { transcode } from 'buffer';
-import Header from './Header';
+import HeaderBox from './HeaderBox';
+
 
 export default function Request() {
   const dispatch = useDispatch();
@@ -68,8 +69,7 @@ export default function Request() {
           Submit Request
         </Button>
 
-        <Header/>
-
+        <HeaderBox/>
       </FormControl>
     </div>
   );

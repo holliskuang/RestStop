@@ -31,7 +31,13 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Hello />} />
+        <Route path="*" element={<div>404</div>} />
+        <Route path="/graphql" element={}/>
+        <Route path="/websocket" element={}/>
+        <Route path="/sse" element={}/>
+        <Route path="/webhook" element={}/>
       </Routes>
     </Router>
   );
 }
+

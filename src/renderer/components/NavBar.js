@@ -21,13 +21,13 @@ export default function NavBar() {
     dispatch(setMode());
   };
 
-  /* const pages = [
-    { name: 'HTTP', route: '/', value: 'http' ,endIcon=`DataObjectIcon`},
-    { name: 'GraphQL', route: '/graphql', value: 'graphQL', endIcon=`HubIcon` },
-    { name: 'WebSocket', route: '/websocket', value: 'ws', endIcon=`PowerIcon`},
-    { name: 'SSE', route: '/sse', value: 'sse', endIcon=`SettingsInputAntennaIcon` },
-    { name: 'Webhook', route: '/webhook', value: 'webhook', endIcon=`WebhookIcon` },
-  ]; */
+   const pages = [
+    { name: 'HTTP', route: '/', value: 'http' ,endIcon:DataObjectIcon},
+    { name: 'GraphQL', route: '/graphql', value: 'graphQL', endIcon:HubIcon },
+    { name: 'WebSocket', route: '/websocket', value: 'ws', endIcon:PowerIcon},
+    { name: 'SSE', route: '/sse', value: 'sse', endIcon:SettingsInputAntennaIcon },
+    { name: 'Webhook', route: '/webhook', value: 'webhook', endIcon:WebhookIcon },
+  ]; 
   function ReduxPageUpdate() {
     console.log('redux page update');
   }
@@ -41,14 +41,16 @@ export default function NavBar() {
         <div className="grow" />
         <div className="nav-buttons">
           
-       { /*{pages.map((page) 
+      {pages.map((page) 
      =>(<Button 
       href={page.route}
       color="inherit"
       variant="outlined"
       endIcon={<page.endIcon/>}
       onClick={ReduxPageUpdate}
-     ></Button>))} */}
+     >
+      {page.name}
+     </Button>))} 
           <Button
             color="inherit"
             variant="outlined"

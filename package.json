@@ -126,7 +126,8 @@
     "react-router-dom": "^6.4.0",
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
-    "state": "^0.2.0"
+    "state": "^0.2.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@electron/notarize": "^1.2.3",
