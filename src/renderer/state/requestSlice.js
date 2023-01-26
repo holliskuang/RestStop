@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   url: '',
   method: 'GET',
-  headers: '',
+  headers: {},
   body: '',
   response: '',
   error: false,
@@ -20,9 +20,12 @@ const requestSlice = createSlice({
     setMethod: (state, action) => {
       state.method = action.payload;
     },
-    setHeaders: (state, action) => {
-      state.headers = action.payload;
+    addHeaders: (state, action) => {
+      state.headers = {...state.headers, [action.payload.key]: action.payload.value}
     },
+    subtractHeaders: (state, action) => {
+
+    }
     setBody: (state, action) => {
       state.body = action.payload;
     },
@@ -41,7 +44,8 @@ const requestSlice = createSlice({
 export const {
   setUrl,
   setMethod,
-  setHeaders,
+  addHeaders,
+    subtractHeaders,
   setBody,
   setResponse,
   setError,

@@ -6,9 +6,20 @@ export default function Header() {
   const [key, setKey] = useState('');
   const [value, setValue] = useState('');
   const [checked, setChecked] = useState(false);
+
+
+  // if checked==true , retrieve key value 
+
+  const handleClick = () => {
+    setChecked(event.target.checked);
+    // add to array in redux
+  }
   return (
     <Box>
-      <Checkbox checked={() => setChecked(!checked)}></Checkbox>
+      <Checkbox
+        checked={checked}
+        onChange={handleClick}
+      ></Checkbox>
       <TextField
         variant="standard"
         label="Key"
