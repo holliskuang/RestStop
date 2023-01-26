@@ -21,9 +21,16 @@ const requestSlice = createSlice({
       state.method = action.payload;
     },
     addHeaders: (state, action) => {
+      state.headers = { ...state.headers, ...action.payload };
     },
     subtractHeaders: (state, action) => {
-
+      const newHeader= Object.keys(state.headers).reduce((acc, key) => {
+        if (key !== action.payload) {
+          acc[key] = state.headers[key];
+        }
+        return acc;
+      }, {}); 
+      state.headers = newHeader;
     },
     setBody: (state, action) => {
       state.body = action.payload;
@@ -44,7 +51,7 @@ export const {
   setUrl,
   setMethod,
   addHeaders,
-    subtractHeaders,
+  subtractHeaders,
   setBody,
   setResponse,
   setError,

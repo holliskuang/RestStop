@@ -5,33 +5,25 @@ import { useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 export default function Header(props) {
-  const [key, setKey] = useState('');
-  const [value, setValue] = useState('');
-  const [checked, setChecked] = useState(false);
-
   // if checked==true , retrieve key value
 
-  const handleClick = () => {
-    setChecked(event.target.checked);
-    // add to array in redux
-  };
   return (
     <Box>
-      <Checkbox checked={checked} onChange={handleClick}></Checkbox>
+      <Checkbox onChange={(event)=> {props.handleCheck(props.id,event)}}></Checkbox>
       <TextField
         variant="standard"
         label="Key"
-        value={key}
+        value={props.headerKey}
         onChange={(event) => {
-          setKey(event.target.value);
+          props.onChangeKey(props.id, event);
         }}
       ></TextField>
       <TextField
         variant="standard"
         label="Value"
-        value={value}
+        value={props.value}
         onChange={(event) => {
-          setValue(event.target.value);
+          props.onChangeValue(props.id, event);
         }}
       ></TextField>
       <IconButton
