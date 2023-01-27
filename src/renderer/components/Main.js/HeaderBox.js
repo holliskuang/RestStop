@@ -14,10 +14,9 @@ export default function HeaderBox() {
   const [headerList, setHeaderList] = useState(initalObj);
   const dispatch = useDispatch();
 
-  // conglomerate header info and update redux for headers whenever local state 
+  // conglomerate header info and update redux for headers whenever local state
   // changes
   dispatch(setHeaders(headerList));
-
 
   // update redux for checked
   const handleCheck = (id, event) => {
@@ -27,7 +26,7 @@ export default function HeaderBox() {
     });
   };
 
-  // update redux for key 
+  // update redux for key
   const onChangeKey = (id, event) => {
     setHeaderList({
       ...headerList,
@@ -54,8 +53,9 @@ export default function HeaderBox() {
   const deleteFromHeaderList = (id) => {
     console.log(id);
     if (Object.keys(headerList).length === 1) return;
-    delete headerList[id];
-    setHeaderList({ ...headerList });
+    let newHeader = { ...headerList };
+    delete newHeader[id];
+    setHeaderList({ ...newHeader });
   };
   return (
     <Box>

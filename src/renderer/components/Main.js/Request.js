@@ -23,8 +23,10 @@ export default function Request() {
     const url = retrieveUrl();
     const method = retrieveMethod();
     const headers = JSON.stringify(retrieveHeaders());
+    console.log(url);
+    console.log(method);
     console.log(headers);
-    const response = await fetch(retrieveUrl(), {
+    const response = await fetch(url, {
       method: method,
       headers: headers,
     });
