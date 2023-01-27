@@ -14,14 +14,45 @@ import { setUrl } from 'C:/Users/Hollis/Desktop/RestStop/src/renderer/state/requ
 import { transcode } from 'buffer';
 import HeaderBox from './HeaderBox';
 
-
 export default function Request() {
   const dispatch = useDispatch();
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  };
   const reqState = useSelector((state) => state.request);
+
+  async function handleSubmit() {
+   
+    event.preventDefault();
+    const url=retrieveUrl();
+    const method=retrieveMethod();
+    const headers=JSON.stringify(retrieveHeaders());
+    console.log(headers);
+  const response = await fetch(retrieveUrl(), {
+      method: retrieveMethod(),
+    });
+    const data = await response.json();
+    console.log(data); // JSON data parsed by `data.json()` call
+  }
+
+  // retrieve checked headers from redux and return as object
+  const retrieveHeaders = () => {
+    const headers = {};
+    Object.keys(reqState.headers).forEach((id) => {
+      if (reqState.headers[id].checked) {
+        headers[reqState.headers[id].key] = reqState.headers[id].value;
+      }
+    });
+
+    return headers;
+  };
+  // retrieve url from redux
+  const retrieveUrl = () => {
+    const url = reqState.url;
+    return url;
+  };
+  // retrieve method from redux
+  const retrieveMethod = () => {
+    const method = reqState.method;
+    return method;
+  };
 
   return (
     <div className="request">
@@ -65,11 +96,12 @@ export default function Request() {
           sx={{
             color: 'white',
           }}
+          onClick={handleSubmit}
         >
           Submit Request
         </Button>
 
-        <HeaderBox/>
+        <HeaderBox />
       </FormControl>
     </div>
   );

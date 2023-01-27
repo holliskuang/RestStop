@@ -1,9 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { v4 as uuid } from 'uuid';
+
+const initalObj = {};
+initalObj[uuid()] = { key: '', value: '', checked: false };
 
 const initialState = {
   url: '',
   method: 'GET',
-  headers: {},
+  headers: initalObj,
   body: '',
   response: '',
   error: false,
@@ -20,17 +24,8 @@ const requestSlice = createSlice({
     setMethod: (state, action) => {
       state.method = action.payload;
     },
-    addHeaders: (state, action) => {
-      state.headers = { ...state.headers, ...action.payload };
-    },
-    subtractHeaders: (state, action) => {
-      const newHeader= Object.keys(state.headers).reduce((acc, key) => {
-        if (key !== action.payload) {
-          acc[key] = state.headers[key];
-        }
-        return acc;
-      }, {}); 
-      state.headers = newHeader;
+    setHeaders: (state, action) => {
+      state.headers = action.payload;
     },
     setBody: (state, action) => {
       state.body = action.payload;
@@ -50,8 +45,7 @@ const requestSlice = createSlice({
 export const {
   setUrl,
   setMethod,
-  addHeaders,
-  subtractHeaders,
+  setHeaders,
   setBody,
   setResponse,
   setError,

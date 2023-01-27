@@ -4,29 +4,53 @@ import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import Header from './Header';
 import Box from '@mui/material/Box/Box';
+import { useDispatch, useSelector } from 'react-redux';
+import { setHeaders } from '../../state/requestSlice';
+import { get } from 'http';
 
 export default function HeaderBox() {
   const initalObj = {};
-  initalObj[uuid()] = { key: '', value: '', checked: false };
+  initalObj[uuid()] = { key: '', value: '', checked: true };
   const [headerList, setHeaderList] = useState(initalObj);
+  const dispatch = useDispatch();
 
-  const onChangeKey = (id, event) => {
-    headerList[id].key = event.currentTarget.value;
-    setHeaderList({ ...headerList });
-  };
+  // conglomerate header info and update redux for headers whenever local state 
+  // changes
+  dispatch(setHeaders(headerList));
+
+
+  // update redux for checked
   const handleCheck = (id, event) => {
-    headerList[id].checked = event.currentTarget.checked;
-    setHeaderList({ ...headerList });
+    setHeaderList({
+      ...headerList,
+      [id]: { ...headerList[id], checked: event.target.checked },
+    });
   };
+
+  // update redux for key 
+  const onChangeKey = (id, event) => {
+    setHeaderList({
+      ...headerList,
+      [id]: { ...headerList[id], key: event.target.value },
+    });
+  };
+
+  // update redux for value
   const onChangeValue = (id, event) => {
-    headerList[id].value = event.currentTarget.value;
-    setHeaderList({ ...headerList });
+    setHeaderList({
+      ...headerList,
+      [id]: { ...headerList[id], value: event.target.value },
+    });
   };
+
+  // add new header to local state
   const addHeader = () => {
     const newHeader = {};
     newHeader[uuid()] = { key: '', value: '', checked: false };
     setHeaderList({ ...headerList, ...newHeader });
   };
+
+  // delete header from local state
   const deleteFromHeaderList = (id) => {
     console.log(id);
     if (Object.keys(headerList).length === 1) return;
