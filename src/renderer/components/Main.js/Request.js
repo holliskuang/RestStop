@@ -33,7 +33,7 @@ export default function Request() {
   }
 
   // retrieve checked headers from redux and return as object
-  const retrieveHeaders = () => {
+  const retrieveHeaders = () => {  
     const headers = {};
     Object.keys(reqState.headers).forEach((id) => {
       if (reqState.headers[id].checked) {
