@@ -129,20 +129,15 @@ app
   .whenReady()
   .then(() => {
     ipcMain.handle('fetch', async (event, url, method, headers) => {
-      await fetch('https://google.com', {
+      let response = await fetch('https://geolocation-db.com/json/', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
-      })
-      // determine if HTML or JSON
-      // get Headers and Body
-        .then(async (res) => await res.json())
-        .then((json) => console.log(json));
-
-      
+      });
+      let json = await response.json();
+      return json;
     });
-
     createWindow();
     app.on('activate', () => {
       // On macOS it's common to re-create a window in the app when the

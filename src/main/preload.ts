@@ -1,5 +1,4 @@
 import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron';
-
 export type Channels = 'ipc-example';
 
 const electronHandler = {
@@ -19,12 +18,12 @@ const electronHandler = {
     once(channel: Channels, func: (...args: unknown[]) => void) {
       ipcRenderer.once(channel, (_event, ...args) => func(...args));
     },
-    invoke(channel: Channels, ...args: unknown[]) {
-      ipcRenderer.invoke(channel, ...args);
+    async invoke(channel: Channels, ...args: unknown[]) {
+      return await ipcRenderer.invoke(channel, ...args);
     },
   },
 };
 
-contextBridge.exposeInMainWorld('electron', electronHandler);
+contextBridge.exposeInMainWorld('api', electronHandler);
 
 export type ElectronHandler = typeof electronHandler;

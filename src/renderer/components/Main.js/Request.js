@@ -11,22 +11,19 @@ import {
 } from 'C:/Users/Hollis/Desktop/RestStop/src/renderer/state/requestSlice.js';
 import { Button, TextField } from '@mui/material';
 import { setUrl } from 'C:/Users/Hollis/Desktop/RestStop/src/renderer/state/requestSlice.js';
-import { transcode } from 'buffer';
 import HeaderBox from './HeaderBox';
-import { ipcRenderer } from 'electron';
 
 export default function Request() {
   const dispatch = useDispatch();
   const reqState = useSelector((state) => state.request);
-
+  const api = window.api.ipcRenderer;
   async function handleSubmit() {
     event.preventDefault();
     const url = retrieveUrl();
     const method = retrieveMethod();
     const headers = JSON.stringify(retrieveHeaders());
-    console.log(url);
-    const hi = await window.electron.ipcRenderer.invoke('fetch', url);
-    console.log(hi);
+    const hi = await api.invoke('fetch', [url])
+    console.log(hi)
   }
 
   // retrieve checked headers from redux and return as object
