@@ -25,16 +25,8 @@ export default function Request() {
     const method = retrieveMethod();
     const headers = JSON.stringify(retrieveHeaders());
     console.log(url);
-    console.log(method);
-    console.log(headers);
-    const response = ipcRenderer.invoke(
-      'fetch',
-      (url = url),
-      (method = method),
-      (headers = headers)
-    );
-    const data = await response.json();
-    console.log(data); // JSON data parsed by `data.json()` call
+    const hi = await window.electron.ipcRenderer.invoke('fetch', url);
+    console.log(hi);
   }
 
   // retrieve checked headers from redux and return as object

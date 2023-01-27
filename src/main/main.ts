@@ -36,13 +36,6 @@ if (process.env.NODE_ENV === 'production') {
   sourceMapSupport.install();
 }
 
-ipcMain.handle('fetch', async (event, url , method , headers) => {
-  const res = await fetch(url,{
-    method: method,
-    headers: headers
-  });
-  return await res.json();
-})
 const isDebug =
   process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true';
 
@@ -85,6 +78,7 @@ const createWindow = async () => {
       preload: app.isPackaged
         ? path.join(__dirname, 'preload.js')
         : path.join(__dirname, '../../.erb/dll/preload.js'),
+      nodeIntegration: true,
     },
   });
 
@@ -134,6 +128,17 @@ app.on('window-all-closed', () => {
 app
   .whenReady()
   .then(() => {
+    ipcMain.handle('fetch', async (event, url, method, headers) => {
+      await fetch('https://geolocation-db.com/json/', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then(async (res) => (await res.json()))
+      .then((data) => {console.log(data)})
+      // or
+    });
+
     createWindow();
     app.on('activate', () => {
       // On macOS it's common to re-create a window in the app when the
