@@ -13,6 +13,7 @@ import { Button, TextField } from '@mui/material';
 import { setUrl } from 'C:/Users/Hollis/Desktop/RestStop/src/renderer/state/requestSlice.js';
 import { transcode } from 'buffer';
 import HeaderBox from './HeaderBox';
+import { ipcRenderer } from 'electron';
 
 export default function Request() {
   const dispatch = useDispatch();
@@ -26,10 +27,12 @@ export default function Request() {
     console.log(url);
     console.log(method);
     console.log(headers);
-    const response = await fetch(url, {
-      method: method,
-      headers: headers,
-    });
+    const response = ipcRenderer.invoke(
+      'fetch',
+      (url = url),
+      (method = method),
+      (headers = headers)
+    );
     const data = await response.json();
     console.log(data); // JSON data parsed by `data.json()` call
   }

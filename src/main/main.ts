@@ -36,6 +36,13 @@ if (process.env.NODE_ENV === 'production') {
   sourceMapSupport.install();
 }
 
+ipcMain.handle('fetch', async (event, url , method , headers) => {
+  const res = await fetch(url,{
+    method: method,
+    headers: headers
+  });
+  return await res.json();
+})
 const isDebug =
   process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true';
 
