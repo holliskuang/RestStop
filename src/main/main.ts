@@ -129,14 +129,18 @@ app
   .whenReady()
   .then(() => {
     ipcMain.handle('fetch', async (event, url, method, headers) => {
-      await fetch('https://geolocation-db.com/json/', {
+      await fetch('https://google.com', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
-      }).then(async (res) => (await res.json()))
-      .then((data) => {console.log(data)})
-      // or
+      })
+      // determine if HTML or JSON
+      // get Headers and Body
+        .then(async (res) => await res.json())
+        .then((json) => console.log(json));
+
+      
     });
 
     createWindow();
