@@ -19,21 +19,21 @@ export default function Request() {
   const reqState = useSelector((state) => state.request);
 
   async function handleSubmit() {
-   
     event.preventDefault();
-    const url=retrieveUrl();
-    const method=retrieveMethod();
-    const headers=JSON.stringify(retrieveHeaders());
+    const url = retrieveUrl();
+    const method = retrieveMethod();
+    const headers = JSON.stringify(retrieveHeaders());
     console.log(headers);
-  const response = await fetch(retrieveUrl(), {
-      method: retrieveMethod(),
+    const response = await fetch(retrieveUrl(), {
+      method: method,
+      headers: headers,
     });
     const data = await response.json();
     console.log(data); // JSON data parsed by `data.json()` call
   }
 
   // retrieve checked headers from redux and return as object
-  const retrieveHeaders = () => {  
+  const retrieveHeaders = () => {
     const headers = {};
     Object.keys(reqState.headers).forEach((id) => {
       if (reqState.headers[id].checked) {
