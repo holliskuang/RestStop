@@ -30,6 +30,8 @@ export default function Request() {
     const hi = await api.invoke('fetch', [url], [method], [finalHeaders]);
     console.log(hi);
   }
+  // Send Object to Main Process, Object gets sent back to Render, back and forth
+  //      api.send('open-grpc', reqResObj);
 
   // On Recieve, Dispatch to Update Redux State
   api.receive('cookie',(arg)=> {
