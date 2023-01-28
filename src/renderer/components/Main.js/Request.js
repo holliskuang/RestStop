@@ -30,6 +30,8 @@ export default function Request() {
     const hi = await api.invoke('fetch', [url], [method], [finalHeaders]);
     console.log(hi);
   }
+
+  // On Recieve, Dispatch to Update Redux State
   api.receive('cookie',(arg)=> {
     console.log(arg);
   } );

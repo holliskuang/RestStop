@@ -15,19 +15,6 @@ const electronHandler = {
         ipcRenderer.removeListener(channel, subscription);
       };
     },
-    //   event.sender.send('reqResUpdate', reqResObj); // send to renderer
-
-    /*     api.receive('reqResUpdate', (reqResObj: ReqRes) => {
-      if (
-        (reqResObj.connection === 'closed' ||
-          reqResObj.connection === 'error') &&
-        reqResObj.timeSent &&
-        reqResObj.timeReceived &&
-        reqResObj.response.events.length > 0
-      ) {
-        appDispatch(graphUpdated(reqResObj));
-      }
-    appDispatch(reqResUpdated(reqResObj)); */
     receive: (channel, cb) => {
       ipcRenderer.on(channel, (event, ...args) => cb(...args));
       ipcRenderer.removeListener(channel, (event, ...args) => cb(...args));
@@ -38,6 +25,9 @@ const electronHandler = {
     async invoke(channel: Channels, ...args: unknown[]) {
       return await ipcRenderer.invoke(channel, ...args);
     },
+    send: (channel, ...data) => {
+      ipcRenderer.send(channel, ...data);
+    }
   },
 };
 
