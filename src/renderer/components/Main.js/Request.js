@@ -21,11 +21,18 @@ export default function Request() {
     event.preventDefault();
     const url = retrieveUrl();
     const method = retrieveMethod();
-    const headers = JSON.stringify(retrieveHeaders());
-    const hi = await api.invoke('fetch', [url])
-    console.log(hi)
+    const headers = retrieveHeaders();
+    headers['Content-Type'] = 'application/json';
+    let finalHeaders = JSON.stringify(headers);
+    console.log(finalHeaders);
+    console.log(method);
+    console.log(url);
+    const hi = await api.invoke('fetch', [url], [method], [finalHeaders]);
+    console.log(hi);
   }
-
+  api.receive('cookie',()=> {
+    console.log('cookie');
+  } );
   // retrieve checked headers from redux and return as object
   const retrieveHeaders = () => {
     const headers = {};

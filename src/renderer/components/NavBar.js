@@ -43,6 +43,7 @@ export default function NavBar() {
           
       {pages.map((page) 
      =>(<Button 
+      key={page.name}
       href={page.route}
       color="inherit"
       variant="outlined"
@@ -52,6 +53,7 @@ export default function NavBar() {
       {page.name}
      </Button>))} 
           <Button
+          key="mode"
             color="inherit"
             variant="outlined"
             onClick={handleModeChange}

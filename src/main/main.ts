@@ -14,6 +14,7 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
+var setCookie = require('set-cookie-parser');
 
 class AppUpdater {
   constructor() {
@@ -127,16 +128,26 @@ app.on('window-all-closed', () => {
 
 app
   .whenReady()
+
+  // listen for fetch, return json or text along with headers and cookies
   .then(() => {
-    ipcMain.handle('fetch', async (event, url, method, headers) => {
-      let response = await fetch('https://geolocation-db.com/json/', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+    ipcMain.handle('fetch', async (event, url, method, header) => {
+      let response = await fetch(url, {
+        method: method,
       });
-      let json = await response.json();
-      return json;
+      const contentType = response.headers.get('content-type');
+      const cookieMonster = setCookie.parse(response.headers.get('set-cookie'));
+      let holderObj: any = {};
+      if (contentType && contentType.indexOf('application/json') !== -1) {
+        let json = await response.json();
+        return json;
+      } else {
+        let text = await response.text();
+        holderObj['text'] = text;
+        holderObj['cookies'] = cookieMonster;
+        event.sender.send('cookie', 'hi')
+        return holderObj;
+      }
     });
     createWindow();
     app.on('activate', () => {
