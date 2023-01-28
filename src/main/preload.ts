@@ -15,8 +15,21 @@ const electronHandler = {
         ipcRenderer.removeListener(channel, subscription);
       };
     },
-    receive: (channel, cb) => { /
+    //   event.sender.send('reqResUpdate', reqResObj); // send to renderer
+
     
+    /*     api.receive('reqResUpdate', (reqResObj: ReqRes) => {
+      if (
+        (reqResObj.connection === 'closed' ||
+          reqResObj.connection === 'error') &&
+        reqResObj.timeSent &&
+        reqResObj.timeReceived &&
+        reqResObj.response.events.length > 0
+      ) {
+        appDispatch(graphUpdated(reqResObj));
+      }
+    appDispatch(reqResUpdated(reqResObj)); */
+    receive: (channel, cb) => {
       ipcRenderer.on(channel, (event, ...args) => cb(...args));
     },
     once(channel: Channels, func: (...args: unknown[]) => void) {
