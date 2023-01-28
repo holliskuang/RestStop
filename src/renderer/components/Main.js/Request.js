@@ -30,8 +30,8 @@ export default function Request() {
     const hi = await api.invoke('fetch', [url], [method], [finalHeaders]);
     console.log(hi);
   }
-  api.receive('cookie',()=> {
-    console.log('cookie');
+  api.receive('cookie',(arg)=> {
+    console.log(arg);
   } );
   // retrieve checked headers from redux and return as object
   const retrieveHeaders = () => {

@@ -145,7 +145,7 @@ app
         let text = await response.text();
         holderObj['text'] = text;
         holderObj['cookies'] = cookieMonster;
-        event.sender.send('cookie', 'hi')
+        event.sender.send('cookie', cookieMonster)
         return holderObj;
       }
     });

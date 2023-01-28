@@ -17,7 +17,6 @@ const electronHandler = {
     },
     //   event.sender.send('reqResUpdate', reqResObj); // send to renderer
 
-    
     /*     api.receive('reqResUpdate', (reqResObj: ReqRes) => {
       if (
         (reqResObj.connection === 'closed' ||
@@ -31,6 +30,7 @@ const electronHandler = {
     appDispatch(reqResUpdated(reqResObj)); */
     receive: (channel, cb) => {
       ipcRenderer.on(channel, (event, ...args) => cb(...args));
+      ipcRenderer.removeListener(channel, (event, ...args) => cb(...args));
     },
     once(channel: Channels, func: (...args: unknown[]) => void) {
       ipcRenderer.once(channel, (_event, ...args) => func(...args));
