@@ -14,7 +14,8 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
-var setCookie = require('set-cookie-parser');
+import { handleRequest } from './util';
+
 
 class AppUpdater {
   constructor() {
@@ -31,6 +32,11 @@ ipcMain.on('ipc-example', async (event, arg) => {
   console.log(msgTemplate(arg));
   event.reply('ipc-example', msgTemplate('pong'));
 });
+
+// get request and return object that contains updated response 
+ipcMain.handle('fetch', async (event, reqResObj) => {
+  return handleRequest(reqResObj);
+})
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
@@ -131,24 +137,6 @@ app
 
   // listen for fetch, return json or text along with headers and cookies
   .then(() => {
-    ipcMain.handle('fetch', async (event, url, method, header) => {
-      let response = await fetch(url, {
-        method: method,
-      });
-      const contentType = response.headers.get('content-type');
-      const cookieMonster = setCookie.parse(response.headers.get('set-cookie'));
-      let holderObj: any = {};
-      if (contentType && contentType.indexOf('application/json') !== -1) {
-        let json = await response.json();
-        return json;
-      } else {
-        let text = await response.text();
-        holderObj['text'] = text;
-        holderObj['cookies'] = cookieMonster;
-        event.sender.send('cookie', cookieMonster)
-        return holderObj;
-      }
-    });
     createWindow();
     app.on('activate', () => {
       // On macOS it's common to re-create a window in the app when the

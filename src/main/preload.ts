@@ -6,18 +6,9 @@ const electronHandler = {
     sendMessage(channel: Channels, args: unknown[]) {
       ipcRenderer.send(channel, args);
     },
-    on(channel: Channels, func: (...args: unknown[]) => void) {
-      const subscription = (_event: IpcRendererEvent, ...args: unknown[]) =>
-        func(...args);
-      ipcRenderer.on(channel, subscription);
-
-      return () => {
-        ipcRenderer.removeListener(channel, subscription);
-      };
-    },
     receive: (channel, cb) => {
       ipcRenderer.on(channel, (event, ...args) => cb(...args));
-      ipcRenderer.removeListener(channel, (event, ...args) => cb(...args));
+      ipcRenderer.removeAllListeners(channel);
     },
     once(channel: Channels, func: (...args: unknown[]) => void) {
       ipcRenderer.once(channel, (_event, ...args) => func(...args));
@@ -27,7 +18,16 @@ const electronHandler = {
     },
     send: (channel, ...data) => {
       ipcRenderer.send(channel, ...data);
-    }
+    },
+
+    /*on(channel: Channels, func: (...args: unknown[]) => void) {
+      const subscription = (_event: IpcRendererEvent, ...args: unknown[]) =>
+        func(...args);
+      ipcRenderer.on(channel, subscription);
+
+      return () => {
+        ipcRenderer.removeListener(channel, subscription);
+      }; */
   },
 };
 

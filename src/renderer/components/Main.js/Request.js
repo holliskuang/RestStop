@@ -12,31 +12,26 @@ import {
 import { Button, TextField } from '@mui/material';
 import { setUrl } from 'C:/Users/Hollis/Desktop/RestStop/src/renderer/state/requestSlice.js';
 import HeaderBox from './HeaderBox';
+import { v4 as uuid } from 'uuid';
 
 export default function Request() {
   const dispatch = useDispatch();
   const reqState = useSelector((state) => state.request);
   const api = window.api.ipcRenderer;
+
+
+   // Send Object to Main Process, Object gets sent back to Render, back and forth 
   async function handleSubmit() {
     event.preventDefault();
-    const url = retrieveUrl();
-    const method = retrieveMethod();
-    const headers = retrieveHeaders();
-    headers['Content-Type'] = 'application/json';
-    let finalHeaders = JSON.stringify(headers);
-    console.log(finalHeaders);
-    console.log(method);
-    console.log(url);
-    const hi = await api.invoke('fetch', [url], [method], [finalHeaders]);
+    let reqResObj = {};
+    reqResObj.id = uuid();
+    reqResObj.url = retrieveUrl();
+    reqResObj.method = retrieveMethod();
+    reqResObj.headers = retrieveHeaders();
+    const hi = await api.invoke('fetch', reqResObj);
     console.log(hi);
   }
-  // Send Object to Main Process, Object gets sent back to Render, back and forth
-  //      api.send('open-grpc', reqResObj);
 
-  // On Recieve, Dispatch to Update Redux State
-  api.receive('cookie',(arg)=> {
-    console.log(arg);
-  } );
   // retrieve checked headers from redux and return as object
   const retrieveHeaders = () => {
     const headers = {};
@@ -45,8 +40,8 @@ export default function Request() {
         headers[reqState.headers[id].key] = reqState.headers[id].value;
       }
     });
-
-    return headers;
+    headers['Content-Type'] = 'application/json';
+    return JSON.stringify(headers);
   };
   // retrieve url from redux
   const retrieveUrl = () => {
