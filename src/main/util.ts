@@ -13,6 +13,7 @@ export function resolveHtmlPath(htmlFileName: string) {
   return `file://${path.resolve(__dirname, '../renderer/', htmlFileName)}`;
 }
 
+// handle Request , pull in headers and cookies and body and return response object
 export async function handleRequest(reqResObj) {
   const resHeader = {};
   let response = await fetch(reqResObj.url, {

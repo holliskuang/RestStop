@@ -29,10 +29,16 @@ export default function Request() {
     reqResObj.url = retrieveUrl();
     reqResObj.method = retrieveMethod();
     reqResObj.headers = retrieveHeaders();
+    reqResObj.body = retrieveBody();
     const hi = await api.invoke('fetch', reqResObj);
     console.log(hi);
   }
 
+  // retrieve body from redux
+  const retrieveBody = () => {
+    const body = reqState.body;
+    return body;
+  };
   // retrieve checked headers from redux and return as object
   const retrieveHeaders = () => {
     const headers = {};
