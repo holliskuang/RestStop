@@ -10,27 +10,37 @@ import { html } from '@codemirror/lang-html';
 import { EditorView } from '@codemirror/view';
 import { materialDark } from '@uiw/codemirror-theme-material';
 import { useSelector, useDispatch } from 'react-redux';
+import { setBody } from 'renderer/state/requestSlice';
 
 export default function ReqBodyTextBox() {
   const reqState = useSelector((state) => state.request);
   const dispatch = useDispatch();
-  const value = reqState.reqBody;
-  const bodyType = reqState.bodyType;
-  // convert plain to xml for codeMirror functionality
-  console.log(bodyType);
-  const lang = bodyType.substring(bodyType.indexOf('/') + 1);
+  let value = reqState.reqBody;
+  let bodyType = reqState.bodyType;
+  if (bodyType === 'plain') {
+    bodyType = 'xml';
+  }
+  let languageExtensionConverter = {
+    xml: xml(),
+    html: html(),
+    json: json(),
+    javascript: javascript(),
+  };
   return (
     <Box>
       <Typography variant="h5"> Request Body</Typography>
       <Typography> Content Type</Typography>
       <CodeMirror
-        extensions={[lang(), EditorView.lineWrapping]}
+        extensions={[
+          languageExtensionConverter[bodyType],
+          EditorView.lineWrapping,
+        ]}
         placeholder="Enter body here"
         value={value}
         readOnly={false}
         theme={materialDark}
         onChange={(event) => {
-          dispatch(setReqBody(event.value));
+          dispatch(setBody(event.value));
         }}
       ></CodeMirror>
     </Box>

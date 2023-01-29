@@ -12,21 +12,17 @@ export default function ReqBodyTextBoxSelector() {
     <FormControl>
       <Select
         label="Content Type"
-        defaultValue="xml"
-        placeholder="text/plain"
+        defaultValue="plain"
         value={reqState.bodyType}
         onChange={(event) => {
           dispatch(setBodyType(event.target.value));
         }}
       >
-        <ListSubheader>
-          Text
-          <MenuItem value="xml">text/plain</MenuItem>
-          <MenuItem value="html">text/html</MenuItem>
-          <MenuItem value="json">application/json</MenuItem>
-          <MenuItem value="javascript">application/javascript</MenuItem>
-          <MenuItem value="xml">application/xml</MenuItem>
-        </ListSubheader>
+        <MenuItem value="plain">text/plain</MenuItem>
+        <MenuItem value="html">text/html</MenuItem>
+        <MenuItem value="json">application/json</MenuItem>
+        <MenuItem value="javascript">application/javascript</MenuItem>
+        <MenuItem value="xml">application/xml</MenuItem>
       </Select>
     </FormControl>
   );
