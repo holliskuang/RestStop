@@ -30,8 +30,8 @@ export default function Request() {
     reqResObj.method = retrieveMethod();
     reqResObj.headers = retrieveHeaders();
     reqResObj.body = retrieveBody();
-    const hi = await api.invoke('fetch', reqResObj);
-    console.log(hi);
+    const reqAndRes = await api.invoke('fetch', reqResObj);
+    console.log(reqAndRes);
   }
 
   // retrieve body from redux
