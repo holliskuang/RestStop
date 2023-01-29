@@ -58,7 +58,7 @@ export default function Request() {
   /// handle change in text box update redux
   const textBoxHandleChange = (event) => {
     dispatch(setReqBody(event.target.value));
-  }
+  };
 
   return (
     <div className="request">
@@ -108,12 +108,15 @@ export default function Request() {
         </Button>
 
         <HeaderBox />
-        <ReqBodyTextBoxSelector/>
-        <ReqBodyTextBox 
-          onChange={textBoxHandleChange}
-        
-          value={reqState.reqBody}
-        />
+        {reqState.method === 'GET' ? null : (
+          <>
+            <ReqBodyTextBoxSelector />
+            <ReqBodyTextBox
+              onChange={textBoxHandleChange}
+              value={reqState.reqBody}
+            />
+          </>
+        )}
       </FormControl>
     </div>
   );
