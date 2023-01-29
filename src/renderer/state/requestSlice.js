@@ -9,6 +9,7 @@ const initialState = {
   method: 'GET',
   headers: initalObj,
   body: '',
+  bodyType: 'xml',
   response: '',
   error: false,
   loading: true,
@@ -30,6 +31,9 @@ const requestSlice = createSlice({
     setBody: (state, action) => {
       state.body = action.payload;
     },
+    setBodyType: (state, action) => {
+      state.bodyType = action.payload;
+    },
     setResponse: (state, action) => {
       state.response = action.payload;
     },
@@ -47,6 +51,7 @@ export const {
   setMethod,
   setHeaders,
   setBody,
+  setBodyType,
   setResponse,
   setError,
   setLoading,

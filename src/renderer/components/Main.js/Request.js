@@ -13,14 +13,15 @@ import { Button, TextField } from '@mui/material';
 import { setUrl } from 'C:/Users/Hollis/Desktop/RestStop/src/renderer/state/requestSlice.js';
 import HeaderBox from './HeaderBox';
 import { v4 as uuid } from 'uuid';
+import ReqBodyTextBox from './ReqBodyTextBox';
+import ReqBodyTextBoxSelector from './ReqBodyTextBoxSelector';
 
 export default function Request() {
   const dispatch = useDispatch();
   const reqState = useSelector((state) => state.request);
   const api = window.api.ipcRenderer;
 
-
-   // Send Object to Main Process, Object gets sent back to Render, back and forth 
+  // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {
     event.preventDefault();
     let reqResObj = {};
@@ -53,6 +54,11 @@ export default function Request() {
     const method = reqState.method;
     return method;
   };
+
+  /// handle change in text box update redux
+  const textBoxHandleChange = (event) => {
+    dispatch(setReqBody(event.target.value));
+  }
 
   return (
     <div className="request">
@@ -102,6 +108,12 @@ export default function Request() {
         </Button>
 
         <HeaderBox />
+        <ReqBodyTextBoxSelector/>
+        <ReqBodyTextBox 
+          onChange={textBoxHandleChange}
+        
+          value={reqState.reqBody}
+        />
       </FormControl>
     </div>
   );

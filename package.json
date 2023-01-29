@@ -220,6 +220,16 @@
 
   "dependencies": {
 
+    "@codemirror/lang-html": "github:codemirror/lang-html",
+
+    "@codemirror/lang-javascript": "github:codemirror/lang-javascript",
+
+    "@codemirror/lang-json": "github:codemirror/lang-json",
+
+    "@codemirror/lang-xml": "github:codemirror/lang-xml",
+
+    "@codemirror/view": "github:codemirror/view",
+
     "@emotion/react": "^11.10.5",
 
     "@emotion/styled": "^11.10.5",
@@ -229,6 +239,12 @@
     "@mui/material": "^5.11.6",
 
     "@reduxjs/toolkit": "^1.9.1",
+
+    "@uiw/codemirror-theme-material": "^4.19.7",
+
+    "@uiw/react-codemirror": "^4.19.7",
+
+    "codemirror": "^6.0.1",
 
     "dexie": "^3.2.3",
 

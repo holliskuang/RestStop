@@ -15,5 +15,5 @@ const existingReqSlice = createSlice({
   },
 });
 
-export const { addReqRes, deleteReqRes } = requestSlice.actions;
-export default requestSlice.reducer;
+export const { addReqRes, deleteReqRes } = existingReqSlice.actions;
+export default existingReqSlice.reducer;
