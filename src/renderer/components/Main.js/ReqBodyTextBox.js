@@ -12,7 +12,6 @@ import { materialDark } from '@uiw/codemirror-theme-material';
 import { useSelector, useDispatch } from 'react-redux';
 import { setBody } from 'renderer/state/requestSlice';
 
-
 // This is the component that renders the request body text box
 // Utilize  the CodeMirror component to render the text box
 
@@ -22,18 +21,16 @@ export default function ReqBodyTextBox() {
   let value = reqState.body;
   let bodyType = reqState.bodyType;
 
-  // This is a hack to get the xml language extension to work
-  if (bodyType === 'plain') {
-    bodyType = 'xml';
-  }
-
   // convert the body type to the correct language extension
+  // Also a hack to get the text/plain content type to work
   let languageExtensionConverter = {
-    xml: xml(),
-    html: html(),
-    json: json(),
-    javascript: javascript(),
+    'application/xml': xml(),
+    'text/html': html(),
+    'application/json': json(),
+    'application/javascript': javascript(),
+    'text/plain': xml(),
   };
+
   return (
     <Box>
       <Typography variant="h5"> Request Body</Typography>
@@ -50,6 +47,7 @@ export default function ReqBodyTextBox() {
         // onChange event handler is used to update the state of the request body
         onChange={(editor, data, value) => {
           dispatch(setBody(editor.toString()));
+          console.log(reqState);
         }}
       ></CodeMirror>
     </Box>

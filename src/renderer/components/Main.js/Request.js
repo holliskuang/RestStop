@@ -41,7 +41,8 @@ export default function Request() {
         headers[reqState.headers[id].key] = reqState.headers[id].value;
       }
     });
-    headers['Content-Type'] = 'application/json';
+    // Determine Context Type Header based on body type
+    headers['Content-Type'] = reqState.bodyType;
     return JSON.stringify(headers);
   };
   // retrieve url from redux

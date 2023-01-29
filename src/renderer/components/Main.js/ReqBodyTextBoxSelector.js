@@ -16,20 +16,22 @@ export default function ReqBodyTextBoxSelector() {
   const dispatch = useDispatch();
   return (
     <FormControl>
-    <InputLabel id="Content Type">Content Type</InputLabel>
+      <InputLabel id="Content Type">Content Type</InputLabel>
       <Select
         label="Content Type"
-        defaultValue="plain"
+        defaultValue="text/plain"
         value={reqState.bodyType}
         onChange={(event) => {
           dispatch(setBodyType(event.target.value));
         }}
       >
-        <MenuItem value="plain">text/plain</MenuItem>
-        <MenuItem value="html">text/html</MenuItem>
-        <MenuItem value="json">application/json</MenuItem>
-        <MenuItem value="javascript">application/javascript</MenuItem>
-        <MenuItem value="xml">application/xml</MenuItem>
+        <MenuItem value="text/plain">text/plain</MenuItem>
+        <MenuItem value="text/html">text/html</MenuItem>
+        <MenuItem value="application/json">application/json</MenuItem>
+        <MenuItem value="application/javascript">
+          application/javascript
+        </MenuItem>
+        <MenuItem value="application/xml">application/xml</MenuItem>
       </Select>
     </FormControl>
   );

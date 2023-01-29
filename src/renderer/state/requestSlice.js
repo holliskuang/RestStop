@@ -9,7 +9,7 @@ const initialState = {
   method: 'GET',
   headers: initalObj,
   body: '',
-  bodyType: 'xml',
+  bodyType: "text/plain",
   response: '',
   error: false,
   loading: true,
