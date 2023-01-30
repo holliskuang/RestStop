@@ -17,7 +17,7 @@ function createData(key, value) {
 export default function BasicTable() {
   const rows = [];
   const response = useSelector((state) => state.currentReqRes.response);
-  console.log(response);
+
   // If we have not had a response yet, return an empty table
 
   // else if we have a response, loop through the response headers and add them to the table
@@ -36,7 +36,9 @@ export default function BasicTable() {
         <TableHead>
           <TableRow>
             <TableCell sx={{ width: '50%' }}>Key</TableCell>
-            <TableCell sx={{maxWidth:'50%'}}align="left">Value</TableCell>
+            <TableCell sx={{ maxWidth: '50%' }} align="left">
+              Value
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

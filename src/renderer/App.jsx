@@ -9,22 +9,22 @@ import { useSelector } from 'react-redux';
 import NavBar from './components/NavBar';
 import Request from './components/Main.js/Request/Request';
 import Dashboard from './components/Main.js/Dashboard/Dashboard';
+import Box from '@mui/material/Box';
 
 const Hello = () => {
   const mode = useSelector((state) => state.light.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
   console.log('hi')
   return (
-    <div>
+<Box >
       <ThemeProvider theme={theme}>
         <CssBaseline />
-     
           <NavBar></NavBar>
-        {/* <Request></Request> */}
+        <Request></Request> 
         <Dashboard/>
   
       </ThemeProvider>
-    </div>
+  </Box>
   );
 };
 

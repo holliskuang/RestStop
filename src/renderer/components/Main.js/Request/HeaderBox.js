@@ -51,7 +51,6 @@ export default function HeaderBox() {
 
   // delete header from local state
   const deleteFromHeaderList = (id) => {
-    console.log(id);
     if (Object.keys(headerList).length === 1) return;
     let newHeader = { ...headerList };
     delete newHeader[id];

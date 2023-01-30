@@ -16,6 +16,8 @@ export default function Dashboard() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  const allReqRes = useSelector((state) => state.historyReqRes);
+
   return (
     <Box sx={{ width: '100%', typography: 'body1' }}>
       <Typography variant="h3"></Typography>
@@ -40,7 +42,9 @@ export default function Dashboard() {
           </TabList>
         </Box>
         <TabPanel value="collections">
-          <HistoryBlock />
+          {Object.keys(allReqRes).map((reqRes) => {
+            return <HistoryBlock key={reqRes} reqResInfo={allReqRes[reqRes]} />;
+          })}
         </TabPanel>
         <TabPanel value="schedule"></TabPanel>
         <TabPanel value="history"></TabPanel>
