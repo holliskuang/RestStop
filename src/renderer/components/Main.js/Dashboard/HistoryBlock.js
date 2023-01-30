@@ -8,9 +8,10 @@ import {
   CardActions,
 } from '@mui/material';
 import { setResponse } from '../../../state/currentReqRes';
+import { deleteReqRes } from '../../../state/historyReqRes';
 export default function HistoryBlock(props) {
   const dispatch = useDispatch();
-
+    const reqResHistory = useSelector((state) => state.historyReqRes);
   // Blocks that will be mapped using UUID as key
   // Each block will have a button to remove it from the history
   // Each block will have a button to see the response by overwriting the current response in the redux store
@@ -30,8 +31,10 @@ export default function HistoryBlock(props) {
           <Button
             onClick={() => {
               dispatch(deleteReqRes(props.reqResInfo.id));
+              console.log(reqResHistory)
             }}
-          ></Button>
+            
+          > Remove </Button>
           <Button
             onClick={() => {
               dispatch(setResponse(props.reqResInfo.response));

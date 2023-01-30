@@ -10,7 +10,7 @@ const historyReqRes = createSlice({
       state[action.payload.id] = action.payload;
     },
     deleteReqRes: (state, action) => {
-      delete state[action.payload.id];
+      delete state[action.payload];
     },
   },
 });
