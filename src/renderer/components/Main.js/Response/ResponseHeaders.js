@@ -36,7 +36,7 @@ export default function BasicTable() {
         <TableHead>
           <TableRow>
             <TableCell sx={{ width: '50%' }}>Key</TableCell>
-            <TableCell align="left">Value</TableCell>
+            <TableCell sx={{maxWidth:'50%'}}align="left">Value</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

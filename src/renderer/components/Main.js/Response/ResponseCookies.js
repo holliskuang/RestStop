@@ -8,11 +8,10 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useSelector } from 'react-redux';
 
-
 // convert to string to avoid any object rendering errors
 function createData(key, value) {
-    key= key.toString();
-    value= value.toString();
+  key = key.toString();
+  value = value.toString();
   return { key, value };
 }
 export default function BasicTable() {
@@ -25,7 +24,7 @@ export default function BasicTable() {
   if (response != '') {
     const responseCookies = response.responseCookies[0];
     for (const [key, value] of Object.entries(responseCookies)) {
-      console.log(key, value);
+      rows.push(createData(key, value));
     }
   }
   return (
@@ -37,7 +36,9 @@ export default function BasicTable() {
         <TableHead>
           <TableRow>
             <TableCell sx={{ width: '50%' }}>Key</TableCell>
-            <TableCell align="left">Value</TableCell>
+            <TableCell sx={{ maxWidth: '50%' }} align="left">
+              Value
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
