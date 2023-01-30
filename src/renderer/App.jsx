@@ -8,6 +8,7 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import NavBar from './components/NavBar';
 import Request from './components/Main.js/Request/Request';
+import Dashboard from './components/Main.js/Dashboard/Dashboard';
 
 const Hello = () => {
   const mode = useSelector((state) => state.light.mode);
@@ -17,10 +18,11 @@ const Hello = () => {
     <div>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <div className="Hello">
+     
           <NavBar></NavBar>
-          <Request></Request>
-        </div>
+        {/* <Request></Request> */}
+        <Dashboard/>
+  
       </ThemeProvider>
     </div>
   );

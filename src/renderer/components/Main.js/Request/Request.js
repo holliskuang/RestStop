@@ -16,6 +16,7 @@ import { v4 as uuid } from 'uuid';
 import ReqBodyTextBox from './ReqBodyTextBox';
 import ReqBodyTextBoxSelector from './ReqBodyTextBoxSelector';
 import Response from '../Response/Response';
+import { addReqRes } from 'renderer/state/historyReqRes.js';
 
 export default function Request() {
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ export default function Request() {
     reqResObj.body = retrieveBody();
     const reqAndRes = await api.invoke('fetch', reqResObj);
     dispatch(setResponse(reqAndRes));
-    console.log(reqAndRes);
+    dispatch(addReqRes(reqAndRes))
   }
 
   // retrieve body from redux
