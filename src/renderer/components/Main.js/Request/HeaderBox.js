@@ -6,7 +6,7 @@ import Header from './Header';
 import Box from '@mui/material/Box/Box';
 import { useDispatch, useSelector } from 'react-redux';
 import { get } from 'http';
-import { setHeaders } from 'C:/Users/Hollis/Desktop/RestStop/src/renderer/state/requestSlice.js';
+import { setHeaders } from '../../../state/currentReqRes.js';
 
 export default function HeaderBox() {
   const initalObj = {};

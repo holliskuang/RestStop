@@ -8,17 +8,18 @@ import Select from '@mui/material/Select';
 import {
   setMethod,
   setUrl,
-} from 'C:/Users/Hollis/Desktop/RestStop/src/renderer/state/requestSlice.js';
+  setResponse,
+} from '../../../state/currentReqRes.js';
 import { Button, TextField } from '@mui/material';
-import { setUrl } from 'C:/Users/Hollis/Desktop/RestStop/src/renderer/state/requestSlice.js';
 import HeaderBox from './HeaderBox';
 import { v4 as uuid } from 'uuid';
 import ReqBodyTextBox from './ReqBodyTextBox';
 import ReqBodyTextBoxSelector from './ReqBodyTextBoxSelector';
+import Response from '../Response/Response';
 
 export default function Request() {
   const dispatch = useDispatch();
-  const reqState = useSelector((state) => state.request);
+  const reqState = useSelector((state) => state.currentReqRes);
   const api = window.api.ipcRenderer;
 
   // Send Object to Main Process, Object gets sent back to Render, back and forth
@@ -31,6 +32,7 @@ export default function Request() {
     reqResObj.headers = retrieveHeaders();
     reqResObj.body = retrieveBody();
     const reqAndRes = await api.invoke('fetch', reqResObj);
+    dispatch(setResponse(reqAndRes));
     console.log(reqAndRes);
   }
 
@@ -124,6 +126,7 @@ export default function Request() {
             />
           </>
         )}
+        <Response></Response>
       </FormControl>
     </div>
   );

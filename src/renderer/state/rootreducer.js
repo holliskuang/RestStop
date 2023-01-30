@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import lightSlice from './lightSlice';
-import requestSlice from './requestSlice';
-import existingReqSlice from './existingReqRes';
+import currentReqRes from './currentReqRes';
+import historyReqRes from './historyReqRes';
 
 const rootReducer = combineReducers({
   light: lightSlice,
-  request : requestSlice,
-  existingReqRes: existingReqSlice,
+  currentReqRes: currentReqRes,
+  historyReqRes: historyReqRes,
 });
 
 export default rootReducer;

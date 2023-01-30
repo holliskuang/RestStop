@@ -9,14 +9,14 @@ const initialState = {
   method: 'GET',
   headers: initalObj,
   body: '',
-  bodyType: "text/plain",
+  bodyType: 'text/plain',
   response: '',
   error: false,
   loading: true,
 };
 
-const requestSlice = createSlice({
-  name: 'request',
+const currentReqRes = createSlice({
+  name: 'currentReqRes',
   initialState,
   reducers: {
     setUrl: (state, action) => {
@@ -55,5 +55,5 @@ export const {
   setResponse,
   setError,
   setLoading,
-} = requestSlice.actions;
-export default requestSlice.reducer;
+} = currentReqRes.actions;
+export default currentReqRes.reducer;

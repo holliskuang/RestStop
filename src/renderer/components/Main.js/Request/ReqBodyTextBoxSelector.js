@@ -2,7 +2,7 @@ import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import ListSubheader from '@mui/material/ListSubheader';
-import { setBodyType } from 'renderer/state/requestSlice';
+import { setBodyType } from 'renderer/state/currentReqRes';
 import { useDispatch, useSelector } from 'react-redux';
 import InputLabel from '@mui/material/InputLabel';
 
@@ -12,7 +12,7 @@ import InputLabel from '@mui/material/InputLabel';
 // The content type is stored in the redux store and is used to determine the language extension of the request body
 
 export default function ReqBodyTextBoxSelector() {
-  const reqState = useSelector((state) => state.request);
+  const reqState = useSelector((state) => state.currentReqRes);
   const dispatch = useDispatch();
   return (
     <FormControl>

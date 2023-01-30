@@ -15,10 +15,10 @@ import { setBody } from 'renderer/state/currentReqRes';
 // This is the component that renders the request body text box
 // Utilize  the CodeMirror component to render the text box
 
-export default function ReqBodyTextBox() {
+export default function ResponseBody() {
   const reqState = useSelector((state) => state.currentReqRes);
   const dispatch = useDispatch();
-  let value = reqState.body;
+  let value = reqState.response.responseBody;
   let bodyType = reqState.bodyType;
 
   // convert the body type to the correct language extension
@@ -33,22 +33,16 @@ export default function ReqBodyTextBox() {
 
   return (
     <Box>
-      <Typography variant="h5"> Request Body</Typography>
-      <Typography> Content Type</Typography>
+      <Typography variant="h5"> Response Body</Typography>
       <CodeMirror
         extensions={[
           languageExtensionConverter[bodyType],
           EditorView.lineWrapping,
         ]}
-        placeholder="Enter body here"
-        value={reqState.body}
-        readOnly={false}
+        value={value}
+        readOnly={true}
         theme={materialDark}
-        // onChange event handler is used to update the state of the request body
-        onChange={(editor, data, value) => {
-          dispatch(setBody(editor.toString()));
-          console.log(reqState);
-        }}
+        maxHeight= "300px"
       ></CodeMirror>
     </Box>
   );

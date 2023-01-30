@@ -27,6 +27,7 @@ export async function handleRequest(reqResObj) {
   });
   reqResObj['responseCookies'] = cookieMonster;
   reqResObj['responseHeaders'] = resHeader;
+  reqResObj['responseStatus'] = response.status;
 
   // if JSON
   if (contentType && contentType.indexOf('application/json') !== -1) {

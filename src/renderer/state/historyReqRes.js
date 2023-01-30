@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {};
 
-const existingReqSlice = createSlice({
-  name: 'ExistingReqRes',
+const historyReqRes = createSlice({
+  name: 'historyReqRes',
   initialState,
   reducers: {
     addReqRes: (state, action) => {
@@ -15,5 +15,5 @@ const existingReqSlice = createSlice({
   },
 });
 
-export const { addReqRes, deleteReqRes } = existingReqSlice.actions;
-export default existingReqSlice.reducer;
+export const { addReqRes, deleteReqRes } = historyReqRes.actions;
+export default historyReqRes.reducer;
