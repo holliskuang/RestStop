@@ -17,6 +17,8 @@ import ReqBodyTextBox from './ReqBodyTextBox';
 import ReqBodyTextBoxSelector from './ReqBodyTextBoxSelector';
 import Response from '../Response/Response';
 import { addReqRes } from 'renderer/state/historyReqRes.js';
+import { saveRequestToDB } from '../Dashboard/DashboardController.js';
+import { db } from 'renderer/db.js';
 
 export default function Request() {
   const dispatch = useDispatch();
@@ -34,7 +36,8 @@ export default function Request() {
     reqResObj.body = retrieveBody();
     const reqAndRes = await api.invoke('fetch', reqResObj);
     dispatch(setResponse(reqAndRes));
-    dispatch(addReqRes(reqAndRes))
+    dispatch(addReqRes(reqAndRes));
+    saveRequestToDB(reqResObj.id, reqResObj, 'Initial Folder');
   }
 
   // retrieve body from redux

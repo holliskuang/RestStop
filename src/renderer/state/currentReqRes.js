@@ -13,6 +13,7 @@ const initialState = {
   response: '',
   error: false,
   loading: true,
+  folder: 'Initial Folder',
 };
 
 const currentReqRes = createSlice({
@@ -43,6 +44,9 @@ const currentReqRes = createSlice({
     setLoading: (state, action) => {
       state.loading = action.payload;
     },
+    setFolder: (state, action) => {
+      state.folder = action.payload;
+    },
   },
 });
 
@@ -55,5 +59,6 @@ export const {
   setResponse,
   setError,
   setLoading,
+  setFolder,
 } = currentReqRes.actions;
 export default currentReqRes.reducer;
