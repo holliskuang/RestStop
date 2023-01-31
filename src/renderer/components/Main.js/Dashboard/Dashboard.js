@@ -11,51 +11,67 @@ import Typography from '@mui/material/Typography';
 import { useSelector } from 'react-redux';
 import HistoryBlock from './HistoryBlock';
 import { Card, CardActions, CardContent } from '@mui/material';
+import { getRequestsFromDB } from './DashboardController';
+import { useLiveQuery } from 'dexie-react-hooks';
+import { db } from '../../../db';
+import { useEffect } from 'react';
 
 export default function Dashboard() {
   const [value, setValue] = React.useState('collections');
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
   const allReqRes = useSelector((state) => state.historyReqRes);
+  const currentFolder = useSelector((state) => state.currentReqRes.folder);
+  const requests = useLiveQuery(async () => {
+    return await db.collections.where('folder').equals(currentFolder).toArray();
+  });
 
-  return (
-    <Box sx={{ width: '100%', typography: 'body1' }}>
-      <Typography variant="h3"></Typography>
-      <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <TabList onChange={handleChange} aria-label="lab API tabs example">
-            <Tab
-              icon={<FolderOutlinedIcon />}
-              label="Collections"
-              value="collections"
-            />
-            <Tab
-              icon={<ScheduleSendOutlinedIcon />}
-              label="Schedule"
-              value="schedule"
-            />
-            <Tab
-              icon={<AccessTimeOutlinedIcon />}
-              label="History"
-              value="history"
-            />
-          </TabList>
-        </Box>
-        <TabPanel value="collections">
-          <CardContent></CardContent>
-          <Card sx={{ display: 'flex' }}>
-            <CardActions>New Folder</CardActions>
-            <CardActions>Clear Folder</CardActions>
-            <CardActions>Remove Folder</CardActions>
-          </Card>
-          {Object.keys(allReqRes).map((reqRes) => {
+  if (!requests) {
+    return <div>Loading...</div>;
+  } else
+    return (
+      <Box sx={{ width: '100%', typography: 'body1' }}>
+        <Typography variant="h3"></Typography>
+        <TabContext value={value}>
+          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <TabList onChange={handleChange} aria-label="lab API tabs example">
+              <Tab
+                icon={<FolderOutlinedIcon />}
+                label="Collections"
+                value="collections"
+              />
+              <Tab
+                icon={<ScheduleSendOutlinedIcon />}
+                label="Schedule"
+                value="schedule"
+              />
+              <Tab
+                icon={<AccessTimeOutlinedIcon />}
+                label="History"
+                value="history"
+              />
+            </TabList>
+          </Box>
+          <TabPanel value="collections">
+            <CardContent></CardContent>
+            <Card sx={{ display: 'flex' }}>
+              <CardActions>New Folder</CardActions>
+              <CardActions>Clear Folder</CardActions>
+              <CardActions>Remove Folder</CardActions>
+            </Card>
+            {requests.map((request) => {
+              return <HistoryBlock key={request.id} reqResInfo={request} />;
+            })}
+            {/*{Object.keys(allReqRes).map((reqRes) => {
             return <HistoryBlock key={reqRes} reqResInfo={allReqRes[reqRes]} />;
           })}
-        </TabPanel>
-        <TabPanel value="schedule"></TabPanel>
-        <TabPanel value="history"></TabPanel>
-      </TabContext>
-    </Box>
-  );
+        */}
+          </TabPanel>
+          <TabPanel value="schedule"></TabPanel>
+          <TabPanel value="history"></TabPanel>
+        </TabContext>
+      </Box>
+    );
 }
