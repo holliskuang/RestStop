@@ -18,6 +18,7 @@ export default function HistoryBlock(props) {
   // Each block will have a button to see the response by overwriting the current response in the redux store
 
   return (
+    
     <div>
       <Card>
         <CardContent>
@@ -46,11 +47,6 @@ export default function HistoryBlock(props) {
             See Response
           </Button>
         </CardActions>
-      </Card>
-      <Card>
-        <CardActions>New Folder</CardActions>
-        <CardActions>Clear Folder</CardActions>
-        <CardActions>Remove Folder</CardActions>
       </Card>
     </div>
   );

@@ -10,6 +10,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import Typography from '@mui/material/Typography';
 import { useSelector } from 'react-redux';
 import HistoryBlock from './HistoryBlock';
+import { Card, CardActions, CardContent } from '@mui/material';
 
 export default function Dashboard() {
   const [value, setValue] = React.useState('collections');
@@ -42,6 +43,12 @@ export default function Dashboard() {
           </TabList>
         </Box>
         <TabPanel value="collections">
+          <CardContent></CardContent>
+          <Card sx={{ display: 'flex' }}>
+            <CardActions>New Folder</CardActions>
+            <CardActions>Clear Folder</CardActions>
+            <CardActions>Remove Folder</CardActions>
+          </Card>
           {Object.keys(allReqRes).map((reqRes) => {
             return <HistoryBlock key={reqRes} reqResInfo={allReqRes[reqRes]} />;
           })}

@@ -19,14 +19,7 @@ async function deleteCurrentRequest() {
 }
 
 async function getFoldersFromDB() {
-  let uniqueFolders = [];
-  const requests = await db.collections.toArray();
-  const folders = requests.map((request) => request.folder);
-  folders.map((folder) => {
-    if (!uniqueFolders.includes(folder)) {
-      uniqueFolders.push(folder);
-    }
-  });
+  const uniqueFolders = await db.collections.orderBy('folder').uniqueKeys();
   return uniqueFolders;
 }
 
