@@ -9,16 +9,19 @@ import {
 } from '@mui/material';
 import { setResponse } from '../../../state/currentReqRes';
 import { deleteReqRes } from '../../../state/historyReqRes';
-import { saveRequestToDB } from './DashboardController';
+import {
+  deleteRequestsFromFolder,
+  saveRequestToDB,
+} from './DashboardController';
+import { db } from '../../../../renderer/db';
 export default function HistoryBlock(props) {
   const dispatch = useDispatch();
   const reqResHistory = useSelector((state) => state.historyReqRes);
   // Blocks that will be mapped using UUID as key
   // Each block will have a button to remove it from the history
   // Each block will have a button to see the response by overwriting the current response in the redux store
-  console.log(props);
+  console.log(props.reqResInfo.object);
   return (
-    
     <div>
       <Card>
         <CardContent>
@@ -33,7 +36,10 @@ export default function HistoryBlock(props) {
           <Button
             onClick={() => {
               dispatch(deleteReqRes(props.reqResInfo.object.id));
-              console.log(reqResHistory);
+              db.collections
+                .where('id')
+                .equals(props.reqResInfo.object.id)
+                .delete();
             }}
           >
             {' '}
@@ -41,7 +47,7 @@ export default function HistoryBlock(props) {
           </Button>
           <Button
             onClick={() => {
-              dispatch(setResponse(props.reqResInfo.object.response));
+              dispatch(setResponse(props.reqResInfo.object));
             }}
           >
             See Response

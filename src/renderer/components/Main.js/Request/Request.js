@@ -37,7 +37,7 @@ export default function Request() {
     const reqAndRes = await api.invoke('fetch', reqResObj);
     dispatch(setResponse(reqAndRes));
     dispatch(addReqRes(reqAndRes));
-    saveRequestToDB(reqResObj.id, reqResObj, 'Initial Folder');
+    saveRequestToDB(reqAndRes.id, reqAndRes, 'Initial Folder');
   }
 
   // retrieve body from redux

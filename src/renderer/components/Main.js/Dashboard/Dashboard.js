@@ -10,11 +10,18 @@ import TabPanel from '@mui/lab/TabPanel';
 import Typography from '@mui/material/Typography';
 import { useSelector } from 'react-redux';
 import HistoryBlock from './HistoryBlock';
-import { Card, CardActions, CardContent } from '@mui/material';
-import { getRequestsFromDB } from './DashboardController';
+import { Card, CardActions, CardContent, Button } from '@mui/material';
+import {
+  deleteCurrentFolder,
+  getRequestsFromDB,
+  deleteRequestsFromFolder,
+} from './DashboardController';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../../../db';
 import { useEffect } from 'react';
+import FormDialog from './FormDialog';
+import DeleteIcon from '@mui/icons-material/Delete';
+import BackspaceOutlinedIcon from '@mui/icons-material/BackspaceOutlined';
 
 export default function Dashboard() {
   const [value, setValue] = React.useState('collections');
@@ -55,19 +62,30 @@ export default function Dashboard() {
             </TabList>
           </Box>
           <TabPanel value="collections">
-            <CardContent></CardContent>
-            <Card sx={{ display: 'flex' }}>
-              <CardActions>New Folder</CardActions>
-              <CardActions>Clear Folder</CardActions>
-              <CardActions>Remove Folder</CardActions>
+            <Card sx={{ display: 'flex', bgcolor: 'transparent' }}>
+              <FormDialog action="add">Add Folder</FormDialog>
+              <Button
+                variant="outlined"
+                startIcon={<DeleteIcon />}
+                onClick={() => {
+                  deleteRequestsFromFolder;
+                }}
+              >
+                Clear Folder
+              </Button>
+              <Button
+                variant="outlined"
+                endIcon={<BackspaceOutlinedIcon />}
+                onClick={() => {
+                  deleteCurrentFolder;
+                }}
+              >
+                Remove Folder
+              </Button>
             </Card>
             {requests.map((request) => {
               return <HistoryBlock key={request.id} reqResInfo={request} />;
             })}
-            {/*{Object.keys(allReqRes).map((reqRes) => {
-            return <HistoryBlock key={reqRes} reqResInfo={allReqRes[reqRes]} />;
-          })}
-        */}
           </TabPanel>
           <TabPanel value="schedule"></TabPanel>
           <TabPanel value="history"></TabPanel>
