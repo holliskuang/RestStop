@@ -4,13 +4,14 @@ import { useLiveQuery } from 'dexie-react-hooks';
 import { setFolder } from 'renderer/state/currentReqRes';
 import { v4 as uuid } from 'uuid';
 import { setFolder } from '../../../currentReqRes';
+import moment from 'moment';
 
 async function saveRequestToDB(id, request, folder) {
   await db.collections.add({ id: request.id, object: request, folder: folder });
   await db.history.add({
     id: request.id,
     object: request,
-    created_at: Date.now().toLocaleTimeString('en-US'),
+    created_at: moment().format('ddd, h:mm A'),
   });
 }
 
