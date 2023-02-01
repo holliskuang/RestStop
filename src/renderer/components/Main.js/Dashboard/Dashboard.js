@@ -8,7 +8,7 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Typography from '@mui/material/Typography';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import HistoryBlock from './HistoryBlock';
 import {
   Card,
@@ -30,9 +30,11 @@ import FormDialog from './FormDialog';
 import DeleteIcon from '@mui/icons-material/Delete';
 import BackspaceOutlinedIcon from '@mui/icons-material/BackspaceOutlined';
 import FolderSelect from './FolderSelect';
+import { getFoldersFromDB } from './DashboardController';
 
 export default function Dashboard() {
   const [value, setValue] = React.useState('collections');
+  const dispatch = useDispatch();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -83,7 +85,7 @@ export default function Dashboard() {
                 variant="outlined"
                 startIcon={<BackspaceOutlinedIcon />}
                 onClick={() => {
-                  deleteRequestsFromFolder;
+                  db.collections.where('folder').equals(currentFolder).delete();
                 }}
               >
                 Clear Folder
@@ -92,13 +94,20 @@ export default function Dashboard() {
                 variant="outlined"
                 startIcon={<DeleteIcon />}
                 onClick={() => {
-                  deleteCurrentFolder;
+                  db.collections.where('folder').equals(currentFolder).delete();
+                  db.folder.where('name').equals(currentFolder).delete();
+                  const folders = getFoldersFromDB();
+                  if (folders.length > 0) {
+                    dispatch(setFolder(folders[0]));
+                  } else {
+                    dispatch(setFolder(''));
+                  }
                 }}
               >
                 Remove Folder
               </Button>
             </Card>
-            <Typography variant="h3"> {currentFolder}</Typography>
+
             {requests.map((request) => {
               return <HistoryBlock key={request.id} reqResInfo={request} />;
             })}

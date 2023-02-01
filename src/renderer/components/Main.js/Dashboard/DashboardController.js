@@ -19,7 +19,7 @@ async function getRequestsFromDB() {
 
 async function deleteRequestsFromFolder() {
   const currentFolder = useSelector((state) => state.currentReqRes.folder);
-  await db.collections.where('folder').equals(currentFolder).delete();
+  return await db.collections.where('folder').equals(currentFolder).delete();
 }
 
 async function deleteCurrentFolder() {
