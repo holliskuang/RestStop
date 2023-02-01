@@ -6,45 +6,52 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import AddIcon from '@mui/icons-material/Add';
 
 export default function FormDialog(props) {
-    // Action influences the dialog and the button text
+  // Action influences the dialog and the button text
   let action = props.action;
   const [open, setOpen] = React.useState(false);
+  const [value, setValue] = React.useState('');
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  function handleClose(input) {
     setOpen(false);
-  };
+    if (input === 'add') {
+      // Add folder to database
+      console.log(value);
+    }
 
+  setValue('');
+  }
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Open form dialog
+        <AddIcon />
+        New Folder
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Subscribe</DialogTitle>
+        <DialogTitle>New Folder</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To subscribe to this website, please enter your email address here.
-            We will send updates occasionally.
+            Name the Folder you would like to add to your collections.
           </DialogContentText>
           <TextField
             autoFocus
             margin="dense"
             id="name"
-            label="Email Address"
-            type="email"
             fullWidth
             variant="standard"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Subscribe</Button>
+          <Button onClick={() => handleClose('cancel')}>Cancel</Button>
+          <Button onClick={() => handleClose('add')}>Add</Button>
         </DialogActions>
       </Dialog>
     </div>

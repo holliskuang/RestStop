@@ -66,7 +66,7 @@ export default function Dashboard() {
               <FormDialog action="add">Add Folder</FormDialog>
               <Button
                 variant="outlined"
-                startIcon={<DeleteIcon />}
+                startIcon={<BackspaceOutlinedIcon />}
                 onClick={() => {
                   deleteRequestsFromFolder;
                 }}
@@ -75,7 +75,7 @@ export default function Dashboard() {
               </Button>
               <Button
                 variant="outlined"
-                endIcon={<BackspaceOutlinedIcon />}
+                startIcon={<DeleteIcon />}
                 onClick={() => {
                   deleteCurrentFolder;
                 }}
