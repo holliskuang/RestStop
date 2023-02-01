@@ -7,6 +7,9 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import AddIcon from '@mui/icons-material/Add';
+import { addFolderToDB } from './DashboardController';
+import { v4 as uuid } from 'uuid';
+import { db } from 'renderer/db';
 
 export default function FormDialog(props) {
   // Action influences the dialog and the button text
@@ -18,14 +21,13 @@ export default function FormDialog(props) {
     setOpen(true);
   };
 
-  function handleClose(input) {
+  async function handleClose(input) {
     setOpen(false);
     if (input === 'add') {
       // Add folder to database
-      console.log(value);
+      addFolderToDB(value);
     }
-
-  setValue('');
+    setValue('');
   }
   return (
     <div>

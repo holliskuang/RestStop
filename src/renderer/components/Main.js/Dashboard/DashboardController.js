@@ -2,6 +2,8 @@ import { db } from '../../../db';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { setFolder } from 'renderer/state/currentReqRes';
+import { v4 as uuid } from 'uuid';
+import { setFolder } from '../../../currentReqRes';
 
 async function saveRequestToDB(id, request, folder) {
   await db.collections.add({ id: request.id, object: request, folder: folder });
@@ -32,17 +34,23 @@ async function deleteCurrentFolder() {
 }
 
 async function getFoldersFromDB() {
-  const uniqueFolders = await db.collections.orderBy('folder').uniqueKeys();
+  const uniqueFolders = await db.folder.toArray();
   return uniqueFolders;
 }
 
 async function deleteRequestFromDB(id) {
-    await db.collections.where('id').equals(id).delete();
+  await db.collections.where('id').equals(id).delete();
 }
 
+async function addFolderToDB(name) {
+  const id = uuid();
+  await db.folder.add({ id: id, name: name });
+}
 export {
   saveRequestToDB,
   getRequestsFromDB,
   deleteCurrentFolder,
   deleteRequestsFromFolder,
+  addFolderToDB,
+  getFoldersFromDB,
 };

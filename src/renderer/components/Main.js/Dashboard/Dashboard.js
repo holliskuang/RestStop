@@ -10,7 +10,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import Typography from '@mui/material/Typography';
 import { useSelector } from 'react-redux';
 import HistoryBlock from './HistoryBlock';
-import { Card, CardActions, CardContent, Button } from '@mui/material';
+import { Card, CardActions, CardContent, Button , Select} from '@mui/material';
 import {
   deleteCurrentFolder,
   getRequestsFromDB,
@@ -22,6 +22,8 @@ import { useEffect } from 'react';
 import FormDialog from './FormDialog';
 import DeleteIcon from '@mui/icons-material/Delete';
 import BackspaceOutlinedIcon from '@mui/icons-material/BackspaceOutlined';
+import FolderSelect from './FolderSelect';
+
 
 export default function Dashboard() {
   const [value, setValue] = React.useState('collections');
@@ -62,6 +64,7 @@ export default function Dashboard() {
             </TabList>
           </Box>
           <TabPanel value="collections">
+           <FolderSelect/>
             <Card sx={{ display: 'flex', bgcolor: 'transparent' }}>
               <FormDialog action="add">Add Folder</FormDialog>
               <Button
