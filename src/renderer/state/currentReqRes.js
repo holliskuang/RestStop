@@ -13,7 +13,7 @@ const initialState = {
   response: '',
   error: false,
   loading: true,
-  folder: 'Initial Folder',
+  folder: 'Home Folder',
 };
 
 const currentReqRes = createSlice({

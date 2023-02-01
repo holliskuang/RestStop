@@ -10,7 +10,9 @@ export default function FolderSelect() {
   const folders = useLiveQuery(async () => {
     return await db.folder.toArray();
   });
+  const dispatch = useDispatch();
   console.log(folders);
+
   if (folders != undefined) {
     return (
       <FormControl fullWidth>
@@ -19,8 +21,8 @@ export default function FolderSelect() {
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           label="Current Folder"
-          onClick={(e) => {
-            setFolder(e.target.value);
+          onChange={(e) => {
+            dispatch(setFolder(e.target.value));
           }}
           value={currentFolder}
         >
