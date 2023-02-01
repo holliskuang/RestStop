@@ -10,13 +10,15 @@ import AddIcon from '@mui/icons-material/Add';
 import { addFolderToDB } from './DashboardController';
 import { v4 as uuid } from 'uuid';
 import { db } from 'renderer/db';
+import { setFolder } from 'renderer/state/currentReqRes';
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function FormDialog(props) {
   // Action influences the dialog and the button text
   let action = props.action;
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState('');
-
+  const dispatch = useDispatch();
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -26,6 +28,7 @@ export default function FormDialog(props) {
     if (input === 'add') {
       // Add folder to database
       addFolderToDB(value);
+      dispatch(setFolder(value));
     }
     setValue('');
   }

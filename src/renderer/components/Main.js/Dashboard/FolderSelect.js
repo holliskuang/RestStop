@@ -11,7 +11,7 @@ export default function FolderSelect() {
     return await db.folder.toArray();
   });
   const dispatch = useDispatch();
-
+  console.log(currentFolder);
 
   if (folders != undefined) {
     return (
@@ -25,6 +25,7 @@ export default function FolderSelect() {
             dispatch(setFolder(e.target.value));
           }}
           value={currentFolder}
+         
         >
           {folders.map((folder) => {
             return (

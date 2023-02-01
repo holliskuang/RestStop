@@ -7,6 +7,11 @@ import { setFolder } from '../../../currentReqRes';
 
 async function saveRequestToDB(id, request, folder) {
   await db.collections.add({ id: request.id, object: request, folder: folder });
+  await db.history.add({
+    id: request.id,
+    object: request,
+    created_at: Date.now().toLocaleTimeString('en-US'),
+  });
 }
 
 async function getRequestsFromDB() {

@@ -10,6 +10,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import Typography from '@mui/material/Typography';
 import { useSelector, useDispatch } from 'react-redux';
 import HistoryBlock from './HistoryBlock';
+import TimeBlock from './TimeBlock';
 import {
   Card,
   CardActions,
@@ -31,6 +32,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import BackspaceOutlinedIcon from '@mui/icons-material/BackspaceOutlined';
 import FolderSelect from './FolderSelect';
 import { getFoldersFromDB } from './DashboardController';
+import { setFolder } from '../../../state/currentReqRes';
 
 export default function Dashboard() {
   const [value, setValue] = React.useState('collections');
@@ -41,13 +43,17 @@ export default function Dashboard() {
   };
   const allReqRes = useSelector((state) => state.historyReqRes);
   let currentFolder = useSelector((state) => state.currentReqRes.folder);
+  const allHistory = useLiveQuery(async () => {
+    return await db.history.toArray();
+  });
+  console.log('allHistory', allHistory);
 
   // get all folders and requests from db, filter requests by current folder
   const allRequests = useLiveQuery(async () => {
     return await db.collections.toArray();
   });
 
-  if (!allRequests) {
+  if (!allRequests || !allHistory) {
     return <div>Loading...</div>;
   } else {
     // wait for allRequests to be populated, then filter by current folder
@@ -113,7 +119,17 @@ export default function Dashboard() {
             })}
           </TabPanel>
           <TabPanel value="schedule"></TabPanel>
-          <TabPanel value="history"></TabPanel>
+          <TabPanel value="history">
+            {allHistory.map((request) => {
+              return (
+                <TimeBlock
+                  key={request.id}
+                  reqResInfo={request}
+                  time={request.created_at}
+                />
+              );
+            })}
+          </TabPanel>
         </TabContext>
       </Box>
     );
