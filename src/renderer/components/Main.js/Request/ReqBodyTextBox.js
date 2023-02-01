@@ -47,7 +47,7 @@ export default function ReqBodyTextBox() {
         // onChange event handler is used to update the state of the request body
         onChange={(editor, data, value) => {
           dispatch(setBody(editor.toString()));
-          console.log(reqState);
+    
         }}
       ></CodeMirror>
     </Box>

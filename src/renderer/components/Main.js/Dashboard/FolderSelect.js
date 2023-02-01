@@ -11,7 +11,7 @@ export default function FolderSelect() {
     return await db.folder.toArray();
   });
   const dispatch = useDispatch();
-  console.log(folders);
+
 
   if (folders != undefined) {
     return (

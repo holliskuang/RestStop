@@ -14,7 +14,7 @@ import Box from '@mui/material/Box';
 const Hello = () => {
   const mode = useSelector((state) => state.light.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
-  console.log('hi')
+
   return (
 <Box >
       <ThemeProvider theme={theme}>

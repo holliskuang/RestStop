@@ -10,7 +10,14 @@ import TabPanel from '@mui/lab/TabPanel';
 import Typography from '@mui/material/Typography';
 import { useSelector } from 'react-redux';
 import HistoryBlock from './HistoryBlock';
-import { Card, CardActions, CardContent, Button , Select} from '@mui/material';
+import {
+  Card,
+  CardActions,
+  CardContent,
+  Button,
+  Select,
+  unstable_composeClasses,
+} from '@mui/material';
 import {
   deleteCurrentFolder,
   getRequestsFromDB,
@@ -24,7 +31,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import BackspaceOutlinedIcon from '@mui/icons-material/BackspaceOutlined';
 import FolderSelect from './FolderSelect';
 
-
 export default function Dashboard() {
   const [value, setValue] = React.useState('collections');
 
@@ -32,14 +38,20 @@ export default function Dashboard() {
     setValue(newValue);
   };
   const allReqRes = useSelector((state) => state.historyReqRes);
-  const currentFolder = useSelector((state) => state.currentReqRes.folder);
-  const requests = useLiveQuery(async () => {
-    return await db.collections.where('folder').equals(currentFolder).toArray();
+  let currentFolder = useSelector((state) => state.currentReqRes.folder);
+
+  // get all folders and requests from db, filter requests by current folder
+  const allRequests = useLiveQuery(async () => {
+    return await db.collections.toArray();
   });
 
-  if (!requests) {
+  if (!allRequests) {
     return <div>Loading...</div>;
-  } else
+  } else {
+    // wait for allRequests to be populated, then filter by current folder
+    const requests = allRequests.filter(
+      (request) => request.folder === currentFolder
+    );
     return (
       <Box sx={{ width: '100%', typography: 'body1' }}>
         <Typography variant="h3"></Typography>
@@ -64,7 +76,7 @@ export default function Dashboard() {
             </TabList>
           </Box>
           <TabPanel value="collections">
-           <FolderSelect/>
+            <FolderSelect />
             <Card sx={{ display: 'flex', bgcolor: 'transparent' }}>
               <FormDialog action="add">Add Folder</FormDialog>
               <Button
@@ -86,6 +98,7 @@ export default function Dashboard() {
                 Remove Folder
               </Button>
             </Card>
+            <Typography variant="h3"> {currentFolder}</Typography>
             {requests.map((request) => {
               return <HistoryBlock key={request.id} reqResInfo={request} />;
             })}
@@ -95,4 +108,5 @@ export default function Dashboard() {
         </TabContext>
       </Box>
     );
+  }
 }
