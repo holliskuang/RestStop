@@ -14,7 +14,7 @@ const initialState = {
   error: false,
   loading: true,
   folder: 'Home Folder',
-  test: 'assert(response.status === 200, "Status code is not 200");)'
+  test: '(response.status === 200)'
 };
 
 const currentReqRes = createSlice({

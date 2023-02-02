@@ -20,13 +20,15 @@ import { addReqRes } from 'renderer/state/historyReqRes.js';
 import { saveRequestToDB } from '../Dashboard/DashboardController.js';
 import { db } from 'renderer/db.js';
 import TestBox from './TestBox.js';
+import chai from 'chai';
+
 
 export default function Request() {
   const dispatch = useDispatch();
   const reqState = useSelector((state) => state.currentReqRes);
   const api = window.api.ipcRenderer;
   const currentFolder = useSelector((state) => state.currentReqRes.folder);
-
+  let assert = chai.assert;
   // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {
     event.preventDefault();
@@ -41,6 +43,7 @@ export default function Request() {
     dispatch(setResponse(reqAndRes));
     dispatch(addReqRes(reqAndRes));
     saveRequestToDB(reqAndRes.id, reqAndRes, currentFolder);
+    assert(reqAndRes.responseStatus === 300, 'Status is not 200');
   }
 
   // retrieve body from redux

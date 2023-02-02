@@ -1,7 +1,9 @@
 /* eslint import/prefer-default-export: off */
 import { URL } from 'url';
 import path from 'path';
+import { assert } from 'console';
 var setCookie = require('set-cookie-parser');
+
 
 export function resolveHtmlPath(htmlFileName: string) {
   if (process.env.NODE_ENV === 'development') {
@@ -21,7 +23,10 @@ export async function handleRequest(reqResObj) {
     headers: reqResObj.headers,
   });
 
-  const testResults = handleTest(reqResObj, response);
+  handleTest(reqResObj, response);
+
+  /*const testResults = handleTest(reqResObj, response);
+  reqResObj['responseTest'] = testResults; */
   const contentType = response.headers.get('content-type');
   const cookieMonster = setCookie.parse(response.headers.get('set-cookie'));
 
@@ -47,8 +52,12 @@ export async function handleRequest(reqResObj) {
   return reqResObj;
 }
 
-function handleTest(reqResObj, response) {
-  const evaluation = eval(`(response)=> reqResObj.test`);
+async function handleTest(reqResObj, response) {
+
+
+  /*const evaluation = eval(`(response)=> reqResObj.test`);
   const results = evaluation(response);
-  reqResObj['responseTest'] = results;
+  reqResObj['responseTest'] = results; */
+ 
+
 }
