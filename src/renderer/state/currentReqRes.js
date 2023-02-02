@@ -14,6 +14,9 @@ const initialState = {
   error: false,
   loading: true,
   folder: 'Home Folder',
+  test: `rs.test("Status code is 200", ()=> {
+    rs.expect(rs.response.status).toBe(200);
+});`
 };
 
 const currentReqRes = createSlice({
@@ -47,6 +50,9 @@ const currentReqRes = createSlice({
     setFolder: (state, action) => {
       state.folder = action.payload;
     },
+    setTest:(state, action) => {
+      state.test = action.payload;
+    }
   },
 });
 
@@ -60,5 +66,6 @@ export const {
   setError,
   setLoading,
   setFolder,
+  setTest
 } = currentReqRes.actions;
 export default currentReqRes.reducer;

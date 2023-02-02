@@ -19,6 +19,7 @@ import Response from '../Response/Response';
 import { addReqRes } from 'renderer/state/historyReqRes.js';
 import { saveRequestToDB } from '../Dashboard/DashboardController.js';
 import { db } from 'renderer/db.js';
+import TestBox from './TestBox.js';
 
 export default function Request() {
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ export default function Request() {
     dispatch(addReqRes(reqAndRes));
     saveRequestToDB(reqAndRes.id, reqAndRes, currentFolder);
   }
+  
 
   // retrieve body from redux
   const retrieveBody = () => {
@@ -59,8 +61,10 @@ export default function Request() {
     });
     // Determine Context Type Header based on body type
     headers['Content-Type'] = reqState.bodyType;
-    return JSON.stringify(headers);
+    console.log(headers)
+    return headers;
   };
+
   // retrieve url from redux
   const retrieveUrl = () => {
     const url = reqState.url;
@@ -134,6 +138,7 @@ export default function Request() {
             />
           </>
         )}
+        <TestBox/>
         <Response></Response>
       </FormControl>
     </div>
