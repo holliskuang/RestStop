@@ -7,6 +7,7 @@ import { javascript } from '@codemirror/lang-javascript';
 import { EditorView } from '@codemirror/view';
 import { materialDark } from '@uiw/codemirror-theme-material';
 import { useSelector, useDispatch } from 'react-redux';
+import { setTest } from '../../../state/currentReqRes';
 
 export default function TestBox() {
   const reqState = useSelector((state) => state.currentReqRes);
@@ -31,6 +32,8 @@ export default function TestBox() {
         value={reqState.test}
         readOnly={false}
         theme={materialDark}
+        minWidth="100%"
+        minHeight="100%"
         // onChange event handler is used to update the state of the request body
         onChange={(editor, data, value) => {
           dispatch(setTest(editor.toString()));

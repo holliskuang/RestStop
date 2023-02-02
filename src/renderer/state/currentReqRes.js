@@ -14,9 +14,7 @@ const initialState = {
   error: false,
   loading: true,
   folder: 'Home Folder',
-  test: `rs.test("Status code is 200", ()=> {
-    rs.expect(rs.response.status).toBe(200);
-});`
+  test: 'assert(response.status === 200, "Status code is not 200");)'
 };
 
 const currentReqRes = createSlice({
