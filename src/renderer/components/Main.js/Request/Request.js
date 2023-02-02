@@ -27,9 +27,6 @@ export default function Request() {
   const api = window.api.ipcRenderer;
   const currentFolder = useSelector((state) => state.currentReqRes.folder);
 
-  
- 
-  
   // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {
     event.preventDefault();
@@ -40,11 +37,11 @@ export default function Request() {
     reqResObj.headers = retrieveHeaders();
     reqResObj.body = retrieveBody();
     const reqAndRes = await api.invoke('fetch', reqResObj);
+    console.log(reqAndRes);
     dispatch(setResponse(reqAndRes));
     dispatch(addReqRes(reqAndRes));
     saveRequestToDB(reqAndRes.id, reqAndRes, currentFolder);
   }
-  
 
   // retrieve body from redux
   const retrieveBody = () => {
@@ -54,14 +51,16 @@ export default function Request() {
   // retrieve checked headers from redux and return as object
   const retrieveHeaders = () => {
     const headers = {};
+
     Object.keys(reqState.headers).forEach((id) => {
-      if (reqState.headers[id].checked) {
+      if (reqState.headers[id].checked && reqState.headers[id].key !== '') {
         headers[reqState.headers[id].key] = reqState.headers[id].value;
       }
     });
+
     // Determine Context Type Header based on body type
     headers['Content-Type'] = reqState.bodyType;
-    console.log(headers)
+    console.log(headers);
     return headers;
   };
 
@@ -138,7 +137,7 @@ export default function Request() {
             />
           </>
         )}
-        <TestBox/>
+        <TestBox />
         <Response></Response>
       </FormControl>
     </div>

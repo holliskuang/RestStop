@@ -246,6 +246,8 @@
 
     "@uiw/react-codemirror": "^4.19.7",
 
+    "chai": "^4.3.7",
+
     "codemirror": "^6.0.1",
 
     "dexie": "^3.2.3",

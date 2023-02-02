@@ -15,18 +15,20 @@ export function resolveHtmlPath(htmlFileName: string) {
 
 // handle Request , pull in headers and cookies and body and return response object
 export async function handleRequest(reqResObj) {
-  const headerObj = {};
   const resHeader = {};
   let response = await fetch(reqResObj.url, {
     method: reqResObj.method,
-    headers: reqResObj.headers
+    headers: reqResObj.headers,
   });
+
+  const testResults = handleTest(reqResObj, response);
   const contentType = response.headers.get('content-type');
   const cookieMonster = setCookie.parse(response.headers.get('set-cookie'));
 
   response.headers.forEach((value, key) => {
     resHeader[key] = value;
   });
+
   reqResObj['responseCookies'] = cookieMonster;
   reqResObj['responseHeaders'] = resHeader;
   reqResObj['responseStatus'] = response.status;
@@ -41,5 +43,12 @@ export async function handleRequest(reqResObj) {
     let text = await response.text();
     reqResObj['responseBody'] = text;
   }
+
   return reqResObj;
+}
+
+function handleTest(reqResObj, response) {
+  const evaluation = eval(`(response)=> reqResObj.test`);
+  const results = evaluation(response);
+  reqResObj['responseTest'] = results;
 }
