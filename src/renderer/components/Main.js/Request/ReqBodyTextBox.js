@@ -17,6 +17,7 @@ import { setBody } from 'renderer/state/currentReqRes';
 
 export default function ReqBodyTextBox() {
   const reqState = useSelector((state) => state.currentReqRes);
+  
   const dispatch = useDispatch();
   let value = reqState.body;
   let bodyType = reqState.bodyType;

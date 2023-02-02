@@ -15,7 +15,16 @@ export function resolveHtmlPath(htmlFileName: string) {
 
 // handle Request , pull in headers and cookies and body and return response object
 export async function handleRequest(reqResObj) {
-  const resHeader = {};
+  const headerObj = {};
+  Object.keys(reqResObj.headers).map((keyname, index) => {
+    if (reqResObj.headers[keyname].checked) {
+      headerObj[reqResObj.headers[keyname].key] =
+        reqResObj.headers[keyname].value;
+    }
+  });
+
+  console.log(JSON.stringify(headerObj));
+
   let response = await fetch(reqResObj.url, {
     method: reqResObj.method,
   });

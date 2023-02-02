@@ -24,7 +24,7 @@ export default function Response() {
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <TabList onChange={handleChange} aria-label="lab API tabs example">
-            <Tab label="Body"value="body" />
+            <Tab label="Body" value="body" />
             <Tab label="Headers" value="headers" />
             <Tab label="Cookies" value="cookies" />
           </TabList>

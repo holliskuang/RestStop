@@ -26,6 +26,9 @@ export default function Request() {
   const api = window.api.ipcRenderer;
   const currentFolder = useSelector((state) => state.currentReqRes.folder);
 
+  
+ 
+  
   // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {
     event.preventDefault();
@@ -39,7 +42,6 @@ export default function Request() {
     dispatch(setResponse(reqAndRes));
     dispatch(addReqRes(reqAndRes));
     saveRequestToDB(reqAndRes.id, reqAndRes, currentFolder);
-    
   }
 
   // retrieve body from redux
