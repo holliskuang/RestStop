@@ -42,11 +42,6 @@ export default function Request() {
     dispatch(setResponse(reqAndRes));
     dispatch(addReqRes(reqAndRes));
     saveRequestToDB(reqAndRes.id, reqAndRes, currentFolder);
-    try {
-      eval(`assert(reqAndRes.responseStatus === 300, 'Status is not 200')`);
-    } catch (err) {
-      console.log(err.message);
-    }
   }
 
   // retrieve body from redux

@@ -4,7 +4,6 @@ import path from 'path';
 import { assert } from 'console';
 var setCookie = require('set-cookie-parser');
 
-
 export function resolveHtmlPath(htmlFileName: string) {
   if (process.env.NODE_ENV === 'development') {
     const port = process.env.PORT || 1212;
@@ -53,11 +52,11 @@ export async function handleRequest(reqResObj) {
 }
 
 async function handleTest(reqResObj, response) {
-
-
-  /*const evaluation = eval(`(response)=> reqResObj.test`);
-  const results = evaluation(response);
-  reqResObj['responseTest'] = results; */
- 
-
+  try {
+    eval(`assert(response.status === 300, 'Status is not 200')`);
+    reqResObj['responseTest'] = 'Test Passed';
+  } catch (err) {
+    const results = err.message;
+    reqResObj['responseTest'] = results;
+  }
 }
