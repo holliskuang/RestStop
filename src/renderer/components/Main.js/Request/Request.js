@@ -45,7 +45,7 @@ export default function Request() {
     try {
       eval(`assert(reqAndRes.responseStatus === 300, 'Status is not 200')`);
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
     }
   }
 
