@@ -22,7 +22,6 @@ import { db } from 'renderer/db.js';
 import TestBox from './TestBox.js';
 import chai from 'chai';
 
-
 export default function Request() {
   const dispatch = useDispatch();
   const reqState = useSelector((state) => state.currentReqRes);
@@ -39,11 +38,15 @@ export default function Request() {
     reqResObj.headers = retrieveHeaders();
     reqResObj.body = retrieveBody();
     const reqAndRes = await api.invoke('fetch', reqResObj);
-    console.log(reqAndRes);
+
     dispatch(setResponse(reqAndRes));
     dispatch(addReqRes(reqAndRes));
     saveRequestToDB(reqAndRes.id, reqAndRes, currentFolder);
-    assert(reqAndRes.responseStatus === 300, 'Status is not 200');
+    try {
+      eval(`assert(reqAndRes.responseStatus === 300, 'Status is not 200')`);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   // retrieve body from redux
@@ -63,7 +66,7 @@ export default function Request() {
 
     // Determine Context Type Header based on body type
     headers['Content-Type'] = reqState.bodyType;
-    console.log(headers);
+
     return headers;
   };
 

@@ -46,7 +46,7 @@ export default function Dashboard() {
   const allHistory = useLiveQuery(async () => {
     return await db.history.toArray();
   });
-  console.log('allHistory', allHistory);
+
 
   // get all folders and requests from db, filter requests by current folder
   const allRequests = useLiveQuery(async () => {
