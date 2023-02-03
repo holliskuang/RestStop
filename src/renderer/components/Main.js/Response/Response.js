@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import ResponseBody from './ResponseBody';
 import ResponseHeaders from './ResponseHeaders';
 import ResponseCookies from './ResponseCookies';
+import ResponseTest from './ResponseTest';
 
 export default function Response() {
   const [value, setValue] = React.useState('body');
@@ -27,6 +28,7 @@ export default function Response() {
             <Tab label="Body" value="body" />
             <Tab label="Headers" value="headers" />
             <Tab label="Cookies" value="cookies" />
+            <Tab label="Tests" value="tests" />
           </TabList>
         </Box>
         <TabPanel value="body">
@@ -37,6 +39,9 @@ export default function Response() {
         </TabPanel>
         <TabPanel value="cookies">
           <ResponseCookies />
+        </TabPanel>
+        <TabPanel value="tests">
+          <ResponseTest />
         </TabPanel>
       </TabContext>
     </Box>

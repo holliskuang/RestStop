@@ -37,11 +37,12 @@ export default function Request() {
     reqResObj.method = retrieveMethod();
     reqResObj.headers = retrieveHeaders();
     reqResObj.body = retrieveBody();
+    reqResObj.test = reqState.test;
     const reqAndRes = await api.invoke('fetch', reqResObj);
-
     dispatch(setResponse(reqAndRes));
     dispatch(addReqRes(reqAndRes));
     saveRequestToDB(reqAndRes.id, reqAndRes, currentFolder);
+    console.log(reqAndRes);
   }
 
   // retrieve body from redux

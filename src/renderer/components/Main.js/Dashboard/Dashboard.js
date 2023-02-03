@@ -33,6 +33,7 @@ import BackspaceOutlinedIcon from '@mui/icons-material/BackspaceOutlined';
 import FolderSelect from './FolderSelect';
 import { getFoldersFromDB } from './DashboardController';
 import { setFolder } from '../../../state/currentReqRes';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function Dashboard() {
   const [value, setValue] = React.useState('collections');
@@ -54,7 +55,7 @@ export default function Dashboard() {
   });
 
   if (!allRequests || !allHistory) {
-    return <div>Loading...</div>;
+    return <CircularProgress />
   } else {
     // wait for allRequests to be populated, then filter by current folder
     const requests = allRequests.filter(

@@ -1,8 +1,10 @@
 /* eslint import/prefer-default-export: off */
 import { URL } from 'url';
 import path from 'path';
-import { assert } from 'console';
+import chai from 'chai';
+
 var setCookie = require('set-cookie-parser');
+var assert = chai.assert;
 
 export function resolveHtmlPath(htmlFileName: string) {
   if (process.env.NODE_ENV === 'development') {
@@ -53,10 +55,10 @@ export async function handleRequest(reqResObj) {
 
 async function handleTest(reqResObj, response) {
   try {
-    eval(`assert(response.status === 300, 'Status is not 200')`);
-    reqResObj['responseTest'] = 'Test Passed';
+    eval(reqResObj.test);
+    reqResObj['responseTest'] = true
   } catch (err) {
-    const results = err.message;
-    reqResObj['responseTest'] = results;
+    reqResObj['responseTest'] = false
+    return;
   }
 }

@@ -242,6 +242,8 @@
 
     "@reduxjs/toolkit": "^1.9.1",
 
+    "@types/chai": "^4.3.4",
+
     "@uiw/codemirror-theme-material": "^4.19.7",
 
     "@uiw/react-codemirror": "^4.19.7",
