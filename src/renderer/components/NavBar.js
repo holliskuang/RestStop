@@ -9,6 +9,7 @@ import HubIcon from '@mui/icons-material/Hub';
 import PowerIcon from '@mui/icons-material/Power';
 import SettingsInputAntennaIcon from '@mui/icons-material/SettingsInputAntenna';
 import WebhookIcon from '@mui/icons-material/Webhook';
+import { Link } from "react-router-dom";
 
 import React, { useState } from 'react';
 
@@ -42,15 +43,14 @@ export default function NavBar() {
         <div className="nav-buttons">
           
       {pages.map((page) 
-     =>(<Button 
+     =>(<Button  component={Link} to={page.route}
       key={page.name}
-      href={page.route}
       color="inherit"
       variant="outlined"
       endIcon={<page.endIcon/>}
       onClick={ReduxPageUpdate}
      >
-      {page.name}
+    {page.name}
      </Button>))} 
           <Button
           key="mode"
