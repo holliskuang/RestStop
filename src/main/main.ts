@@ -15,7 +15,7 @@ import log from 'electron-log';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 import { handleRequest } from './util';
-
+import GQLTest from './GQLElectron';
 
 class AppUpdater {
   constructor() {
@@ -33,10 +33,14 @@ ipcMain.on('ipc-example', async (event, arg) => {
   event.reply('ipc-example', msgTemplate('pong'));
 });
 
-// get request and return object that contains updated response 
+// get request and return object that contains updated response
 ipcMain.handle('fetch', async (event, reqResObj) => {
   return handleRequest(reqResObj);
-})
+});
+
+ipcMain.handle('gql', async (event) => {
+  return GQLTest;
+});
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
