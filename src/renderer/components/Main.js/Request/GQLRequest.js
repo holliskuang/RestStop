@@ -21,6 +21,12 @@ import { saveRequestToDB } from '../Dashboard/DashboardController.js';
 import { db } from 'renderer/db.js';
 import TestBox from './TestBox.js';
 import chai from 'chai';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  gql,
+} from '@apollo/client';
 
 export default function Request() {
   const dispatch = useDispatch();
@@ -28,6 +34,28 @@ export default function Request() {
   const api = window.api.ipcRenderer;
   const currentFolder = useSelector((state) => state.currentReqRes.folder);
   let assert = chai.assert;
+
+  //test graphql client
+  const client = new ApolloClient({
+    uri: 'https://spacex-production.up.railway.app/',
+    cache: new InMemoryCache(),
+  });
+
+  client
+    .query({
+      query: gql`
+        query ExampleQuery {
+          company {
+            ceo
+          }
+          roadster {
+            apoapsis_au
+          }
+        }
+      `,
+    })
+    .then((result) => console.log(result));
+
   // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {
     event.preventDefault();

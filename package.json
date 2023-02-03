@@ -220,6 +220,8 @@
 
   "dependencies": {
 
+    "@apollo/client": "^3.7.6",
+
     "@codemirror/lang-html": "github:codemirror/lang-html",
 
     "@codemirror/lang-javascript": "github:codemirror/lang-javascript",
@@ -267,6 +269,8 @@
     "electron-log": "^4.4.8",
 
     "electron-updater": "^5.2.3",
+
+    "graphql": "^16.6.0",
 
     "mocha": "^10.2.0",
 

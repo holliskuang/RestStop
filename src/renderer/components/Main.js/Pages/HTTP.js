@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import NavBar from '../../NavBar';
 import Request from '../Request/Request';
 import Dashboard from '../Dashboard/Dashboard';
-import themeSettings from '../../../themes';
+import { themeSettings } from '../../../themes';
 
 export default function HTTP() {
   const mode = useSelector((state) => state.light.mode);
@@ -18,7 +18,7 @@ export default function HTTP() {
         <CssBaseline />
         <NavBar></NavBar>
         <Request></Request>
-        <Response></Response>
+        
         <Dashboard />
       </ThemeProvider>
     </Box>
