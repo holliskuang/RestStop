@@ -14,7 +14,7 @@ const initialState = {
   error: false,
   loading: true,
   folder: 'Home Folder',
-  test: '(response.status === 200)'
+  test: 'assert(response.status === 200)',
 };
 
 const currentReqRes = createSlice({
@@ -48,9 +48,9 @@ const currentReqRes = createSlice({
     setFolder: (state, action) => {
       state.folder = action.payload;
     },
-    setTest:(state, action) => {
+    setTest: (state, action) => {
       state.test = action.payload;
-    }
+    },
   },
 });
 
@@ -64,6 +64,6 @@ export const {
   setError,
   setLoading,
   setFolder,
-  setTest
+  setTest,
 } = currentReqRes.actions;
 export default currentReqRes.reducer;
