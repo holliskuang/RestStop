@@ -140,7 +140,6 @@ export default function Request() {
           </>
         )}
         <TestBox />
-        <Response></Response>
       </FormControl>
     </div>
   );

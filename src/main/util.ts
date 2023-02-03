@@ -54,6 +54,7 @@ export async function handleRequest(reqResObj) {
 }
 
 async function handleTest(reqResObj, response) {
+  reqResObj['originalTest']= reqResObj.test;
   try {
     eval(reqResObj.test);
     reqResObj['responseTest'] = true

@@ -10,31 +10,18 @@ import NavBar from './components/NavBar';
 import Request from './components/Main.js/Request/Request';
 import Dashboard from './components/Main.js/Dashboard/Dashboard';
 import Box from '@mui/material/Box';
+import HTTP from './components/Main.js/Pages/HTTP';
+import GraphQL from './components/Main.js/Pages/GraphQL';
 
-const Hello = () => {
-  const mode = useSelector((state) => state.light.mode);
-  const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
 
-  return (
-<Box >
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-          <NavBar></NavBar>
-        <Request></Request> 
-        <Dashboard/>
-  
-      </ThemeProvider>
-  </Box>
-  );
-};
 
 export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Hello />} />
+        <Route path="/" element={<HTTP />} />
         <Route path="*" element={<div>404</div>} />
-        <Route path="/graphql" element={}/>
+        <Route path="/graphql" element={<GraphQL/>}/>
         <Route path="/websocket" element={}/>
         <Route path="/sse" element={}/>
         <Route path="/webhook" element={}/>

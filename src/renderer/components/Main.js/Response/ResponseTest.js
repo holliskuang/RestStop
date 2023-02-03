@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 export default function ResponseTest() {
   const reqAndRes = useSelector((state) => state.currentReqRes);
   const response = reqAndRes.response.responseTest;
-  const test = reqAndRes.test;
+  const test = reqAndRes.response.originalTest;
   console.log(response);
 
   return (
