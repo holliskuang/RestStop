@@ -5,8 +5,9 @@ import { useSelector } from 'react-redux';
 
 export default function ResponseTest() {
   const reqAndRes = useSelector((state) => state.currentReqRes);
-  const response = reqAndRes.response.responseStatus;
+  const response = reqAndRes.response.responseTest;
   const test = reqAndRes.test;
+  console.log(response);
 
   return (
     <Paper
@@ -16,6 +17,7 @@ export default function ResponseTest() {
         flexWrap: 'wrap',
         backgroundColor: 'alternate.main',
         justifyContent: ' space-between',
+        minHeight: '200px',
       }}
     >
       <Box sx={{ width: '50%', display: 'flex', justifyContent: 'center' }}>
@@ -26,7 +28,7 @@ export default function ResponseTest() {
         {' '}
         Response
       </Box>
-      {response !== '' ? (
+      {response !== undefined ? (
         <Paper
           sx={{
             backgroundColor: response ? '#54B435' : '#FF6464',

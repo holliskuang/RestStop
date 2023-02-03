@@ -55,10 +55,10 @@ export async function handleRequest(reqResObj) {
 
 async function handleTest(reqResObj, response) {
   try {
-    eval(reqResObj.test);
-    reqResObj['responseTest'] = true
+    eval('assert(response.status === 300)');
+    reqResObj['responseTest'] = true;
   } catch (err) {
-    reqResObj['responseTest'] = false
+    reqResObj['responseTest'] = false;
     return;
   }
 }
