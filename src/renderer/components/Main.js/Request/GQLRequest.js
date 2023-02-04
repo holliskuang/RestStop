@@ -29,14 +29,14 @@ export default function Request() {
   const currentFolder = useSelector((state) => state.currentReqRes.folder);
   let assert = chai.assert;
 
-  async function gql(){
-    const gql = await api.invoke('gql');
-    console.log(gql)
+  async function gql() {
+    let reqResObj = {};
+    const gql = await api.invoke('gql', reqResObj);
+    console.log(gql);
   }
   gql();
   // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {
-   
     event.preventDefault();
     let reqResObj = {};
     reqResObj.id = uuid();

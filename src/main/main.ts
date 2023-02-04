@@ -38,8 +38,8 @@ ipcMain.handle('fetch', async (event, reqResObj) => {
   return handleRequest(reqResObj);
 });
 
-ipcMain.handle('gql', async (event) => {
-  return GQLTest;
+ipcMain.handle('gql', async (event, reqResObj) => {
+  return GQLTest(reqResObj);
 });
 
 if (process.env.NODE_ENV === 'production') {
