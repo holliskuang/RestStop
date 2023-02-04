@@ -33,7 +33,7 @@ export default function Request() {
 
   // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {
-    setResponseMode('GraphQL')
+    setResponseMode('GraphQL');
     event.preventDefault();
     let reqResObj = {};
     reqResObj.responseMode = reqState.responseMode;
@@ -140,7 +140,6 @@ export default function Request() {
           />
         </>
 
-        <TestBox />
         <Response></Response>
       </FormControl>
     </div>

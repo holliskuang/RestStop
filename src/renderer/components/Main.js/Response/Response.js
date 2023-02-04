@@ -50,7 +50,11 @@ export default function Response() {
           )}
         </TabPanel>
         <TabPanel value="tests">
-          <ResponseTest />
+          {responseMode === 'HTTP' ? (
+            <ResponseTest />
+          ) : (
+            'Tests are only available in HTTP mode'
+          )}
         </TabPanel>
       </TabContext>
     </Box>
