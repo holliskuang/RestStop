@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -8,10 +8,16 @@ import Request from '../Request/Request';
 import Dashboard from '../Dashboard/Dashboard';
 import { themeSettings } from '../../../themes';
 import GQLRequest from '../Request/GQLRequest';
+import { useDispatch } from 'react-redux';
+import { setMethod } from '../../../state/currentReqRes.js';
 
 export default function GraphQL() {
   const mode = useSelector((state) => state.light.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setMethod('QUERY'));
+  }, []);
 
   return (
     <Box>

@@ -8,26 +8,26 @@ import {
 export default async function GQLTest(reqResObj): object {
   //test graphql client
   const client = new ApolloClient({
-    uri: 'https://spacex-production.up.railway.app/',
+    uri: `${reqResObj.url}`,
     cache: new InMemoryCache(),
   });
 
   // const client = ...
-
-  const query = await client.query({
-    query: gql`
-      query ExampleQuery {
-        company {
-          ceo
+  if (reqResObj.method === 'QUERY') {
+    const query = await client.query({
+      query: gql`
+        query ExampleQuery {
+          company {
+            ceo
+          }
+          roadster {
+            apoapsis_au
+          }
         }
-        roadster {
-          apoapsis_au
-        }
-      }
-    `,
-  });
-
-  reqResObj['responseBody'] = query
+      `,
+    });
+    reqResObj['responseBody'] = query;
+  }
 
   return reqResObj;
 }

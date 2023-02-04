@@ -7,10 +7,17 @@ import NavBar from '../../NavBar';
 import Request from '../Request/Request';
 import Dashboard from '../Dashboard/Dashboard';
 import { themeSettings } from '../../../themes';
+import { useDispatch } from 'react-redux';
+import { setMethod } from '../../../state/currentReqRes.js';
+
 
 export default function HTTP() {
   const mode = useSelector((state) => state.light.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setMethod('GET'));
+  }, []);
 
   return (
     <Box>

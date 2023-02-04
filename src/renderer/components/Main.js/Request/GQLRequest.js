@@ -31,7 +31,7 @@ export default function Request() {
 
   async function gql() {
     let reqResObj = {};
-    const gql = await api.invoke('gql', reqResObj);
+
     console.log(gql);
   }
   gql();
@@ -45,7 +45,7 @@ export default function Request() {
     reqResObj.headers = retrieveHeaders();
     reqResObj.body = retrieveBody();
     reqResObj.test = reqState.test;
-    const reqAndRes = await api.invoke('fetch', reqResObj);
+    const gql = await api.invoke('gql', reqResObj);
     dispatch(setResponse(reqAndRes));
     dispatch(addReqRes(reqAndRes));
     saveRequestToDB(reqAndRes.id, reqAndRes, currentFolder);
@@ -109,11 +109,9 @@ export default function Request() {
             dispatch(setMethod(event.target.value));
           }}
         >
-          <MenuItem value="GET">GET</MenuItem>
-          <MenuItem value="POST">POST</MenuItem>
-          <MenuItem value="PUT">PUT</MenuItem>
-          <MenuItem value="PATCH">PATCH</MenuItem>
-          <MenuItem value="DELETE">DELETE</MenuItem>
+          <MenuItem value="QUERY">QUERY</MenuItem>
+          <MenuItem value="MUTATION">MUTATION</MenuItem>
+      
         </Select>
         <TextField
           id="outlined-basic"
