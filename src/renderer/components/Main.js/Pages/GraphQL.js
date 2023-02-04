@@ -9,7 +9,7 @@ import Dashboard from '../Dashboard/Dashboard';
 import { themeSettings } from '../../../themes';
 import GQLRequest from '../Request/GQLRequest';
 import { useDispatch } from 'react-redux';
-import { setMethod } from '../../../state/currentReqRes.js';
+import { setMethod, setResponseMode } from '../../../state/currentReqRes.js';
 
 export default function GraphQL() {
   const mode = useSelector((state) => state.light.mode);
@@ -17,6 +17,7 @@ export default function GraphQL() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setMethod('QUERY'));
+    dispatch(setResponseMode('GraphQL'));
   }, []);
 
   return (

@@ -9,6 +9,7 @@ import {
   setMethod,
   setUrl,
   setResponse,
+  setResponseMode,
 } from '../../../state/currentReqRes.js';
 import { Button, TextField } from '@mui/material';
 import HeaderBox from './HeaderBox';
@@ -31,7 +32,9 @@ export default function Request() {
   // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {
     event.preventDefault();
+    setResponseMode('HTTP');
     let reqResObj = {};
+    reqResObj.responseMode = reqState.responseMode;
     reqResObj.id = uuid();
     reqResObj.url = retrieveUrl();
     reqResObj.method = retrieveMethod();

@@ -17,6 +17,7 @@ export default function Response() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  const responseMode = reqState.responseMode;
   return (
     <Box sx={{ width: '100%', typography: 'body1' }}>
       <Typography variant="h3">
@@ -35,10 +36,18 @@ export default function Response() {
           <ResponseBody />
         </TabPanel>
         <TabPanel value="headers">
-          <ResponseHeaders />
+          {responseMode === 'HTTP' ? (
+            <ResponseHeaders />
+          ) : (
+            'Headers are only available in HTTP mode'
+          )}
         </TabPanel>
         <TabPanel value="cookies">
-          <ResponseCookies />
+          {responseMode === 'HTTP' ? (
+            <ResponseCookies />
+          ) : (
+            'Cookies are only available in HTTP mode'
+          )}
         </TabPanel>
         <TabPanel value="tests">
           <ResponseTest />

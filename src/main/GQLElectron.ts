@@ -27,6 +27,20 @@ export default async function GQLTest(reqResObj): object {
       `,
     });
     reqResObj['responseBody'] = query;
+  } else if (reqResObj.method === 'MUTATION') {
+    const mutation = await client.mutate({
+      mutation: gql`
+        mutation ExampleMutation {
+          company {
+            ceo
+          }
+          roadster {
+            apoapsis_au
+          }
+        }
+      `,
+    });
+    reqResObj['responseBody'] = mutation;
   }
 
   return reqResObj;

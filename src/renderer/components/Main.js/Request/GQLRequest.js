@@ -9,6 +9,7 @@ import {
   setMethod,
   setUrl,
   setResponse,
+  setResponseMode,
 } from '../../../state/currentReqRes.js';
 import { Button, TextField } from '@mui/material';
 import HeaderBox from './HeaderBox';
@@ -21,6 +22,7 @@ import { saveRequestToDB } from '../Dashboard/DashboardController.js';
 import { db } from 'renderer/db.js';
 import TestBox from './TestBox.js';
 import chai from 'chai';
+import GraphQL from '../Pages/GraphQL.js';
 
 export default function Request() {
   const dispatch = useDispatch();
@@ -29,23 +31,19 @@ export default function Request() {
   const currentFolder = useSelector((state) => state.currentReqRes.folder);
   let assert = chai.assert;
 
-  async function gql() {
-    let reqResObj = {};
-
-    console.log(gql);
-  }
-  gql();
   // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {
+    setResponseMode('GraphQL')
     event.preventDefault();
     let reqResObj = {};
+    reqResObj.responseMode = reqState.responseMode;
     reqResObj.id = uuid();
     reqResObj.url = retrieveUrl();
     reqResObj.method = retrieveMethod();
     reqResObj.headers = retrieveHeaders();
     reqResObj.body = retrieveBody();
     reqResObj.test = reqState.test;
-    const gql = await api.invoke('gql', reqResObj);
+    const reqAndRes = await api.invoke('gql', reqResObj);
     dispatch(setResponse(reqAndRes));
     dispatch(addReqRes(reqAndRes));
     saveRequestToDB(reqAndRes.id, reqAndRes, currentFolder);
@@ -111,7 +109,6 @@ export default function Request() {
         >
           <MenuItem value="QUERY">QUERY</MenuItem>
           <MenuItem value="MUTATION">MUTATION</MenuItem>
-      
         </Select>
         <TextField
           id="outlined-basic"
@@ -135,15 +132,14 @@ export default function Request() {
         </Button>
 
         <HeaderBox />
-        {reqState.method === 'GET' ? null : (
-          <>
-            <ReqBodyTextBoxSelector />
-            <ReqBodyTextBox
-              onChange={textBoxHandleChange}
-              value={reqState.reqBody}
-            />
-          </>
-        )}
+
+        <>
+          <ReqBodyTextBox
+            onChange={textBoxHandleChange}
+            value={reqState.reqBody}
+          />
+        </>
+
         <TestBox />
         <Response></Response>
       </FormControl>

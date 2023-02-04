@@ -7,13 +7,18 @@ import {
   Button,
   CardActions,
 } from '@mui/material';
-import { setResponse } from '../../../state/currentReqRes';
+import {
+  setMethod,
+  setResponse,
+  setResponseMode,
+} from '../../../state/currentReqRes';
 import { deleteReqRes } from '../../../state/historyReqRes';
 import {
   deleteRequestsFromFolder,
   saveRequestToDB,
 } from './DashboardController';
 import { db } from '../../../../renderer/db';
+
 export default function HistoryBlock(props) {
   const dispatch = useDispatch();
   const reqResHistory = useSelector((state) => state.historyReqRes);
@@ -47,6 +52,7 @@ export default function HistoryBlock(props) {
           </Button>
           <Button
             onClick={() => {
+              dispatch(setResponseMode(props.reqResInfo.object.responseMode));
               dispatch(setResponse(props.reqResInfo.object));
             }}
           >

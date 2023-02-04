@@ -21,6 +21,12 @@ export default function ResponseBody() {
   let value = reqState.response.responseBody;
   let bodyType = reqState.bodyType;
 
+  //if graphql mode is on, convert the JSON body to a string
+  if (reqState.responseMode === 'GraphQL') {
+    value = JSON.stringify(value);
+  }
+
+
   // convert the body type to the correct language extension
   // Also a hack to get the text/plain content type to work
   let languageExtensionConverter = {
@@ -42,7 +48,7 @@ export default function ResponseBody() {
         value={value}
         readOnly={true}
         theme={materialDark}
-        maxHeight= "300px"
+        maxHeight="300px"
       ></CodeMirror>
     </Box>
   );

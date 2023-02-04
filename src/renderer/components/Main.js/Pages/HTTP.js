@@ -9,6 +9,8 @@ import Dashboard from '../Dashboard/Dashboard';
 import { themeSettings } from '../../../themes';
 import { useDispatch } from 'react-redux';
 import { setMethod } from '../../../state/currentReqRes.js';
+import { useEffect } from 'react';
+import { setResponseMode } from '../../../state/currentReqRes.js';
 
 
 export default function HTTP() {
@@ -17,6 +19,7 @@ export default function HTTP() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setMethod('GET'));
+    dispatch(setResponseMode('HTTP'));
   }, []);
 
   return (
