@@ -34,16 +34,22 @@ export async function GQLTest(reqResObj): object {
 
 // dissect JSON variables for each individual variable and apply variables to body
 function handleVariables(reqResObj): object {
-  if (reqResObj.variables === '') {
-    return reqResObj;
-  }
   const variables = reqResObj.variables;
-  const variablesArray = variables.split(',');
-  const variablesObject = {};
-  variablesArray.forEach((variable) => {
-    const variableArray = variable.split(':');
-    variablesObject[variableArray[0]] = variableArray[1];
+  const body = reqResObj.body;
+  const variableKeys = Object.keys(variables);
+  variableKeys.forEach((key) => {
+    const variable = variables[key];
+    const variableType = typeof variable;
+    if (variableType === 'string') {
+      reqResObj.body = body.replace(`$${key}`, `"${variable}"`);
+    } else if (variableType === 'number') {
+      reqResObj.body = body.replace(`$${key}`, `${variable}`);
+    } else if (variableType === 'boolean') {
+      reqResObj.body = body.replace(`$${key}`, `${variable}`);
+    } else if (variableType === 'object') {
+      reqResObj.body = body.replace(`$${key}`, `${JSON.stringify(variable)}`);
+    }
   });
-  reqResObj['body'] = reqResObj.body.replace('CEO', 'testworks');
+
   return reqResObj;
 }
