@@ -10,11 +10,15 @@ import { themeSettings } from '../../../themes';
 import GQLRequest from '../Request/GQLRequest';
 import { useDispatch } from 'react-redux';
 import { setMethod, setResponseMode } from '../../../state/currentReqRes.js';
+import { ipcRenderer } from 'electron';
 
 export default function GraphQL() {
   const mode = useSelector((state) => state.light.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
   const dispatch = useDispatch();
+  ipcRenderer.on('subscription', function (evt, message) {
+    console.log(message); // Returns: {'SAVED': 'File Saved'}
+  });
   useEffect(() => {
     dispatch(setMethod('QUERY'));
     dispatch(setResponseMode('GraphQL'));

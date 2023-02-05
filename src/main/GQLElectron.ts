@@ -9,6 +9,7 @@ import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
+import { app, BrowserWindow, shell, ipcMain } from 'electron';
 
 export async function GQLFetch(reqResObj): Promise<object> {
   // if (reqResObj.method === 'SUBSCRIPTION') we have to separate it from the rest of the methods
@@ -16,6 +17,9 @@ export async function GQLFetch(reqResObj): Promise<object> {
   const wsLink = new GraphQLWsLink(
     createClient({
       url: `${reqResObj.url}`,
+      connectionParams: {
+        headers: reqResObj.headers,
+      },
     })
   );
 
@@ -56,6 +60,21 @@ export async function GQLFetch(reqResObj): Promise<object> {
       addTypename: false,
     }),
   });
+  // if subscription, we have to use the client.subscribe method
+  if (reqResObj.method === 'SUBSCRIPTION') {
+    const observableSubscription = client.subscribe({
+      query: gql`
+        ${reqResObj.body}
+      `,
+    });
+    observableSubscription.subscribe((result) => {
+      // ipc send update to renderer
+      let mainWindow: BrowserWindow | null = null;
+      mainWindow.webContents.send('subscription', result);
+      const responseBody = result.data;
+      reqResObj['responseBody'] = responseBody;
+    });
+  }
 
   // const client = ...
   if (reqResObj.method === 'QUERY') {
