@@ -1,18 +1,25 @@
 import {
   ApolloClient,
   InMemoryCache,
-  ApolloProvider,
-  ApolloLink,
   gql,
   HttpLink,
   from,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
+import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
+import { createClient } from 'graphql-ws';
 
 export async function GQLFetch(reqResObj): Promise<object> {
+  // if (reqResObj.method === 'SUBSCRIPTION') we have to separate it from the rest of the methods
+  // because it uses websocket not http
+  const wsLink = new GraphQLWsLink(
+    createClient({
+      url: `${reqResObj.url}`,
+    })
+  );
+
   // Links for URL and Headers
-  console.log('GQLTest', reqResObj)
   const authLink = setContext((_, { headers }) => {
     return { headers: reqResObj.headers };
   });
@@ -39,7 +46,11 @@ export async function GQLFetch(reqResObj): Promise<object> {
   handleVariables(reqResObj);
   //test graphql client
   const client = new ApolloClient({
-    link: from([errorLink, authLink, httpLink]),
+    link: from([
+      errorLink,
+      authLink,
+      reqResObj.method === 'SUBSCRIPTION' ? wsLink : httpLink,
+    ]),
     // uri: `${reqResObj.url}`,
     cache: new InMemoryCache({
       addTypename: false,
