@@ -5,10 +5,17 @@ const initalObj = {};
 initalObj[uuid()] = { key: '', value: '', checked: false };
 
 const initialState = {
-  url: '',
+  url: 'https://spacex-production.up.railway.app/',
   method: 'GET',
   headers: initalObj,
-  body: '',
+  body: `query ExampleQuery {
+    company {
+      people
+    }
+    roadster {
+      apoapsis_au
+    }
+  }`,
   bodyType: 'text/plain',
   response: '',
   error: false,
@@ -16,7 +23,9 @@ const initialState = {
   folder: 'Home Folder',
   test: 'assert(response.status === 200)',
   responseMode: 'HTTP',
-  variables: '',
+  variables: `{
+    "people" : "ceo"
+  }`,
 };
 
 const currentReqRes = createSlice({

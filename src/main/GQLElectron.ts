@@ -6,6 +6,8 @@ import {
 } from '@apollo/client';
 
 export async function GQLTest(reqResObj): object {
+  // Switch Out any Variables
+  handleVariables(reqResObj);
   //test graphql client
   const client = new ApolloClient({
     uri: `${reqResObj.url}`,
@@ -28,7 +30,7 @@ export async function GQLTest(reqResObj): object {
     });
     reqResObj['responseBody'] = mutation;
   }
-  handleVariables(reqResObj);
+
   return reqResObj;
 }
 
@@ -37,17 +39,18 @@ function handleVariables(reqResObj): object {
   const variables = reqResObj.variables;
   const body = reqResObj.body;
   const variableKeys = Object.keys(variables);
+
   variableKeys.forEach((key) => {
     const variable = variables[key];
     const variableType = typeof variable;
     if (variableType === 'string') {
-      reqResObj.body = body.replace(`$${key}`, `"${variable}"`);
+      reqResObj.body = body.replaceAll(`${key}`, `${variable}`);
     } else if (variableType === 'number') {
-      reqResObj.body = body.replace(`$${key}`, `${variable}`);
+      reqResObj.body = body.replaceAll(`${key}`, `${variable}`);
     } else if (variableType === 'boolean') {
-      reqResObj.body = body.replace(`$${key}`, `${variable}`);
+      reqResObj.body = body.replaceAll(`${key}`, `${variable}`);
     } else if (variableType === 'object') {
-      reqResObj.body = body.replace(`$${key}`, `${JSON.stringify(variable)}`);
+      reqResObj.body = body.replaceALl(`${key}`, `${JSON.stringify(variable)}`);
     }
   });
 
