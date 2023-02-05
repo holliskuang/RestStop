@@ -32,7 +32,7 @@ export default function Request() {
   // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {
     event.preventDefault();
-    setResponseMode('HTTP');
+    dispatch(setResponseMode('HTTP'));
     let reqResObj = {};
     reqResObj.responseMode = reqState.responseMode;
     reqResObj.id = uuid();

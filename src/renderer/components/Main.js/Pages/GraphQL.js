@@ -17,7 +17,7 @@ export default function GraphQL() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setMethod('QUERY'));
- 
+    dispatch(setResponseMode('GraphQL'));
   }, []);
 
   return (

@@ -25,6 +25,7 @@ export default function TimeBlock(props) {
         <CardActions>
           <Button
             onClick={() => {
+   
               dispatch(setResponseMode(props.reqResInfo.object.responseMode));
               dispatch(setResponse(props.reqResInfo.object));
             }}

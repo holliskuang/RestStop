@@ -34,7 +34,8 @@ export default function Request() {
 
   // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {
-    setResponseMode('GraphQL');
+    dispatch(setResponseMode('GraphQL'));
+    console.log('reqState', reqState.responseMode);
     event.preventDefault();
     let reqResObj = {};
     reqResObj.responseMode = reqState.responseMode;
@@ -50,17 +51,18 @@ export default function Request() {
     dispatch(addReqRes(reqAndRes));
     saveRequestToDB(reqAndRes.id, reqAndRes, currentFolder);
     console.log(reqAndRes);
+    console.log(reqState.responseMode);
   }
 
   // retrieve variables from redux
   const retrieveVariables = () => {
     const variables = reqState.variables;
-    let   variablesObj = {};
+    let variablesObj = {};
     if (variables === '') {
       return variablesObj;
     }
     try {
-       variablesObj = JSON.parse(variables);
+      variablesObj = JSON.parse(variables);
     } catch (e) {
       alert('Invalid JSON');
     }

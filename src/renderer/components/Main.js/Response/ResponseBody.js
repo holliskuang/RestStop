@@ -22,10 +22,9 @@ export default function ResponseBody() {
   let bodyType = reqState.bodyType;
 
   //if graphql mode is on, convert the JSON body to a string
-  if (reqState.responseMode === 'GraphQL') {
+  if (typeof reqState.responseMode != 'object') {
     value = JSON.stringify(value, null, 2);
   }
-
 
   // convert the body type to the correct language extension
   // Also a hack to get the text/plain content type to work

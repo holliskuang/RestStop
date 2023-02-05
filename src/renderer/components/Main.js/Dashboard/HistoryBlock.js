@@ -52,6 +52,7 @@ export default function HistoryBlock(props) {
           </Button>
           <Button
             onClick={() => {
+      
               dispatch(setResponseMode(props.reqResInfo.object.responseMode));
               dispatch(setResponse(props.reqResInfo.object));
             }}
