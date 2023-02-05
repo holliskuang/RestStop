@@ -15,7 +15,7 @@ import log from 'electron-log';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 import { handleRequest } from './util';
-import GQLTest from './GQLElectron';
+import {GQLTest} from './GQLElectron';
 
 class AppUpdater {
   constructor() {

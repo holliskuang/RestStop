@@ -55,12 +55,14 @@ export default function Request() {
   // retrieve variables from redux
   const retrieveVariables = () => {
     const variables = reqState.variables;
-    try {
-      const variablesObj=JSON.parse(variables);
+    let   variablesObj = {};
+    if (variables === '') {
+      return variablesObj;
     }
-    catch (e) {
+    try {
+       variablesObj = JSON.parse(variables);
+    } catch (e) {
       alert('Invalid JSON');
-      
     }
     return variablesObj;
   };

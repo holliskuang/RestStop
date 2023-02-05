@@ -45,6 +45,7 @@ export default function ReqBodyTextBox() {
         value={reqState.body}
         readOnly={false}
         theme={materialDark}
+        minWidth="300px"
         // onChange event handler is used to update the state of the request body
         onChange={(editor, data, value) => {
           dispatch(setBody(editor.toString()));

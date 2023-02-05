@@ -34,7 +34,6 @@ export default function GQLVariableBox() {
         readOnly={false}
         theme={materialDark}
         minWidth="100%"
-        minHeight="100%"
         // onChange event handler is used to update the state of the request body
         onChange={(editor, data, value) => {
           dispatch(setVariables(editor.toString()));
