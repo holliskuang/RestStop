@@ -5,13 +5,15 @@ import {
   gql,
 } from '@apollo/client';
 
-export async function GQLTest(reqResObj): object {
+export async function GQLTest(reqResObj): Promise<object> {
   // Switch Out any Variables
   handleVariables(reqResObj);
   //test graphql client
   const client = new ApolloClient({
     uri: `${reqResObj.url}`,
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+      addTypename: false,
+    }),
   });
 
   // const client = ...
@@ -21,14 +23,17 @@ export async function GQLTest(reqResObj): object {
         ${reqResObj.body}
       `,
     });
-    reqResObj['responseBody'] = query;
+    const responseBody = query.data;
+    reqResObj['responseBody'] = responseBody;
   } else if (reqResObj.method === 'MUTATION') {
     const mutation = await client.mutate({
       mutation: gql`
         ${reqResObj.body}
       `,
     });
-    reqResObj['responseBody'] = mutation;
+
+    const responseBody = mutation.data;
+    reqResObj['responseBody'] = responseBody;
   }
 
   return reqResObj;

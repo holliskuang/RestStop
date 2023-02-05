@@ -19,7 +19,7 @@ export default function HTTP() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setMethod('GET'));
-    dispatch(setResponseMode('HTTP'));
+   
   }, []);
 
   return (

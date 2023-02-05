@@ -23,7 +23,7 @@ export default function ResponseBody() {
 
   //if graphql mode is on, convert the JSON body to a string
   if (reqState.responseMode === 'GraphQL') {
-    value = JSON.stringify(value);
+    value = JSON.stringify(value, null, 2);
   }
 
 
