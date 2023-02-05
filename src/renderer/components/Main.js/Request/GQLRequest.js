@@ -23,6 +23,7 @@ import { db } from 'renderer/db.js';
 import TestBox from './TestBox.js';
 import chai from 'chai';
 import GraphQL from '../Pages/GraphQL.js';
+import GQLVariableBox from './GQLVariableBox.js';
 
 export default function Request() {
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ export default function Request() {
     reqResObj.headers = retrieveHeaders();
     reqResObj.body = retrieveBody();
     reqResObj.test = reqState.test;
+    reqResObj.variables = retrieveVariables();
     const reqAndRes = await api.invoke('gql', reqResObj);
     dispatch(setResponse(reqAndRes));
     dispatch(addReqRes(reqAndRes));
@@ -50,6 +52,18 @@ export default function Request() {
     console.log(reqAndRes);
   }
 
+  // retrieve variables from redux
+  const retrieveVariables = () => {
+    const variables = reqState.variables;
+    try {
+      const variablesObj=JSON.parse(variables);
+    }
+    catch (e) {
+      alert('Invalid JSON');
+      
+    }
+    return variablesObj;
+  };
   // retrieve body from redux
   const retrieveBody = () => {
     const body = reqState.body;
@@ -132,7 +146,7 @@ export default function Request() {
         </Button>
 
         <HeaderBox />
-
+        <GQLVariableBox />
         <>
           <ReqBodyTextBox
             onChange={textBoxHandleChange}

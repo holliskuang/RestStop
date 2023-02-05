@@ -15,7 +15,8 @@ const initialState = {
   loading: true,
   folder: 'Home Folder',
   test: 'assert(response.status === 200)',
-  responseMode:'HTTP'
+  responseMode: 'HTTP',
+  variables: '',
 };
 
 const currentReqRes = createSlice({
@@ -55,6 +56,9 @@ const currentReqRes = createSlice({
     setResponseMode: (state, action) => {
       state.responseMode = action.payload;
     },
+    setVariables: (state, action) => {
+      state.variables = action.payload;
+    },
   },
 });
 
@@ -69,6 +73,7 @@ export const {
   setLoading,
   setFolder,
   setTest,
-  setResponseMode
+  setResponseMode,
+  setVariables,
 } = currentReqRes.actions;
 export default currentReqRes.reducer;
