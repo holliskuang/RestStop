@@ -2,15 +2,45 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
+  ApolloLink,
   gql,
+  HttpLink,
+  from,
 } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import { onError } from '@apollo/client/link/error';
 
-export async function GQLTest(reqResObj): Promise<object> {
+export async function GQLFetch(reqResObj): Promise<object> {
+  // Links for URL and Headers
+  console.log('GQLTest', reqResObj)
+  const authLink = setContext((_, { headers }) => {
+    return { headers: reqResObj.headers };
+  });
+
+  const httpLink = new HttpLink({
+    uri: `${reqResObj.url}`,
+    fetchOptions: {
+      mode: 'no-cors',
+    },
+  });
+  //on error Link
+  const errorLink = onError(({ graphQLErrors, networkError }) => {
+    if (graphQLErrors)
+      graphQLErrors.forEach(({ message, locations, path }) =>
+        console.log(
+          `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+        )
+      );
+
+    if (networkError) console.log(`[Network error]: ${networkError}`);
+  });
+
   // Switch Out any Variables
   handleVariables(reqResObj);
   //test graphql client
   const client = new ApolloClient({
-    uri: `${reqResObj.url}`,
+    link: from([errorLink, authLink, httpLink]),
+    // uri: `${reqResObj.url}`,
     cache: new InMemoryCache({
       addTypename: false,
     }),

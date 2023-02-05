@@ -84,7 +84,7 @@ export default function Request() {
     });
 
     // Determine Context Type Header based on body type
-    headers['Content-Type'] = reqState.bodyType;
+    headers['Content-Type'] = 'application/json'
 
     return headers;
   };

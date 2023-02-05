@@ -15,7 +15,7 @@ import log from 'electron-log';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 import { handleRequest } from './util';
-import {GQLTest} from './GQLElectron';
+import {GQLFetch} from './GQLElectron';
 
 class AppUpdater {
   constructor() {
@@ -39,7 +39,7 @@ ipcMain.handle('fetch', async (event, reqResObj) => {
 });
 
 ipcMain.handle('gql', async (event, reqResObj) => {
-  return GQLTest(reqResObj);
+  return GQLFetch(reqResObj);
 });
 
 if (process.env.NODE_ENV === 'production') {
