@@ -10,6 +10,8 @@ import { onError } from '@apollo/client/link/error';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
 import NodeWebSocket from 'ws';
+import { electronDispatch } from '../renderer/state/store';
+import { setResponse } from '../renderer/state/currentReqRes';
 
 export async function GQLFetch(reqResObj, mainWindow): Promise<object> {
   // if (reqResObj.method === 'SUBSCRIPTION') we have to separate it from the rest of the methods
@@ -37,14 +39,18 @@ export async function GQLFetch(reqResObj, mainWindow): Promise<object> {
   });
   //on error Link
   const errorLink = onError(({ graphQLErrors, networkError }) => {
-    if (graphQLErrors)
+    if (graphQLErrors) {
       graphQLErrors.forEach(({ message, locations, path }) =>
         console.log(
           `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
         )
       );
+    }
 
-    if (networkError) console.log(`[Network error]: ${networkError}`);
+    if (networkError) {
+      console.log(`[Network error]: ${networkError}`);
+      reqResObj['responseBody'] = `networkError`;
+    }
   });
 
   // Switch Out any Variables
@@ -78,8 +84,8 @@ export async function GQLFetch(reqResObj, mainWindow): Promise<object> {
       },
       // on error
       (error) => {
-        reqResObj['responseBody'] = error;
         mainWindow.webContents.send('subscription', error);
+        return reqResObj;
       }
     );
   }

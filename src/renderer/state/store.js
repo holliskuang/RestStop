@@ -14,7 +14,5 @@ const store = configureStore({
     }),
 });
 
-export const useAppDispatch = () => useDispatch;
-
-export const appDispatch = store.dispatch;
+export const electronDispatch = store.dispatch;
 export default store;

@@ -25,9 +25,10 @@ export default function ResponseBody() {
   // listen for response from subscription
   api.sub(function (evt, message) {
     console.log(message);
-    // update the body whenever a subscription response is received
-    dispatch(setResponse({ ...reqState.response, responseBody: message }));
-    console.log(value);
+
+    // update the body whenever a subscription response is received whether it is an update or an error
+
+    dispatch(setResponse({ ...reqState.response, responseBody: `${message}` }));
   });
 
   //if graphql mode is on, convert the JSON body to a string

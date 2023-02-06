@@ -47,11 +47,12 @@ export default function Request() {
     reqResObj.test = reqState.test;
     reqResObj.variables = retrieveVariables();
     const reqAndRes = await api.invoke('gql', reqResObj);
+    console.log('reqAndRes', reqAndRes);
     dispatch(setResponse(reqAndRes));
     dispatch(addReqRes(reqAndRes));
     saveRequestToDB(reqAndRes.id, reqAndRes, currentFolder);
-    console.log(reqAndRes);
-    console.log(reqState.responseMode);
+   
+
   }
 
   // retrieve variables from redux

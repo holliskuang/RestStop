@@ -22,6 +22,7 @@ export default function GraphQL() {
     dispatch(setResponseMode('GraphQL'));
   }, []);
 
+
   return (
     <Box>
       <ThemeProvider theme={theme}>
