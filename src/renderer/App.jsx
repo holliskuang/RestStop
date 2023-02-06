@@ -12,6 +12,7 @@ import Dashboard from './components/Main.js/Dashboard/Dashboard';
 import Box from '@mui/material/Box';
 import HTTP from './components/Main.js/Pages/HTTP';
 import GraphQL from './components/Main.js/Pages/GraphQL';
+import WebSocket from './components/Main.js/Pages/WebSocket';
 
 
 
@@ -25,7 +26,7 @@ export default function App() {
         <Route path="/" element={<HTTP />} />
         <Route path="*" element={<div>404</div>} />
         <Route path="/graphql" element={<GraphQL/>}/>
-        <Route path="/websocket" element={}/>
+        <Route path="/websocket" element={<WebSocket/>}/>
         <Route path="/sse" element={}/>
         <Route path="/webhook" element={}/>
       </Routes>
