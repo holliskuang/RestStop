@@ -19,15 +19,10 @@ const electronHandler = {
     send: (channel, ...data) => {
       ipcRenderer.send(channel, ...data);
     },
-
-    /*on(channel: Channels, func: (...args: unknown[]) => void) {
-      const subscription = (_event: IpcRendererEvent, ...args: unknown[]) =>
-        func(...args);
-      ipcRenderer.on(channel, subscription);
-
-      return () => {
-        ipcRenderer.removeListener(channel, subscription);
-      }; */
+    // on to subscribe to a channel and receive updates
+    sub: (callback) => {
+      ipcRenderer.on('subscription', callback);
+    },
   },
 };
 

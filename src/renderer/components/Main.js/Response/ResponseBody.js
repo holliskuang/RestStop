@@ -20,7 +20,11 @@ export default function ResponseBody() {
   const dispatch = useDispatch();
   let value = reqState.response.responseBody;
   let bodyType = reqState.bodyType;
-
+  let api = window.api.ipcRenderer;
+  // listen for response from subscription
+  api.sub(function (evt, message) {
+    console.log(message);
+  });
   //if graphql mode is on, convert the JSON body to a string
   if (typeof reqState.responseMode != 'object') {
     value = JSON.stringify(value, null, 2);

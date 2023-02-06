@@ -9,19 +9,22 @@ import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
-import { app, BrowserWindow, shell, ipcMain } from 'electron';
+import NodeWebSocket from 'ws';
 
-export async function GQLFetch(reqResObj): Promise<object> {
+
+export async function GQLFetch(reqResObj, mainWindow): Promise<object> {
+  mainWindow.webContents.send('subscription', 'hello');
   // if (reqResObj.method === 'SUBSCRIPTION') we have to separate it from the rest of the methods
   // because it uses websocket not http
-  const wsLink = new GraphQLWsLink(
+   const wsLink = new GraphQLWsLink(
     createClient({
+      webSocketImpl: typeof window === 'undefined' ? NodeWebSocket : WebSocket,
       url: `${reqResObj.url}`,
       connectionParams: {
         headers: reqResObj.headers,
       },
     })
-  );
+  ); 
 
   // Links for URL and Headers
   const authLink = setContext((_, { headers }) => {
@@ -53,7 +56,7 @@ export async function GQLFetch(reqResObj): Promise<object> {
     link: from([
       errorLink,
       authLink,
-      reqResObj.method === 'SUBSCRIPTION' ? wsLink : httpLink,
+      reqResObj.method === 'SUBSCRIPTION' ? wsLink :  httpLink,
     ]),
     // uri: `${reqResObj.url}`,
     cache: new InMemoryCache({
@@ -61,6 +64,7 @@ export async function GQLFetch(reqResObj): Promise<object> {
     }),
   });
   // if subscription, we have to use the client.subscribe method
+
   if (reqResObj.method === 'SUBSCRIPTION') {
     const observableSubscription = client.subscribe({
       query: gql`
@@ -69,8 +73,8 @@ export async function GQLFetch(reqResObj): Promise<object> {
     });
     observableSubscription.subscribe((result) => {
       // ipc send update to renderer
-      let mainWindow: BrowserWindow | null = null;
-      mainWindow.webContents.send('subscription', result);
+
+      //  mainWindow.webContents.send('subscription', result);
       const responseBody = result.data;
       reqResObj['responseBody'] = responseBody;
     });

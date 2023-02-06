@@ -15,7 +15,7 @@ import log from 'electron-log';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 import { handleRequest } from './util';
-import {GQLFetch} from './GQLElectron';
+import { GQLFetch } from './GQLElectron';
 
 class AppUpdater {
   constructor() {
@@ -31,15 +31,6 @@ ipcMain.on('ipc-example', async (event, arg) => {
   const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
   console.log(msgTemplate(arg));
   event.reply('ipc-example', msgTemplate('pong'));
-});
-
-// get request and return object that contains updated response
-ipcMain.handle('fetch', async (event, reqResObj) => {
-  return handleRequest(reqResObj);
-});
-
-ipcMain.handle('gql', async (event, reqResObj) => {
-  return GQLFetch(reqResObj);
 });
 
 if (process.env.NODE_ENV === 'production') {
@@ -122,6 +113,16 @@ const createWindow = async () => {
   // Remove this if your app does not use auto updates
   // eslint-disable-next-line
   new AppUpdater();
+
+  // get request and return object that contains updated response
+  ipcMain.handle('fetch', async (event, reqResObj) => {
+    return handleRequest(reqResObj);
+  });
+
+  ipcMain.handle('gql', async (event, reqResObj) => {
+
+    return GQLFetch(reqResObj,mainWindow);
+  });
 };
 
 /**

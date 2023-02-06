@@ -16,9 +16,7 @@ export default function GraphQL() {
   const mode = useSelector((state) => state.light.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
   const dispatch = useDispatch();
-  ipcRenderer.on('subscription', function (evt, message) {
-    console.log(message); // Returns: {'SAVED': 'File Saved'}
-  });
+  const api = window.api.ipcRenderer;
   useEffect(() => {
     dispatch(setMethod('QUERY'));
     dispatch(setResponseMode('GraphQL'));
