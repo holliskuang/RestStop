@@ -11,12 +11,10 @@ import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
 import NodeWebSocket from 'ws';
 
-
 export async function GQLFetch(reqResObj, mainWindow): Promise<object> {
-  mainWindow.webContents.send('subscription', 'hello');
   // if (reqResObj.method === 'SUBSCRIPTION') we have to separate it from the rest of the methods
   // because it uses websocket not http
-   const wsLink = new GraphQLWsLink(
+  const wsLink = new GraphQLWsLink(
     createClient({
       webSocketImpl: typeof window === 'undefined' ? NodeWebSocket : WebSocket,
       url: `${reqResObj.url}`,
@@ -24,7 +22,7 @@ export async function GQLFetch(reqResObj, mainWindow): Promise<object> {
         headers: reqResObj.headers,
       },
     })
-  ); 
+  );
 
   // Links for URL and Headers
   const authLink = setContext((_, { headers }) => {
@@ -56,7 +54,7 @@ export async function GQLFetch(reqResObj, mainWindow): Promise<object> {
     link: from([
       errorLink,
       authLink,
-      reqResObj.method === 'SUBSCRIPTION' ? wsLink :  httpLink,
+      reqResObj.method === 'SUBSCRIPTION' ? wsLink : httpLink,
     ]),
     // uri: `${reqResObj.url}`,
     cache: new InMemoryCache({
@@ -71,13 +69,19 @@ export async function GQLFetch(reqResObj, mainWindow): Promise<object> {
         ${reqResObj.body}
       `,
     });
-    observableSubscription.subscribe((result) => {
-      // ipc send update to renderer
 
-      mainWindow.webContents.send('subscription', result);
-      const responseBody = result.data;
-      reqResObj['responseBody'] = responseBody;
-    });
+    observableSubscription.subscribe(
+      (result) => {
+        // ipc send update to renderer
+        console.log(result);
+        mainWindow.webContents.send('subscription', result);
+      },
+      // on error
+      (error) => {
+        reqResObj['responseBody'] = error;
+        mainWindow.webContents.send('subscription', error);
+      }
+    );
   }
 
   // const client = ...

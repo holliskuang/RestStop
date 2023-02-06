@@ -21,6 +21,8 @@ const electronHandler = {
     },
     // on to subscribe to a channel and receive updates
     sub: (callback) => {
+      // if listener is already registered, remove it
+      ipcRenderer.removeAllListeners('subscription');
       ipcRenderer.on('subscription', callback);
     },
   },

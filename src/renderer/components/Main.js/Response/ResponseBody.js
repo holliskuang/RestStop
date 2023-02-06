@@ -10,7 +10,7 @@ import { html } from '@codemirror/lang-html';
 import { EditorView } from '@codemirror/view';
 import { materialDark } from '@uiw/codemirror-theme-material';
 import { useSelector, useDispatch } from 'react-redux';
-import { setBody } from 'renderer/state/currentReqRes';
+import { setResponse } from 'renderer/state/currentReqRes';
 
 // This is the component that renders the request body text box
 // Utilize  the CodeMirror component to render the text box
@@ -21,6 +21,14 @@ export default function ResponseBody() {
   let value = reqState.response.responseBody;
   let bodyType = reqState.bodyType;
   let api = window.api.ipcRenderer;
+
+  // listen for response from subscription
+  api.sub(function (evt, message) {
+    console.log(message);
+    // update the body whenever a subscription response is received
+    dispatch(setResponse({ ...reqState.response, responseBody: message }));
+    console.log(value);
+  });
 
   //if graphql mode is on, convert the JSON body to a string
   if (typeof reqState.responseMode != 'object') {
