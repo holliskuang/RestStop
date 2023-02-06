@@ -10,8 +10,6 @@ import { onError } from '@apollo/client/link/error';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
 import NodeWebSocket from 'ws';
-import { electronDispatch } from '../renderer/state/store';
-import { setResponse } from '../renderer/state/currentReqRes';
 
 export async function GQLFetch(reqResObj, mainWindow): Promise<object> {
   // if (reqResObj.method === 'SUBSCRIPTION') we have to separate it from the rest of the methods
@@ -22,6 +20,7 @@ export async function GQLFetch(reqResObj, mainWindow): Promise<object> {
       url: `${reqResObj.url}`,
       connectionParams: {
         headers: reqResObj.headers,
+        timeout: 60000,
       },
     })
   );
@@ -76,18 +75,15 @@ export async function GQLFetch(reqResObj, mainWindow): Promise<object> {
       `,
     });
 
-    observableSubscription.subscribe(
-      (result) => {
-        // ipc send update to renderer
-        console.log(result);
-        mainWindow.webContents.send('subscription', result);
+    // subscribe to the observable
+    observableSubscription.subscribe({
+      next: (results) => {
+        mainWindow.webContents.send('subscription', results.data);
       },
-      // on error
-      (error) => {
+      error: (error) => {
         mainWindow.webContents.send('subscription', error);
-        return reqResObj;
-      }
-    );
+      },
+    });
   }
 
   // const client = ...

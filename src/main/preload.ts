@@ -7,8 +7,8 @@ const electronHandler = {
       ipcRenderer.send(channel, args);
     },
     receive: (channel, cb) => {
-      ipcRenderer.on(channel, (event, ...args) => cb(...args));
       ipcRenderer.removeAllListeners(channel);
+      ipcRenderer.on(channel, cb);
     },
     once(channel: Channels, func: (...args: unknown[]) => void) {
       ipcRenderer.once(channel, (_event, ...args) => func(...args));
@@ -16,8 +16,9 @@ const electronHandler = {
     async invoke(channel: Channels, ...args: unknown[]) {
       return await ipcRenderer.invoke(channel, ...args);
     },
-    send: (channel, ...data) => {
-      ipcRenderer.send(channel, ...data);
+    send: (channel, cb) => {
+      ipcRenderer.removeAllListeners(channel);
+      ipcRenderer.send(channel, cb);
     },
     // on to subscribe to a channel and receive updates
     sub: (callback) => {

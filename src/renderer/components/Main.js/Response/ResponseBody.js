@@ -29,6 +29,7 @@ export default function ResponseBody() {
     // update the body whenever a subscription response is received whether it is an update or an error
 
     dispatch(setResponse({ ...reqState.response, responseBody: `${message}` }));
+    
   });
 
   //if graphql mode is on, convert the JSON body to a string

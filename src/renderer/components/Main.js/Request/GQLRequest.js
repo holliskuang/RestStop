@@ -51,8 +51,6 @@ export default function Request() {
     dispatch(setResponse(reqAndRes));
     dispatch(addReqRes(reqAndRes));
     saveRequestToDB(reqAndRes.id, reqAndRes, currentFolder);
-   
-
   }
 
   // retrieve variables from redux
@@ -85,7 +83,7 @@ export default function Request() {
     });
 
     // Determine Context Type Header based on body type
-    headers['Content-Type'] = 'application/json'
+    headers['Content-Type'] = 'application/json';
 
     return headers;
   };
@@ -148,7 +146,7 @@ export default function Request() {
           }}
           onClick={handleSubmit}
         >
-          Submit Request
+          {reqState.method === 'SUBSCRIPTION' ? `Connect` : `Submit Request`}
         </Button>
 
         <HeaderBox />
