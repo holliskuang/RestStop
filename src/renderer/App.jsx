@@ -16,7 +16,17 @@ import GraphQL from './components/Main.js/Pages/GraphQL';
 
 
 
+
 export default function App() {
+  let api = window.api.ipcRenderer;
+
+  // listen for response from subscription
+  api.sub(function (evt, message) {
+    console.log(message);
+      // update the body whenever a subscription response is received
+    //dispatch(setBody(value + message));
+  });
+  
   return (
     <Router>
       <Routes>

@@ -127,6 +127,7 @@ export default function Request() {
         >
           <MenuItem value="QUERY">QUERY</MenuItem>
           <MenuItem value="MUTATION">MUTATION</MenuItem>
+          <MenuItem value="SUBSCRIPTION">SUBSCRIPTION</MenuItem>
         </Select>
         <TextField
           id="outlined-basic"

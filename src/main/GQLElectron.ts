@@ -74,7 +74,7 @@ export async function GQLFetch(reqResObj, mainWindow): Promise<object> {
     observableSubscription.subscribe((result) => {
       // ipc send update to renderer
 
-      //  mainWindow.webContents.send('subscription', result);
+      mainWindow.webContents.send('subscription', result);
       const responseBody = result.data;
       reqResObj['responseBody'] = responseBody;
     });
