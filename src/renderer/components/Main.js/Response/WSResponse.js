@@ -13,23 +13,23 @@ export default function WSResponse() {
         className="message-list"
         lockable={true}
         toBottomHeight={'100%'}
-      >
-        <MessageBox
-          position="left"
-          title="Burhan"
-          type="text"
-          text="Hi there !"
-          date={new Date()}
-          replyButton={true}
-        />
-        <MessageBox
-          position="right"
-          title="Emre"
-          type="meetingLink"
-          text="Click to join the meeting"
-          date={new Date()}
-        />
-      </MessageList>
+        dataSource={[
+          {
+            position: 'left',
+            type: 'text',
+            text: 'Hi, how are you?',
+            date: new Date(),
+          },
+          {
+            position: 'right',
+            type: 'text',
+            text: 'good',
+            date: new Date(),
+          },
+        ]}
+        messageBoxStyles={{ backgroundColor: 'transparent' }}
+        notchStyle={{ fill: 'transparent' }}
+      />
       <Input placeholder="Type here..." multiline={true} />
       <Button text={'Send'} onClick={() => alert('Sending...')} title="Send" />;
     </div>

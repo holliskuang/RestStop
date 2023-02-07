@@ -26,7 +26,7 @@ import GraphQL from '../Pages/GraphQL.js';
 import GQLVariableBox from './GQLVariableBox.js';
 import WSResponse from '../Response/WSResponse.js';
 
-export default function Request() {
+export default function WSRequest() {
   const dispatch = useDispatch();
   const reqState = useSelector((state) => state.currentReqRes);
   const api = window.api.ipcRenderer;
@@ -109,8 +109,7 @@ export default function Request() {
         >
           {reqState.connectStatus === 'open' ? 'Disconnect' : 'Connect'}
         </Button>
-
-        <WSResponse />
+        <WSResponse /> 
       </FormControl>
     </div>
   );

@@ -11,6 +11,7 @@ import GQLRequest from '../Request/GQLRequest';
 import { useDispatch } from 'react-redux';
 import { setMethod, setResponseMode } from '../../../state/currentReqRes.js';
 import { ipcRenderer } from 'electron';
+import WSRequest from '../Request/WSRequest';
 
 export default function WebSocket() {
   const mode = useSelector((state) => state.light.mode);
@@ -27,7 +28,7 @@ export default function WebSocket() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <NavBar></NavBar>
-        <GQLRequest />
+         <WSRequest />
         <Dashboard />
       </ThemeProvider>
     </Box>
