@@ -46,7 +46,7 @@ const WebSocketController = {
   }
 };
 
-module.exports = () => {
+export default function turnOnWebSocketListeners(){
   // initialize websocket connection
   ipcMain.on('openWebSocket', (event, arg, reqResObj) => {
     WebSocketController.openWebSocket(event, arg, reqResObj);
