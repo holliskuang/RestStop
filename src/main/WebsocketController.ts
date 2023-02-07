@@ -1,13 +1,16 @@
 import { ipcMain } from 'electron';
-import ws from 'ws';
+import webSocket from 'ws';
 
 export default function WebSocketController(reqResObj, mainWindow): void {
   // Initialize websocket connection
-  const ws = new ws(reqResObj.url);
-
+  const ws = new webSocket.WebSocket(reqResObj.serverUrl);
+  reqResObj.connectionStatus = 'pending';
+  reqResObj.response.clientMessage = [];
   // let front end know that the websocket is open
-  reqResObj.connectionStatus = 'open';
-  mainWindow.webContents.send('serverMessage', reqResObj);
+  ws.on('open', function open() {
+    reqResObj.connectionStatus = 'open';
+    mainWindow.webContents.send('serverMessage', reqResObj);
+  });
 
   // Transfer Message From Renderer to Main and send it through the websocket
   ipcMain.on('clientMessage', (event, arg) => {
@@ -17,28 +20,30 @@ export default function WebSocketController(reqResObj, mainWindow): void {
   // Transfer Message From Main to Renderer that is received from the websocket
 
   ws.on('message', function incoming(data) {
-    reqResObj.clientMessage.push(data);
+    reqResObj.response.clientMessage.push(data);
     mainWindow.webContents.send('serverMessage', reqResObj);
   });
 
   // handle websocket errors and unexpected responses
   ws.on('error', function error(err) {
-    reqResObj.clientMessage.push(err.message);
+    reqResObj.response.clientMessage.push(err.message);
     mainWindow.webContents.send('serverMessage', reqResObj);
   });
   ws.on('unexpected-response', function unexpectedResponse(req, res) {
-    reqResObj.clientMessage.push(res.statusCode);
+    reqResObj.response.clientMessage.push(res.statusCode);
     mainWindow.webContents.send('serverMessage', reqResObj);
   });
 
   // handle websocket close
   ws.on('close', function close() {
-    reqResObj.clientMessage.push('WebSocket closed');
+    reqResObj.response.clientMessage.push('WebSocket closed');
     reqResObj.connectionStatus = 'closed';
     mainWindow.webContents.send('serverMessage', reqResObj);
   });
   // initialize websocket close
   ipcMain.on('closeWebSocket', (event, arg) => {
     ws.close();
+    reqResObj.connectionStatus = 'closed';
+    mainWindow.webContents.send('serverMessage', reqResObj);
   });
 }
