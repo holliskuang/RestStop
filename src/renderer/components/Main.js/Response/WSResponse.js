@@ -7,6 +7,10 @@ import { Input } from 'react-chat-elements';
 import { Button } from 'react-chat-elements';
 
 export default function WSResponse() {
+
+
+       /* Array that is mapped , following below format: pos, type,text,time */
+
   return (
     <div>
       <MessageList

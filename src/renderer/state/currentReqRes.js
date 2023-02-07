@@ -5,17 +5,10 @@ const initalObj = {};
 initalObj[uuid()] = { key: '', value: '', checked: false };
 
 const initialState = {
-  url: 'https://spacex-production.up.railway.app/',
+  url: '',
   method: 'GET',
   headers: initalObj,
-  body: `query ExampleQuery {
-    company {
-      people
-    }
-    roadster {
-      apoapsis_au
-    }
-  }`,
+  body: ``,
   bodyType: 'text/plain',
   response: '',
   error: false,
