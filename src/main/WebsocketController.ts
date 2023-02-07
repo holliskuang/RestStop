@@ -2,11 +2,12 @@ import { ipcMain } from 'electron';
 import ws from 'ws';
 
 export default function WebSocketController(reqResObj, mainWindow): void {
+  // Initialize websocket connection
   const ws = new ws(reqResObj.url);
 
-  ws.on('open', function open() {
-    ws.send('Hello!');
-  });
+  // let front end know that the websocket is open
+  reqResObj.connectionStatus = 'open';
+  mainWindow.webContents.send('serverMessage', reqResObj);
 
   // Transfer Message From Renderer to Main and send it through the websocket
   ipcMain.on('clientMessage', (event, arg) => {
@@ -16,20 +17,25 @@ export default function WebSocketController(reqResObj, mainWindow): void {
   // Transfer Message From Main to Renderer that is received from the websocket
 
   ws.on('message', function incoming(data) {
-    mainWindow.webContents.send('serverMessage', data);
+    reqResObj.clientMessage.push(data);
+    mainWindow.webContents.send('serverMessage', reqResObj);
   });
 
   // handle websocket errors and unexpected responses
   ws.on('error', function error(err) {
-    mainWindow.webContents.send('serverMessage', err.message);
+    reqResObj.clientMessage.push(err.message);
+    mainWindow.webContents.send('serverMessage', reqResObj);
   });
   ws.on('unexpected-response', function unexpectedResponse(req, res) {
-    mainWindow.webContents.send('serverMessage', res.statusCode);
+    reqResObj.clientMessage.push(res.statusCode);
+    mainWindow.webContents.send('serverMessage', reqResObj);
   });
 
   // handle websocket close
   ws.on('close', function close() {
-    mainWindow.webContents.send('serverMessage', 'WebSocket closed');
+    reqResObj.clientMessage.push('WebSocket closed');
+    reqResObj.connectionStatus = 'closed';
+    mainWindow.webContents.send('serverMessage', reqResObj);
   });
   // initialize websocket close
   ipcMain.on('closeWebSocket', (event, arg) => {
