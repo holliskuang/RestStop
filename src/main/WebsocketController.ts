@@ -4,7 +4,7 @@ import webSocket from 'ws';
 export default function WebSocketController(reqResObj, mainWindow): void {
   // Initialize websocket connection
   const ws = new webSocket.WebSocket(reqResObj.serverUrl);
-  reqResObj.connectionStatus = 'pending';
+  reqResObj.connectionStatus = 'connecting';
   reqResObj.response.clientMessage = [];
   // let front end know that the websocket is open
   ws.on('open', function open() {

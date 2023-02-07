@@ -23,9 +23,8 @@ const initialState = {
   folder: 'Home Folder',
   test: 'assert(response.status === 200)',
   responseMode: 'HTTP',
-  variables: `{
-    "people" : "ceo"
-  }`,
+  variables: ``,
+  connectionStatus: 'Closed',
 };
 
 const currentReqRes = createSlice({
@@ -68,6 +67,9 @@ const currentReqRes = createSlice({
     setVariables: (state, action) => {
       state.variables = action.payload;
     },
+    setConnectionStatus: (state, action) => {
+      state.connectionStatus = action.payload;
+    },
   },
 });
 
@@ -84,5 +86,6 @@ export const {
   setTest,
   setResponseMode,
   setVariables,
+  setConnectionStatus,
 } = currentReqRes.actions;
 export default currentReqRes.reducer;
