@@ -16,6 +16,7 @@ import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 import { handleRequest } from './util';
 import { GQLFetch } from './GraphQLController';
+import WebSocketController from './WebsocketController';
 
 class AppUpdater {
   constructor() {
@@ -120,8 +121,11 @@ const createWindow = async () => {
   });
 
   ipcMain.handle('gql', async (event, reqResObj) => {
+    return GQLFetch(reqResObj, mainWindow);
+  });
 
-    return GQLFetch(reqResObj,mainWindow);
+  ipcMain.on('openWS', async (event, reqResObj) => {
+    WebSocketController(reqResObj, mainWindow);
   });
 };
 

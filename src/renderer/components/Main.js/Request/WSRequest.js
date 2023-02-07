@@ -42,7 +42,7 @@ export default function WSRequest() {
     reqResObj.responseMode = reqState.responseMode;
     reqResObj.id = uuid();
     reqResObj.url = retrieveUrl();
-    const reqAndRes = await api.invoke('ws', reqResObj);
+    api.send('openWS', reqResObj);
     console.log('reqAndRes', reqAndRes);
     dispatch(setResponse(reqAndRes));
     dispatch(addReqRes(reqAndRes));
