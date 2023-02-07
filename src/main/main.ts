@@ -15,7 +15,7 @@ import log from 'electron-log';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 import { handleRequest } from './util';
-import { GQLFetch } from './GQLElectron';
+import { GQLFetch } from './GraphQLController';
 
 class AppUpdater {
   constructor() {
