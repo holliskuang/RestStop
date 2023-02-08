@@ -7,6 +7,7 @@ export const WebSocketController = {
   openWebSocket: (event, reqResObj) => {
     const ws = new WebSocket(reqResObj.url);
     this.websocket = ws;
+    console.log('websocket', ws);
     reqResObj.connectionStatus = 'connecting';
     reqResObj['response'] = { clientMessage: [] };
     // let front end know that the websocket is open
@@ -17,6 +18,7 @@ export const WebSocketController = {
     // Transfer Message From Main to Renderer that is received from the websocket
     ws.on('message', function incoming(data) {
       reqResObj.response.clientMessage.push(data);
+      console.log('data', data);
       event.sender.send('serverMessage', reqResObj);
     });
     // handle websocket errors and unexpected responses
