@@ -124,7 +124,7 @@ const createWindow = async () => {
     return GQLFetch(reqResObj, mainWindow);
   });
 
-  turnOnWebSocketListeners();
+  turnOnWebSocketListeners(mainWindow);
 };
 
 /**
