@@ -7,7 +7,7 @@ export const WebSocketController = {
   openWebSocket: (event, reqResObj) => {
     const ws = new WebSocket(reqResObj.url);
     this.websocket = ws;
-    console.log('websocket', ws);
+    console.log('websocket', this.websocket);
     reqResObj.connectionStatus = 'connecting';
     reqResObj['response'] = { clientMessage: [] };
     // let front end know that the websocket is open

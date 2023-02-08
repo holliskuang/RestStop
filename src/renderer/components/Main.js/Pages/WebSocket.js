@@ -23,12 +23,15 @@ export default function WebSocket() {
     dispatch(setResponseMode('WS'));
   }, []);
 
+  api.receive('serverMessage', (event, arg) => {
+    return console.log('serverMessage', arg);
+  });
   return (
     <Box>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <NavBar></NavBar>
-         <WSRequest />
+        <WSRequest />
         <Dashboard />
       </ThemeProvider>
     </Box>
