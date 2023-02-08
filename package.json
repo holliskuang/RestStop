@@ -232,6 +232,8 @@
 
     "@codemirror/view": "github:codemirror/view",
 
+    "@electron/remote": "^2.0.9",
+
     "@emotion/react": "^11.10.5",
 
     "@emotion/styled": "^11.10.5",

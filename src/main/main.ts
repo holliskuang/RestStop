@@ -16,7 +16,7 @@ import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 import { handleRequest } from './util';
 import { GQLFetch } from './GraphQLController';
-import turnOnWebSocketListeners from './WebsocketController';
+import { WebSocketController } from './WebsocketController';
 
 class AppUpdater {
   constructor() {
@@ -124,7 +124,19 @@ const createWindow = async () => {
     return GQLFetch(reqResObj, mainWindow);
   });
 
-  turnOnWebSocketListeners(mainWindow);
+  // initialize websocket connection
+  ipcMain.on('openWebSocket', (event, reqResObj) => {
+    WebSocketController.openWebSocket(event, reqResObj);
+  });
+  // initialize websocket close
+  ipcMain.on('closeWebSocket', (event, reqResObj) => {
+    WebSocketController.closeWebSocket(event, reqResObj);
+  });
+
+  // Transfer Message From Renderer to Main and send it through the websocket
+  ipcMain.on('clientMessage', (event, message, mainWindow) => {
+    WebSocketController.TransferMessageToWebSocket(event, message);
+  });
 };
 
 /**
