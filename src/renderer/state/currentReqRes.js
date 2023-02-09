@@ -5,7 +5,7 @@ const initalObj = {};
 initalObj[uuid()] = { key: '', value: '', checked: false };
 
 const initialState = {
-  url: '',
+  url: 'ws://localhost:3000',
   method: 'GET',
   headers: initalObj,
   body: ``,

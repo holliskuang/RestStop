@@ -134,8 +134,8 @@ const createWindow = async () => {
   });
 
   // Transfer Message From Renderer to Main and send it through the websocket
-  ipcMain.on('clientMessage', (event, message, mainWindow) => {
-    WebSocketController.TransferMessageToWebSocket(event, message);
+  ipcMain.on('clientMessage', (event,message) => {
+    WebSocketController.TransferMessageToWebSocket(message);
   });
 };
 

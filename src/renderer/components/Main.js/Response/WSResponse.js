@@ -5,11 +5,12 @@ import { MessageList } from 'react-chat-elements';
 import { MessageBox } from 'react-chat-elements';
 import { Input } from 'react-chat-elements';
 import { Button } from 'react-chat-elements';
+import { ipcRenderer } from 'electron';
 
 export default function WSResponse() {
-
-
-       /* Array that is mapped , following below format: pos, type,text,time */
+  const api = window.api.ipcRenderer;
+  const [message, setMessage] = React.useState('');
+  /* Array that is mapped , following below format: pos, type,text,time */
 
   return (
     <div>
@@ -34,8 +35,21 @@ export default function WSResponse() {
         messageBoxStyles={{ backgroundColor: 'transparent' }}
         notchStyle={{ fill: 'transparent' }}
       />
-      <Input placeholder="Type here..." multiline={true} />
-      <Button text={'Send'} onClick={() => alert('Sending...')} title="Send" />;
+      <Input
+        placeholder="Type here..."
+        multiline={true}
+        onChange={() => {
+          setMessage(event.target.value);
+        }}
+      />
+      <Button
+        text={'Send'}
+        onClick={() => {
+          console.log(message);
+          api.send('clientMessage', message);
+        }}
+        title="Send"
+      />
     </div>
   );
 }

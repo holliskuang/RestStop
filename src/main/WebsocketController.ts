@@ -43,7 +43,7 @@ export const WebSocketController = {
     reqResObj.connectionStatus = 'closed';
     event.sender.send('serverMessage', reqResObj);
   },
-  TransferMessageToWebSocket: (event, message) => {
+  TransferMessageToWebSocket: (message) => {
     this.websocket.send(message);
   },
 };
