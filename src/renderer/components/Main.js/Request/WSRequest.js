@@ -42,9 +42,10 @@ export default function WSRequest() {
     reqResObj.responseMode = reqState.responseMode;
     reqResObj.id = uuid();
     reqResObj.url = retrieveUrl();
+    dispatch(setResponse(reqResObj))
     api.send('openWebSocket', reqResObj);
    // console.log('reqAndRes', reqAndRes);
-    //dispatch(setResponse(reqAndRes));
+    
     //dispatch(addReqRes(reqAndRes));
     //saveRequestToDB(reqAndRes.id, reqAndRes, currentFolder);
   }

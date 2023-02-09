@@ -6,12 +6,13 @@ import { MessageBox } from 'react-chat-elements';
 import { Input } from 'react-chat-elements';
 import { Button } from 'react-chat-elements';
 import { ipcRenderer } from 'electron';
+import { setResponse } from 'renderer/state/currentReqRes';
 
 export default function WSResponse() {
   const api = window.api.ipcRenderer;
   const [message, setMessage] = React.useState('');
+  const reqResObj = useSelector((state) => state.currentReqRes.response);
   /* Array that is mapped , following below format: pos, type,text,time */
-
   return (
     <div>
       <MessageList
@@ -46,7 +47,8 @@ export default function WSResponse() {
         text={'Send'}
         onClick={() => {
           console.log(message);
-          api.send('clientMessage', message);
+          api.send('clientMessage', message, reqResObj);
+
         }}
         title="Send"
       />
