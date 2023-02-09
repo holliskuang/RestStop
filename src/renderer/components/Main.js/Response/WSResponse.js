@@ -11,8 +11,10 @@ import { setResponse } from 'renderer/state/currentReqRes';
 export default function WSResponse() {
   const api = window.api.ipcRenderer;
   const [message, setMessage] = React.useState('');
+  const [chatLogState, setChatLogState] = React.useState([]);
   const reqResObj = useSelector((state) => state.currentReqRes.response);
   /* Array that is mapped , following below format: pos, type,text,time */
+
   let dataFiller = [];
   if (reqResObj.chatLog) {
     dataFiller = reqResObj.chatLog.map((message) => {
@@ -24,6 +26,9 @@ export default function WSResponse() {
       };
     });
   }
+  React.useEffect(() => {
+    setChatLogState(dataFiller);
+  }, [reqResObj]);
 
   return (
     <div>
@@ -31,15 +36,7 @@ export default function WSResponse() {
         className="message-list"
         lockable={true}
         toBottomHeight={'100%'}
-        dataSource={[
-          /*    {
-            position: 'left',
-            type: 'text',
-            text: 'Hi, how are you?',
-            date: new Date(),
-          }, */
-          ...dataFiller,
-        ]}
+        dataSource={chatLogState}
         messageBoxStyles={{ backgroundColor: 'transparent' }}
         notchStyle={{ fill: 'transparent' }}
       />
