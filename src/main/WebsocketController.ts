@@ -9,7 +9,7 @@ export const WebSocketController = {
     this.websocket = ws;
     console.log('websocket', this.websocket);
     reqResObj.connectionStatus = 'connecting';
-    reqResObj['response'] = { chatLog: [] };
+    reqResObj.chatLog = [];
     ws.on('open', function open() {
       reqResObj.connectionStatus = 'open';
       event.sender.send('serverMessage', reqResObj);
@@ -17,21 +17,17 @@ export const WebSocketController = {
 
     // handle websocket errors and unexpected responses
     ws.on('error', function error(err) {
-      reqResObj.response.chatLog.push([err.message, Date.now(), 'server']);
+      reqResObj.chatLog.push([err.message, Date.now(), 'server']);
       event.sender.send('serverMessage', reqResObj);
     });
     ws.on('unexpected-response', function unexpectedResponse(req, res) {
-      reqResObj.response.chatLog.push([
-        res.statusCode,
-        Date.now(),
-        'server',
-      ]);
+      reqResObj.chatLog.push([res.statusCode, Date.now(), 'server']);
       event.sender.send('serverMessage', reqResObj);
     });
 
     // handle websocket close
     ws.on('close', function close() {
-      reqResObj.response.chatLog.push([
+      reqResObj.chatLog.push([
         'WebSocket closed',
         Date.now(),
         'server',
@@ -55,12 +51,12 @@ export const WebSocketController = {
     // Transfer Message From Main to Renderer that is received from the websocket
 
     ws.on('message', function incoming(data) {
-      reqResObj.response.chatLog.push([data, Date.now(), 'server']);
+      reqResObj.chatLog.push([data, Date.now(), 'server']);
       console.log('data', data);
       event.sender.send('serverMessage', reqResObj);
     });
 
-    reqResObj.response.chatLog.push([message, Date.now(), 'client']);
+    reqResObj.chatLog.push([message, Date.now(), 'client']);
     console.log('pushing message', message);
     console.log('reqResObj', reqResObj);
     event.sender.send('serverMessage', reqResObj);

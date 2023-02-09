@@ -13,6 +13,18 @@ export default function WSResponse() {
   const [message, setMessage] = React.useState('');
   const reqResObj = useSelector((state) => state.currentReqRes.response);
   /* Array that is mapped , following below format: pos, type,text,time */
+  let dataFiller = [];
+  if (reqResObj.chatLog) {
+    dataFiller = reqResObj.chatLog.map((message) => {
+      return {
+        position: message[2] === 'server' ? 'left' : 'right',
+        type: 'text',
+        text: message[0],
+        date: message[1],
+      };
+    });
+  }
+
   return (
     <div>
       <MessageList
@@ -20,18 +32,13 @@ export default function WSResponse() {
         lockable={true}
         toBottomHeight={'100%'}
         dataSource={[
-          {
+          /*    {
             position: 'left',
             type: 'text',
             text: 'Hi, how are you?',
             date: new Date(),
-          },
-          {
-            position: 'right',
-            type: 'text',
-            text: 'good',
-            date: new Date(),
-          },
+          }, */
+          ...dataFiller,
         ]}
         messageBoxStyles={{ backgroundColor: 'transparent' }}
         notchStyle={{ fill: 'transparent' }}
@@ -48,7 +55,6 @@ export default function WSResponse() {
         onClick={() => {
           console.log('sending object', reqResObj);
           api.send('clientMessage', message, reqResObj);
-
         }}
         title="Send"
       />
