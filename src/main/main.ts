@@ -124,6 +124,7 @@ const createWindow = async () => {
     return GQLFetch(reqResObj, mainWindow);
   });
 
+
   // initialize websocket connection
   ipcMain.on('openWebSocket', (event, reqResObj) => {
     WebSocketController.openWebSocket(event, reqResObj);

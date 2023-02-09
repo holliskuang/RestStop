@@ -46,7 +46,7 @@ export default function WSResponse() {
       <Button
         text={'Send'}
         onClick={() => {
-          console.log(message);
+          console.log('sending object', reqResObj);
           api.send('clientMessage', message, reqResObj);
 
         }}

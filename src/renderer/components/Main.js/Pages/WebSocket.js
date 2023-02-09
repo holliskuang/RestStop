@@ -9,27 +9,30 @@ import Dashboard from '../Dashboard/Dashboard';
 import { themeSettings } from '../../../themes';
 import GQLRequest from '../Request/GQLRequest';
 import { useDispatch } from 'react-redux';
-import { setMethod, setResponseMode , setResponse} from '../../../state/currentReqRes.js';
+import {
+  setMethod,
+  setResponseMode,
+  setResponse,
+} from '../../../state/currentReqRes.js';
 import { ipcRenderer } from 'electron';
 import WSRequest from '../Request/WSRequest';
 
 export default function WebSocket() {
   const mode = useSelector((state) => state.light.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
-  const response = useSelector((state) => state.currentReqRes.response);
   const dispatch = useDispatch();
   const api = window.api.ipcRenderer;
+  const response = useSelector((state) => state.currentReqRes.response);
   useEffect(() => {
     dispatch(setMethod('WS'));
     dispatch(setResponseMode('WS'));
   }, []);
- 
+
   api.receive('serverMessage', (event, arg) => {
-     dispatch(setResponse(arg));
-     return console.log('serverMessage', arg);
-    console.log('respone',response);
-  
+    dispatch(setResponse(arg));
+    api.send('addEventListeners', arg);
   });
+  console.log('response', response);
   return (
     <Box>
       <ThemeProvider theme={theme}>
