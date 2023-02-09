@@ -26,9 +26,10 @@ export default function WSResponse() {
       };
     });
   }
+
   React.useEffect(() => {
     setChatLogState(dataFiller);
-  }, [reqResObj]);
+  }, [dataFiller]);
 
   return (
     <div>
