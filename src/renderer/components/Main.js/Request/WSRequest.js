@@ -57,7 +57,7 @@ export default function WSRequest() {
       // console.log('reqAndRes', reqAndRes);
     }
   }
-  console.log('hi', response);
+  console.log('METHOD', reqState.method);
   // retrieve url from redux
   const retrieveUrl = () => {
     const url = reqState.url;
