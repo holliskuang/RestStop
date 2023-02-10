@@ -1,4 +1,3 @@
-import { ipcMain } from 'electron';
 import WebSocket from 'ws';
 
 export const WebSocketController = {

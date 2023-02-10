@@ -30,9 +30,7 @@ export default function WebSocket() {
 
   api.receive('serverMessage', (event, arg) => {
     dispatch(setResponse(arg));
-    api.send('addEventListeners', arg);
   });
-  console.log('response', response);
   return (
     <Box>
       <ThemeProvider theme={theme}>

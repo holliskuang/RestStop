@@ -17,7 +17,7 @@ import {
 import { ipcRenderer } from 'electron';
 import WSRequest from '../Request/WSRequest';
 
-export default function WebSocket() {
+export default function SSE() {
   const mode = useSelector((state) => state.light.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
   const dispatch = useDispatch();
@@ -30,7 +30,6 @@ export default function WebSocket() {
 
   api.receive('serverMessage', (event, arg) => {
     dispatch(setResponse(arg));
-    api.send('addEventListeners', arg);
   });
   console.log('response', response);
   return (
