@@ -31,7 +31,6 @@ export default function WSRequest() {
   const reqState = useSelector((state) => state.currentReqRes);
   const api = window.api.ipcRenderer;
   const currentFolder = useSelector((state) => state.currentReqRes.folder);
-  let assert = chai.assert;
   let response = useSelector((state) => state.currentReqRes.response);
   // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {

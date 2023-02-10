@@ -20,24 +20,21 @@ import Response from '../Response/Response';
 import { addReqRes } from 'renderer/state/historyReqRes.js';
 import { saveRequestToDB } from '../Dashboard/DashboardController.js';
 import { db } from 'renderer/db.js';
-import TestBox from './TestBox.js';
-import chai from 'chai';
-import WSResponse from '../Response/WSResponse.js';
+import SSEResponse from '../Response/SSEResponse.js';
 
 export default function SSERequest() {
   const dispatch = useDispatch();
   const reqState = useSelector((state) => state.currentReqRes);
   const api = window.api.ipcRenderer;
   const currentFolder = useSelector((state) => state.currentReqRes.folder);
-  let assert = chai.assert;
   // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {
     // Disconnect an existing SSE if it exists and save the reqres to history
     if (response.connectionStatus === 'open') {
       api.send('closeSSE', response);
-      const responseCopy = { ...response };
-      responseCopy.connectionStatus = 'closed';
-      dispatch(setResponse(responseCopy));
+  //    const responseCopy = { ...response };
+    //  responseCopy.connectionStatus = 'closed';
+     // dispatch(setResponse(responseCopy));
       dispatch(addReqRes(responseCopy));
       saveRequestToDB(responseCopy.id, responseCopy, currentFolder);
     } else {
@@ -126,7 +123,7 @@ export default function SSERequest() {
         </Button>
 
         <HeaderBox />
-        <WSResponse />
+        <SSEResponse/>
       </FormControl>
     </div>
   );
