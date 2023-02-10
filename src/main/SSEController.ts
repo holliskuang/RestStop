@@ -1,4 +1,4 @@
-import eventsources from 'sse-event-sources';
+import EventSource from 'eventsource'
 
 export const SSEController = {
   sse: null,
@@ -6,7 +6,7 @@ export const SSEController = {
   openSSE: (event, reqResObj) => {
     //headers
     var eventSourceInitDict = reqResObj.headers;
-    const sse = new eventsources.EventSource(
+    const sse = new EventSource(
       reqResObj.url,
       eventSourceInitDict
     );
@@ -16,28 +16,24 @@ export const SSEController = {
     reqResObj.chatLog = [];
     sse.onopen = function open() {
       reqResObj.connectionStatus = 'open';
-      event.sender.send('serverMessage', reqResObj);
+      event.sender.send('SSEserverMessage', reqResObj);
     };
-
+    
     // handle SSE errors and unexpected responses
     sse.onerror = function error(err) {
       reqResObj.chatLog.push([err.message, Date.now(), 'server']);
-      event.sender.send('serverMessage', reqResObj);
-    };
-    sse.onunexpectedresponse = function unexpectedResponse(req, res) {
-      reqResObj.chatLog.push([res.statusCode, Date.now(), 'server']);
-      event.sender.send('serverMessage', reqResObj);
+      event.sender.send('SSEserverMessage', reqResObj);
     };
     sse.onmessage = function incoming(data) {
       reqResObj.chatLog.push([data, Date.now(), 'server']);
       console.log('data', data);
-      event.sender.send('serverMessage', reqResObj);
+      event.sender.send('SSEserverMessage', reqResObj);
     };
   },
 
   closeSSE: (event, reqResObj) => {
     this.sse.close();
     reqResObj.connectionStatus = 'closed';
-    event.sender.send('serverMessage', reqResObj);
+    event.sender.send('SSEserverMessage', reqResObj);
   },
 };

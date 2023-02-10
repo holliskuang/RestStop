@@ -28,7 +28,7 @@ export default function SSE() {
     dispatch(setResponseMode('SSE'));
   }, []);
 
-  api.receive('serverMessage', (event, arg) => {
+  api.receive('SSEserverMessage', (event, arg) => {
     dispatch(setResponse(arg));
   });
   console.log('response', response);

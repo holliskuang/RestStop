@@ -17,6 +17,7 @@ import { resolveHtmlPath } from './util';
 import { handleRequest } from './util';
 import { GQLFetch } from './GraphQLController';
 import { WebSocketController } from './WebsocketController';
+import { SSEController } from './SSEController';
 
 class AppUpdater {
   constructor() {
