@@ -15,7 +15,7 @@ import {
   setResponse,
 } from '../../../state/currentReqRes.js';
 import { ipcRenderer } from 'electron';
-import WSRequest from '../Request/WSRequest';
+import SSERequest from '../Request/SSERequest';
 
 export default function SSE() {
   const mode = useSelector((state) => state.light.mode);
@@ -37,7 +37,7 @@ export default function SSE() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <NavBar></NavBar>
-        <WSRequest />
+        <SSERequest />
         <Dashboard />
       </ThemeProvider>
     </Box>

@@ -1,4 +1,4 @@
-import EventSource from 'eventsource'
+import EventSource from 'eventsource';
 
 export const SSEController = {
   sse: null,
@@ -6,10 +6,7 @@ export const SSEController = {
   openSSE: (event, reqResObj) => {
     //headers
     var eventSourceInitDict = reqResObj.headers;
-    const sse = new EventSource(
-      reqResObj.url,
-      eventSourceInitDict
-    );
+    const sse = new EventSource(reqResObj.url, eventSourceInitDict);
     this.sse = sse;
     console.log('sse', this.sse);
     reqResObj.connectionStatus = 'connecting';
@@ -18,10 +15,10 @@ export const SSEController = {
       reqResObj.connectionStatus = 'open';
       event.sender.send('SSEserverMessage', reqResObj);
     };
-    
+
     // handle SSE errors and unexpected responses
     sse.onerror = function error(err) {
-      reqResObj.chatLog.push([err.message, Date.now(), 'server']);
+      reqResObj.chatLog.push([err.data, Date.now(), 'server']);
       event.sender.send('SSEserverMessage', reqResObj);
     };
     sse.onmessage = function incoming(data) {

@@ -41,7 +41,6 @@ export default function WSResponse() {
         notchStyle={{ fill: 'transparent' }}
       />
       <Input
-        placeholder="Type here..."
         multiline={true}
         onChange={() => {
           setMessage(event.target.value);
