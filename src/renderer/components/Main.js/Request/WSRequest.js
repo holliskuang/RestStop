@@ -36,15 +36,19 @@ export default function WSRequest() {
   // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {
     // Disconnect an existing websocket if it exists and save the reqres to history
-    if (reqState.response.connectionStatus === 'open') {
+    if (response.connectionStatus === 'open') {
       api.send('closeWebSocket', response);
-      dispatch(addReqRes(response));
-      saveRequestToDB(response.id, response, currentFolder);
+      const responseCopy = { ...response };
+      responseCopy.connectionStatus = 'closed';
+      dispatch(setResponse(responseCopy));
+      dispatch(addReqRes(responseCopy));
+      saveRequestToDB(responseCopy.id, responseCopy, currentFolder);
     } else {
-      // oprn a new websocket 
+      // oprn a new websocket
       dispatch(setResponseMode('WS'));
       event.preventDefault();
       let reqResObj = {};
+      reqResObj.method = reqState.method;
       reqResObj.responseMode = reqState.responseMode;
       reqResObj.id = uuid();
       reqResObj.url = retrieveUrl();
@@ -114,7 +118,7 @@ export default function WSRequest() {
             ? 'Disconnect'
             : 'Connect'}
         </Button>
-        <WSResponse />
+        <Response />
       </FormControl>
     </div>
   );

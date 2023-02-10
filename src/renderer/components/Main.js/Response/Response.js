@@ -10,6 +10,7 @@ import ResponseBody from './ResponseBody';
 import ResponseHeaders from './ResponseHeaders';
 import ResponseCookies from './ResponseCookies';
 import ResponseTest from './ResponseTest';
+import WSResponse from './WSResponse';
 
 export default function Response() {
   const [value, setValue] = React.useState('body');
@@ -18,6 +19,8 @@ export default function Response() {
     setValue(newValue);
   };
   const responseMode = reqState.responseMode;
+  // If response mode is WS, return WSResponse component
+  if (responseMode === 'WS') return <WSResponse />;
   return (
     <Box sx={{ width: '100%', typography: 'body1' }}>
       <Typography variant="h3">

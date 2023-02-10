@@ -24,7 +24,7 @@ export default function WebSocket() {
   const api = window.api.ipcRenderer;
   const response = useSelector((state) => state.currentReqRes.response);
   useEffect(() => {
-    dispatch(setMethod('WS'));
+    dispatch(setMethod('WebSocket'));
     dispatch(setResponseMode('WS'));
   }, []);
 
