@@ -32,25 +32,28 @@ export default function WSRequest() {
   const api = window.api.ipcRenderer;
   const currentFolder = useSelector((state) => state.currentReqRes.folder);
   let assert = chai.assert;
-
+  let response = useSelector((state) => state.currentReqRes.response);
   // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {
-    dispatch(setResponseMode('WS'));
-    console.log('reqState', reqState.responseMode);
-    event.preventDefault();
-    let reqResObj = {};
-    reqResObj.responseMode = reqState.responseMode;
-    reqResObj.id = uuid();
-    reqResObj.url = retrieveUrl();
-    dispatch(setResponse(reqResObj))
-    api.send('openWebSocket', reqResObj);
-   // console.log('reqAndRes', reqAndRes);
-    
-    //dispatch(addReqRes(reqAndRes));
-    //saveRequestToDB(reqAndRes.id, reqAndRes, currentFolder);
+    // Disconnect an existing websocket if it exists and save the reqres to history
+    if (reqState.response.connectionStatus === 'open') {
+      api.send('closeWebSocket', response);
+      dispatch(addReqRes(response));
+      saveRequestToDB(response.id, response, currentFolder);
+    } else {
+      // oprn a new websocket 
+      dispatch(setResponseMode('WS'));
+      event.preventDefault();
+      let reqResObj = {};
+      reqResObj.responseMode = reqState.responseMode;
+      reqResObj.id = uuid();
+      reqResObj.url = retrieveUrl();
+      dispatch(setResponse(reqResObj));
+      api.send('openWebSocket', reqResObj);
+      // console.log('reqAndRes', reqAndRes);
+    }
   }
-
-
+  console.log('hi', response);
   // retrieve url from redux
   const retrieveUrl = () => {
     const url = reqState.url;
@@ -88,7 +91,6 @@ export default function WSRequest() {
           }}
         >
           <MenuItem value="WS">WS</MenuItem>
-        
         </Select>
         <TextField
           id="outlined-basic"
@@ -108,9 +110,11 @@ export default function WSRequest() {
           }}
           onClick={handleSubmit}
         >
-          {reqState.connectStatus === 'open' ? 'Disconnect' : 'Connect'}
+          {reqState.response.connectionStatus == 'open'
+            ? 'Disconnect'
+            : 'Connect'}
         </Button>
-        <WSResponse /> 
+        <WSResponse />
       </FormControl>
     </div>
   );

@@ -14,7 +14,7 @@ export default function WSResponse() {
   const [chatLogState, setChatLogState] = React.useState([]);
   const reqResObj = useSelector((state) => state.currentReqRes.response);
   /* Array that is mapped , following below format: pos, type,text,time */
-
+  
   let dataFiller = [];
   if (reqResObj.chatLog) {
     dataFiller = reqResObj.chatLog.map((message) => {
@@ -29,7 +29,7 @@ export default function WSResponse() {
 
   React.useEffect(() => {
     setChatLogState(dataFiller);
-  }, [dataFiller]);
+  }, [reqResObj]);
 
   return (
     <div>
