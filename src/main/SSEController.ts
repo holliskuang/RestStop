@@ -4,7 +4,12 @@ export const SSEController = {
   sse: null,
   // Initialize SSE connection
   openSSE: (event, reqResObj) => {
-    const sse = new eventsources.EventSource(reqResObj.url,reqResObj.headers);
+    //headers
+    var eventSourceInitDict = reqResObj.headers;
+    const sse = new eventsources.EventSource(
+      reqResObj.url,
+      eventSourceInitDict
+    );
     this.sse = sse;
     console.log('sse', this.sse);
     reqResObj.connectionStatus = 'connecting';
@@ -28,11 +33,9 @@ export const SSEController = {
       console.log('data', data);
       event.sender.send('serverMessage', reqResObj);
     };
-
   },
 
   closeSSE: (event, reqResObj) => {
-    reqResObj.connectionStatus = 'closed';
     this.sse.close();
     reqResObj.connectionStatus = 'closed';
     event.sender.send('serverMessage', reqResObj);

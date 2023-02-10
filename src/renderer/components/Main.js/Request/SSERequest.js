@@ -22,6 +22,7 @@ import { saveRequestToDB } from '../Dashboard/DashboardController.js';
 import { db } from 'renderer/db.js';
 import TestBox from './TestBox.js';
 import chai from 'chai';
+import WSResponse from '../Response/WSResponse.js';
 
 export default function SSERequest() {
   const dispatch = useDispatch();
@@ -48,21 +49,12 @@ export default function SSERequest() {
       reqResObj.url = retrieveUrl();
       reqResObj.method = retrieveMethod();
       reqResObj.headers = retrieveHeaders();
-      reqResObj.body = retrieveBody();
-      reqResObj.test = reqState.test;
       api.send('openSSE', reqResObj);
-      // dispatch(setResponse(reqAndRes));
-      // dispatch(addReqRes(reqAndRes));
-      // saveRequestToDB(reqAndRes.id, reqAndRes, currentFolder);
       console.log(reqAndRes);
     }
   }
 
   // retrieve body from redux
-  const retrieveBody = () => {
-    const body = reqState.body;
-    return body;
-  };
   // retrieve checked headers from redux and return as object
   const retrieveHeaders = () => {
     const headers = {};
@@ -90,11 +82,6 @@ export default function SSERequest() {
     return method;
   };
 
-  /// handle change in text box update redux
-  const textBoxHandleChange = (event) => {
-    dispatch(setReqBody(event.target.value));
-  };
-
   return (
     <div className="request">
       <FormControl
@@ -115,11 +102,7 @@ export default function SSERequest() {
             dispatch(setMethod(event.target.value));
           }}
         >
-          <MenuItem value="GET">GET</MenuItem>
-          <MenuItem value="POST">POST</MenuItem>
-          <MenuItem value="PUT">PUT</MenuItem>
-          <MenuItem value="PATCH">PATCH</MenuItem>
-          <MenuItem value="DELETE">DELETE</MenuItem>
+          <MenuItem value="SSE">SSE</MenuItem>
         </Select>
         <TextField
           id="outlined-basic"
@@ -139,21 +122,11 @@ export default function SSERequest() {
           }}
           onClick={handleSubmit}
         >
-          Submit Request
+          {response.connectionStatus === 'open' ? 'Disconnect' : 'Connect'}
         </Button>
 
         <HeaderBox />
-        {reqState.method === 'GET' ? null : (
-          <>
-            <ReqBodyTextBoxSelector />
-            <ReqBodyTextBox
-              onChange={textBoxHandleChange}
-              value={reqState.reqBody}
-            />
-          </>
-        )}
-        <TestBox />
-        <Response></Response>
+        <WSResponse />
       </FormControl>
     </div>
   );
