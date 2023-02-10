@@ -124,7 +124,6 @@ const createWindow = async () => {
     return GQLFetch(reqResObj, mainWindow);
   });
 
-
   // initialize websocket connection
   ipcMain.on('openWebSocket', (event, reqResObj) => {
     WebSocketController.openWebSocket(event, reqResObj);
@@ -137,6 +136,15 @@ const createWindow = async () => {
   // Transfer Message From Renderer to Main and send it through the websocket
   ipcMain.on('clientMessage', (event, message, reqResObj) => {
     WebSocketController.TransferMessageToWebSocket(event, message, reqResObj);
+  });
+
+  // SSE Event Listener for the main process to listen for SSE events
+  ipcMain.on('openSSE', (event, reqResObj) => {
+    SSEController.openSSE(event, reqResObj);
+  });
+
+  ipcMain.on('closeSSE', (event, reqResObj) => {
+    SSEController.closeSSE(event, reqResObj);
   });
 };
 
