@@ -1,6 +1,7 @@
-import grpcLibrary from '@grpc/grpc-js';
-import protoLoader from '@grpc/proto-loader';
+const protoLoader = require('@grpc/proto-loader');
+const grpcLibrary = require('@grpc/grpc-js');
 import fs from 'fs';
+import path from 'path';
 
 // one function that opens GRPC connection and sends the response
 export const GRPCController = (event: any, reqResObj: any) => {
@@ -12,17 +13,9 @@ export const parseProtoFile = async (
   event: Electron.IpcMainEvent,
   filePath: string
 ) => {
-  fs.readFile(filePath, 'utf-8', (err, file) => {
-    if (err) {
-      console.log(err);
-      // send error to renderer that proto could not be parsed
-      return;
-    } else {
-      // Write Contents to file on Backend and return file path
-      return file;
-    }
-  });
-
+  let protoObject: any = {};
+  let randomFileName = Math.random().toString(36).substring(7);
+  let protoProcessPath;
   const options = {
     keepCase: true,
     longs: String,
@@ -30,15 +23,46 @@ export const parseProtoFile = async (
     defaults: true,
     oneofs: true,
   };
-  // load must use file path  not file contents
+  // Create file path for proto contents on the backend that will allow us to load the proto file
+  if (!fs.existsSync(path.join(process.resourcesPath, '/protoFiles/'))) {
+    fs.mkdirSync(path.join(process.resourcesPath, '/protoFiles/'));
+  }
 
-  protoLoader
-    .load(protoData, options)
-    .then((packageDefinition) => {
-      const packageObject =
-        grpcLibrary.loadPackageDefinition(packageDefinition);
-    })
-    .then((packageObject) => {
-      console.log(packageObject);
-    });
+  fs.readFile(filePath, 'utf-8', (err, file) => {
+    if (err) {
+      console.log(err);
+      event.sender.send('serverMessage', {
+        error: err,
+        message: 'Error reading proto file',
+      });
+      return;
+    } else {
+      // Write Contents to file on Backend and return file path
+      fs.writeFileSync(
+        path.join(process.resourcesPath, `/protoFiles/${randomFileName}.proto`),
+        file,
+        'utf-8'
+      );
+      protoProcessPath = path.join(
+        process.resourcesPath,
+        `/protoFiles/${randomFileName}.proto`
+      );
+      protoObject.filePath = protoProcessPath;
+      createAndDecipherProtoFile(protoObject);
+    }
+  });
+
+  const createAndDecipherProtoFile = async (protoObject) => {
+    // load must use file path  not file contents
+
+    const packageDefinition = protoLoader.loadSync(
+      protoObject.filePath,
+      options
+    );
+    const packageObject = grpcLibrary.loadPackageDefinition(packageDefinition);
+
+    // assign our descriptor to the protoObject to iterate through available services
+    protoObject.packageObject = packageObject;
+    console.log(protoObject);
+  };
 };
