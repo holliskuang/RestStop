@@ -31,6 +31,11 @@ export default function Request() {
   let assert = chai.assert;
   // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {
+    // IF URL NOT HTTP, THROW ERROR AND RETURN
+    if (!reqState.url.startsWith('http')) {
+      alert('URL must be HTTP');
+      return;
+    }
     event.preventDefault();
     dispatch(setResponseMode('HTTP'));
     let reqResObj = {};

@@ -34,6 +34,11 @@ export default function WSRequest() {
   let response = useSelector((state) => state.currentReqRes.response);
   // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {
+    // IF URL NOT WS, THROW ERROR AND RETURN
+    if (!reqState.url.startsWith('ws')) {
+      alert('URL must be WS');
+      return;
+    }
     // Disconnect an existing websocket if it exists and save the reqres to history
     if (response.connectionStatus === 'open') {
       api.send('closeWebSocket', response);

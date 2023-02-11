@@ -27,14 +27,20 @@ export default function SSERequest() {
   const reqState = useSelector((state) => state.currentReqRes);
   const api = window.api.ipcRenderer;
   const currentFolder = useSelector((state) => state.currentReqRes.folder);
+  let response = useSelector((state) => state.currentReqRes.response);
   // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {
+    /// If URL not HTTP, throw error and return
+    if (!reqState.url.startsWith('http')) {
+      alert('URL must be HTTP');
+      return;
+    }
     // Disconnect an existing SSE if it exists and save the reqres to history
     if (response.connectionStatus === 'open') {
       api.send('closeSSE', response);
-  //    const responseCopy = { ...response };
-    //  responseCopy.connectionStatus = 'closed';
-     // dispatch(setResponse(responseCopy));
+      const responseCopy = { ...response };
+      responseCopy.connectionStatus = 'closed';
+      dispatch(setResponse(responseCopy));
       dispatch(addReqRes(responseCopy));
       saveRequestToDB(responseCopy.id, responseCopy, currentFolder);
     } else {
@@ -47,7 +53,7 @@ export default function SSERequest() {
       reqResObj.method = retrieveMethod();
       reqResObj.headers = retrieveHeaders();
       api.send('openSSE', reqResObj);
-      console.log(reqAndRes);
+      console.log(reqResObj);
     }
   }
 
@@ -123,7 +129,7 @@ export default function SSERequest() {
         </Button>
 
         <HeaderBox />
-        <SSEResponse/>
+        <SSEResponse />
       </FormControl>
     </div>
   );

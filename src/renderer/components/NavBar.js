@@ -27,7 +27,7 @@ export default function NavBar() {
     { name: 'GraphQL', route: '/graphql', value: 'graphQL', endIcon:HubIcon },
     { name: 'WebSocket', route: '/websocket', value: 'ws', endIcon:PowerIcon},
     { name: 'SSE', route: '/sse', value: 'sse', endIcon:SettingsInputAntennaIcon },
-    { name: 'Webhook', route: '/webhook', value: 'webhook', endIcon:WebhookIcon },
+    { name: 'GRPC', route: '/grpc', value: 'grpc', endIcon:WebhookIcon },
   ]; 
   function ReduxPageUpdate() {
     console.log('redux page update');

@@ -21,9 +21,8 @@ export const SSEController = {
       reqResObj.chatLog.push([err.data, Date.now(), 'server']);
       event.sender.send('SSEserverMessage', reqResObj);
     };
-    sse.onmessage = function incoming(data) {
-      reqResObj.chatLog.push([data, Date.now(), 'server']);
-      console.log('data', data);
+    sse.onmessage = function incoming(SSEserverMessage) {
+      reqResObj.chatLog.push([SSEserverMessage.data, Date.now(), 'server']);
       event.sender.send('SSEserverMessage', reqResObj);
     };
   },

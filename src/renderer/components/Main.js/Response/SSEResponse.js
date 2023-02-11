@@ -40,22 +40,6 @@ export default function WSResponse() {
         messageBoxStyles={{ backgroundColor: 'transparent' }}
         notchStyle={{ fill: 'transparent' }}
       />
-      <Input
-        multiline={true}
-        onChange={() => {
-          setMessage(event.target.value);
-        }}
-        maxlength={0}
-      />
-      <Button
-        text={'Send'}
-        onClick={() => {
-          console.log('sending object', reqResObj);
-          api.send('clientMessage', message, reqResObj);
-        }}
-        disabled={true}
-        title="Send"
-      />
     </div>
   );
 }

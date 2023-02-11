@@ -14,8 +14,7 @@ import HTTP from './components/Main.js/Pages/HTTP';
 import GraphQL from './components/Main.js/Pages/GraphQL';
 import WebSocket from './components/Main.js/Pages/WebSocket';
 import SSE from './components/Main.js/Pages/SSE';
-
-
+import GRPC from './components/Main.js/Pages/GRPC';
 
 
 
@@ -29,7 +28,7 @@ export default function App() {
         <Route path="/graphql" element={<GraphQL/>}/>
         <Route path="/websocket" element={<WebSocket/>}/>
         <Route path="/sse" element={<SSE/>}/>
-        <Route path="/webhook" element={}/>
+        <Route path="/grpc" element={<GRPC/>}/>
       </Routes>
     </Router>
   );
