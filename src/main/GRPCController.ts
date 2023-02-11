@@ -1,5 +1,6 @@
 import grpcLibrary from '@grpc/grpc-js';
 import protoLoader from '@grpc/proto-loader';
+import fs from 'fs';
 
 // one function that opens GRPC connection and sends the response
 export const GRPCController = (event: any, reqResObj: any) => {
@@ -9,12 +10,19 @@ export const GRPCController = (event: any, reqResObj: any) => {
 // parse through filepath to get proto file
 export const parseProtoFile = async (
   event: Electron.IpcMainEvent,
-  filePath: string | string[]
+  filePath: string
 ) => {
+  fs.readFile(filePath, 'utf-8', (err, file) => {
+    if (err) {
+      console.log(err);
+      // send error to renderer that proto could not be parsed
+      return;
+    } else {
+      // Write Contents to file on Backend and return file path
+      return file;
+    }
+  });
 
-
-    
-  let protoFileName = filePath;
   const options = {
     keepCase: true,
     longs: String,
@@ -22,8 +30,10 @@ export const parseProtoFile = async (
     defaults: true,
     oneofs: true,
   };
+  // load must use file path  not file contents
+
   protoLoader
-    .load(protoFileName, options)
+    .load(protoData, options)
     .then((packageDefinition) => {
       const packageObject =
         grpcLibrary.loadPackageDefinition(packageDefinition);
