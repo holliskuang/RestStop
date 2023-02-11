@@ -61,8 +61,18 @@ export const parseProtoFile = async (
     );
     const packageObject = grpcLibrary.loadPackageDefinition(packageDefinition);
 
-    // assign our descriptor to the protoObject to iterate through available services
+    // assign our descriptor to the protoObject to iterate through available messages in a service
     protoObject.packageObject = packageObject;
-    console.log(protoObject);
+
+    protoObject.serviceHolder = Object.values(packageObject)[0];
+    // Service Holder contains 2 Objects, ServiceName and ServiceMethods
+    // We can deconstruct these
+
+    for (const [ServiceName, ServiceMethods] of Object.entries(
+      protoObject.serviceHolder
+    )){
+      console.log(ServiceName)
+      console.log(ServiceMethods);
+    }
   };
 };
