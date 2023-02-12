@@ -29,7 +29,8 @@ export const parseProtoFile = async (
   }
 
   const filedata = fs.readFileSync(filePath, 'utf-8');
-
+  // data to be displayed on front end
+  protoObject.filedata = filedata;
   fs.writeFileSync(
     path.join(process.resourcesPath, `/protoFiles/${randomFileName}.proto`),
     filedata,
@@ -131,13 +132,14 @@ export const parseProtoFile = async (
           // not using the details of the response object (requestDef.responseType) since user will run
           // their own server
         }
+        console.log(serviceObj);
         serviceArr.push(serviceObj);
         protoObject.serviceArr = serviceArr;
       }
     }
 
     // ************************** From Swell OpenSource Repo ********************************
-    console.log(protoObject);
+
     return protoObject;
   };
   const finalObject = await createAndDecipherProtoFile(protoObject);
