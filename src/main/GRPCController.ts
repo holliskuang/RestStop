@@ -16,7 +16,6 @@ export const parseProtoFile = async (
 ) => {
   let protoObject: any = {};
   let randomFileName = Math.random().toString(36).substring(7);
-  let protoProcessPath;
   const options = {
     keepCase: true,
     longs: String,
@@ -55,7 +54,7 @@ export const parseProtoFile = async (
     // Service Holder contains 2 Objects, ServiceName and ServiceMethods
     // We can deconstruct these
 
-    // ** From Swell OpenSource Repo **
+    // ************************** From Swell OpenSource Repo ********************************
     const findNestedService = (obj) => {
       if (Object.values(obj).length > 1) return obj; // otherwise...
       return findNestedService(Object.values(obj)[0]);
@@ -133,10 +132,11 @@ export const parseProtoFile = async (
           // their own server
         }
         serviceArr.push(serviceObj);
+        protoObject.serviceArr = serviceArr;
       }
     }
 
-    protoObject.serviceArr = serviceArr;
+    // ************************** From Swell OpenSource Repo ********************************
     console.log(protoObject);
     return protoObject;
   };
