@@ -115,6 +115,7 @@ export const parseProtoFile = async (
   event: Electron.IpcMainEvent,
   filePath: string
 ) => {
+  let parsedData = {};
   let protoObject: any = {};
   let randomFileName = Math.random().toString(36).substring(7);
   const options = {
@@ -166,8 +167,7 @@ export const parseProtoFile = async (
       protoObject.descriptor
     );
 
-    // Store the services from the current .proto file
-    const serviceArr = [];
+    // iterate through our descriptorDefinition object to find our services
 
     for (const [serviceName, serviceDef] of Object.entries(
       protoObject.descriptorDefinition
@@ -175,6 +175,7 @@ export const parseProtoFile = async (
       if (typeof serviceDef === 'function') {
         // here a service is defined.
         const serviceObj = {};
+
         serviceObj.rpcs = [];
 
         for (const [requestName, requestDef] of Object.entries(
@@ -182,18 +183,26 @@ export const parseProtoFile = async (
         )) {
           const streamingReq = requestDef.requestStream;
           const streamingRes = requestDef.responseStream;
+
           let stream = 'UNARY';
           if (streamingReq) stream = 'CLIENT STREAM';
           if (streamingRes) stream = 'SERVER STREAM';
           if (streamingReq && streamingRes) stream = 'BIDIRECTIONAL';
+
           serviceObj.rpcs.push({
             name: requestName,
             type: stream,
           });
         }
-        console.log('RPC', serviceObj.rpcs);
-        serviceArr.push(serviceObj);
-        protoObject.serviceArr = serviceArr;
+        parsedData.services = serviceObj.rpcs;
+        parsedData.filedata = filedata;
+        parsedData.filePath = path.join(
+          path.join(
+            process.resourcesPath,
+            `/protoFiles/${randomFileName}.proto`
+          )
+        );
+        event.sender.send('protoFileParsed', parsedData);
       }
     }
 
@@ -202,6 +211,5 @@ export const parseProtoFile = async (
     return protoObject;
   };
   const finalObject = await createAndDecipherProtoFile(protoObject);
-  console.log('finalObject', finalObject);
-  return finalObject;
+  // console.log('finalObject', finalObject);
 };

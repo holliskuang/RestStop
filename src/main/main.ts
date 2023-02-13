@@ -151,7 +151,7 @@ const createWindow = async () => {
 
   // GRPC File Upload Event Listener
   ipcMain.on('grpcFileUpload', async (event, filePath) => {
-    let parse = await parseProtoFile(event, filePath);
+    parseProtoFile(event, filePath);
   });
 };
 

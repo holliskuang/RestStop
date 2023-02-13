@@ -7,6 +7,9 @@ export default function GRPC() {
   api.receive('grpcData', (event, data) => {
     console.log(data);
   });
+  api.receive('protoFileParsed', (event, data) => {
+    console.log(data);
+  });
   return (
     <div>
       <FileUploadSingle />
