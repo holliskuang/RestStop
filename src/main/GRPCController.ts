@@ -1,6 +1,5 @@
 const protoLoader = require('@grpc/proto-loader');
 const grpcLibrary = require('@grpc/grpc-js');
-import { current } from '@reduxjs/toolkit';
 import fs from 'fs';
 import path from 'path';
 
@@ -8,15 +7,46 @@ import path from 'path';
 export const GRPCController = (event: any, reqResObj: any) => {
   // service // package name // rpc // url // query
 
+  // to call service we create a stub
+
+  /* const stub = new routeguide.RouteGuide(
+    'localhost:50051',
+    grpc.credentials.createInsecure()
+  );*/
+
   // if Simple RPC
   if (reqResObj.method === 'SIMPLE_RPC') {
     /*stub.method = (param, function(err, response) {
       if (err) {
         console.log(err);
       } else {
+        // send response to front end to display
         console.log(response);
       }
     }*/
+  }
+  // if Server Streaming
+
+  // Instead of passing the method a request and callback, we pass it a request and get a Readable stream object back.  
+  if (reqResObj.method === 'SERVER_STREAMING') {
+
+    /*
+  var call = stub.listFeatures(rectangle);
+  call.on('data', function(feature) {
+      console.log('Found feature called "' + feature.name + '" at ' +
+          feature.location.latitude/COORD_FACTOR + ', ' +
+          feature.location.longitude/COORD_FACTOR);
+  });
+  call.on('end', function() {
+    // The server has finished sending
+  });
+  call.on('error', function(e) {
+    // An error has occurred and the stream has been closed.
+  });
+  call.on('status', function(status) {
+    // process status
+  });
+  */
   }
 };
 //
