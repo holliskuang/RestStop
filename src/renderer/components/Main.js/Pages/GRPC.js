@@ -3,8 +3,20 @@ import FileUploadSingle from '../Widgets/Upload';
 import React, { useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import NavBar from '../../NavBar';
+import Box from '@mui/material/Box';
+import GRPCRequest from '../Request/GRPCRequest';
+import Dashboard from '../Dashboard/Dashboard';
+import { themeSettings } from '../../../themes';
 import { useDispatch } from 'react-redux';
-import { setMethod, setResponseMode, setFileData, setRpcs } from '../../../state/currentReqRes.js';
+import {
+  setMethod,
+  setResponseMode,
+  setFileData,
+  setRpcs,
+} from '../../../state/currentReqRes.js';
 
 export default function GRPC() {
   const mode = useSelector((state) => state.light.mode);
@@ -27,7 +39,7 @@ export default function GRPC() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <NavBar></NavBar>
-        <WSRequest />
+        <GRPCRequest />
         <FileUploadSingle />
         <Dashboard />
       </ThemeProvider>

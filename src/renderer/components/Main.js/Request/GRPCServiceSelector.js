@@ -14,6 +14,7 @@ export default function GRPCServiceSelector() {
   return (
     <FormControl>
       <InputLabel id="Content Type">Methods</InputLabel>
+      
       <Select
         label="Content Type"
         defaultValue="text/plain"

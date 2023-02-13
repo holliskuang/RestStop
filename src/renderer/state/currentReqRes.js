@@ -88,5 +88,7 @@ export const {
   setResponseMode,
   setVariables,
   setConnectionStatus,
+  setFileData,
+  setRpcs,
 } = currentReqRes.actions;
 export default currentReqRes.reducer;

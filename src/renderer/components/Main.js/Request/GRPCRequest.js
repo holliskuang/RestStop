@@ -26,6 +26,7 @@ import GraphQL from '../Pages/GraphQL.js';
 import GQLVariableBox from './GQLVariableBox.js';
 import WSResponse from '../Response/WSResponse.js';
 import GRPCProtoBox from './GRPCProtoBox.js';
+import GRPCServiceSelector from './GRPCServiceSelector.js';
 
 export default function WSRequest() {
   const dispatch = useDispatch();
@@ -99,7 +100,7 @@ export default function WSRequest() {
             dispatch(setMethod(event.target.value));
           }}
         >
-          <MenuItem value="WS">WS</MenuItem>
+          <MenuItem value="WS">gRPC</MenuItem>
         </Select>
         <TextField
           id="outlined-basic"
@@ -123,7 +124,8 @@ export default function WSRequest() {
             ? 'Disconnect'
             : 'Connect'}
         </Button>
-        <GRPCProtoBox/>
+        <GRPCServiceSelector />
+        <GRPCProtoBox />
         <Response />
       </FormControl>
     </div>
