@@ -33,6 +33,7 @@ export default function GRPCProtoBox() {
         readOnly={true}
         theme={materialDark}
         minWidth="100%"
+        maxHeight="40px"
       ></CodeMirror>
     </Box>
   );

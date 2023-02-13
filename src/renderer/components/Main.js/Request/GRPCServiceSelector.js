@@ -11,10 +11,17 @@ import InputLabel from '@mui/material/InputLabel';
 export default function GRPCServiceSelector() {
   const reqState = useSelector((state) => state.currentReqRes);
   const dispatch = useDispatch();
+
+  // RCPC is an object , but we need to map
+  // the keys to an array of strings
+  // so we can use the array to populate the selector
+  const rpcs = Object.values(reqState.rpcs);
+  console.log(rpcs);
+
   return (
     <FormControl>
       <InputLabel id="Content Type">Methods</InputLabel>
-      
+
       <Select
         label="Content Type"
         defaultValue="text/plain"
@@ -23,8 +30,12 @@ export default function GRPCServiceSelector() {
           dispatch(setBodyType(event.target.value));
         }}
       >
-        {reqState.rpcs.map((rpc) => {
-          return <MenuItem value={rpc}>{rpc}</MenuItem>;
+        {rpcs.map((rpc) => {
+          return (
+            <MenuItem key={rpc.name} value={rpc.name}>
+              {rpc.name}
+            </MenuItem>
+          );
         })}
       </Select>
     </FormControl>

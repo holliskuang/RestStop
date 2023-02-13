@@ -194,7 +194,7 @@ export const parseProtoFile = async (
             type: stream,
           });
         }
-        parsedData.services = serviceObj.rpcs;
+        parsedData.rpcs = serviceObj.rpcs;
         parsedData.filedata = filedata;
         parsedData.filePath = path.join(
           path.join(
