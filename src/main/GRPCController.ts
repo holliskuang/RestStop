@@ -198,40 +198,6 @@ export const parseProtoFile = async (
             req: messageNameReq,
             res: messageNameRes,
           });
-
-          // create object with proto info that is formatted for interaction with Swell frontend
-          let draftObj;
-          requestDef.requestType.type.field.forEach((msgObj) => {
-            const mName = msgObj.name;
-            // bool will track if the message is a nested type
-            let bool = false;
-            if (msgObj.type === 'TYPE_MESSAGE') bool = true;
-            if (!draftObj) {
-              draftObj = {
-                name: messageNameReq,
-                def: {},
-              };
-            }
-            draftObj.def[mName] = {};
-            draftObj.def[mName].type = msgObj.type;
-            draftObj.def[mName].nested = bool;
-            draftObj.def[mName].dependent = msgObj.typeName;
-
-            // Frontend expects a message object in the following format
-            // {
-            //   name: messageNameReq,
-            //   def: {
-            //     [mName]: {
-            //       type:msgObj.type,
-            //       nested: bool,
-            //       dependent: msgObj.typeName}
-            //     }
-            // }
-          });
-          serviceObj.messages.push(draftObj);
-
-          // not using the details of the response object (requestDef.responseType) since user will run
-          // their own server
         }
         console.log(serviceObj);
         serviceArr.push(serviceObj);
@@ -244,5 +210,6 @@ export const parseProtoFile = async (
     return protoObject;
   };
   const finalObject = await createAndDecipherProtoFile(protoObject);
+  console.log('finalObject', finalObject);
   return finalObject;
 };
