@@ -18,6 +18,8 @@ const initialState = {
   responseMode: 'HTTP',
   variables: ``,
   connectionStatus: 'Closed',
+  filedata: '',
+  rpcs: [],
 };
 
 const currentReqRes = createSlice({
@@ -62,6 +64,12 @@ const currentReqRes = createSlice({
     },
     setConnectionStatus: (state, action) => {
       state.connectionStatus = action.payload;
+    },
+    setFileData: (state, action) => {
+      state.filedata = action.payload;
+    },
+    setRpcs: (state, action) => {
+      state.rpcs = action.payload;
     },
   },
 });

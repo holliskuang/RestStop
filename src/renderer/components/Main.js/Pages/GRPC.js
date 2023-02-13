@@ -4,7 +4,7 @@ import React, { useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { createTheme } from '@mui/material/styles';
 import { useDispatch } from 'react-redux';
-import { setMethod, setResponseMode } from '../../../state/currentReqRes.js';
+import { setMethod, setResponseMode, setFileData, setRpcs } from '../../../state/currentReqRes.js';
 
 export default function GRPC() {
   const mode = useSelector((state) => state.light.mode);
@@ -17,11 +17,10 @@ export default function GRPC() {
   }, []);
   const api = window.api.ipcRenderer;
 
-  api.receive('grpcData', (event, data) => {
-    console.log(data);
-  });
   api.receive('protoFileParsed', (event, data) => {
     console.log(data);
+    dispatch(setFileData(data.filedata));
+    dispatch(setRpcs(data.rpcs));
   });
   return (
     <Box>
