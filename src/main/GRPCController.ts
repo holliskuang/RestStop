@@ -8,8 +8,18 @@ import path from 'path';
 export const GRPCController = (event: any, reqResObj: any) => {
   // service // package name // rpc // url // query
 
-  c
+  // if Simple RPC
+  if (reqResObj.method === 'SIMPLE_RPC') {
+    /*stub.method = (param, function(err, response) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(response);
+      }
+    }*/
+  }
 };
+//
 
 // parse through filepath to get proto file
 export const parseProtoFile = async (
