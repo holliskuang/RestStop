@@ -24,8 +24,8 @@ export default function GRPC() {
   const dispatch = useDispatch();
   const response = useSelector((state) => state.currentReqRes.response);
   useEffect(() => {
-    dispatch(setMethod('GRPC'));
-    dispatch(setResponseMode('GRPC'));
+    dispatch(setMethod('gRPC'));
+    dispatch(setResponseMode('gRPC'));
   }, []);
   const api = window.api.ipcRenderer;
 

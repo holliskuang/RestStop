@@ -100,7 +100,7 @@ export default function WSRequest() {
             dispatch(setMethod(event.target.value));
           }}
         >
-          <MenuItem value="WS">gRPC</MenuItem>
+          <MenuItem value="gRPC">gRPC</MenuItem>
         </Select>
         <TextField
           id="outlined-basic"
