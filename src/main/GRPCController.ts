@@ -7,6 +7,10 @@ import path from 'path';
 export const GRPCController = (event: any, reqResObj: any) => {
   // service // package name // rpc // url // query
 
+  // to create client, we need ProtoPath, URL , packageDescriptor
+
+  // on front end, rpc method needs to be identified so we know which method for the client to call
+
   // to call service we create a stub/client
 
   /* const client = new routeguide.RouteGuide(
