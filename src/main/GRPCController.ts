@@ -175,31 +175,23 @@ export const parseProtoFile = async (
       if (typeof serviceDef === 'function') {
         // here a service is defined.
         const serviceObj = {};
-        serviceObj.packageName = protoObject.packageName;
-        serviceObj.name = serviceName;
         serviceObj.rpcs = [];
-        serviceObj.messages = [];
 
         for (const [requestName, requestDef] of Object.entries(
           serviceDef.service
         )) {
           const streamingReq = requestDef.requestStream;
           const streamingRes = requestDef.responseStream;
-
           let stream = 'UNARY';
           if (streamingReq) stream = 'CLIENT STREAM';
           if (streamingRes) stream = 'SERVER STREAM';
           if (streamingReq && streamingRes) stream = 'BIDIRECTIONAL';
-          const messageNameReq = requestDef.requestType.type.name;
-          const messageNameRes = requestDef.responseType.type.name;
           serviceObj.rpcs.push({
             name: requestName,
             type: stream,
-            req: messageNameReq,
-            res: messageNameRes,
           });
         }
-        console.log(serviceObj);
+        console.log('RPC', serviceObj.rpcs);
         serviceArr.push(serviceObj);
         protoObject.serviceArr = serviceArr;
       }
