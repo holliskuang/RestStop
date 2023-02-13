@@ -7,6 +7,8 @@ import path from 'path';
 // one function that opens GRPC connection and sends the response
 export const GRPCController = (event: any, reqResObj: any) => {
   // service // package name // rpc // url // query
+
+  c
 };
 
 // parse through filepath to get proto file
