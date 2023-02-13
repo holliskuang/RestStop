@@ -7,16 +7,16 @@ import path from 'path';
 export const GRPCController = (event: any, reqResObj: any) => {
   // service // package name // rpc // url // query
 
-  // to call service we create a stub
+  // to call service we create a stub/client
 
-  /* const stub = new routeguide.RouteGuide(
+  /* const client = new routeguide.RouteGuide(
     'localhost:50051',
     grpc.credentials.createInsecure()
   );*/
 
   // if Simple RPC
   if (reqResObj.method === 'SIMPLE_RPC') {
-    /*stub.method = (param, function(err, response) {
+    /*client.method = (param, function(err, response) {
       if (err) {
         console.log(err);
       } else {
@@ -27,11 +27,11 @@ export const GRPCController = (event: any, reqResObj: any) => {
   }
   // if Server Streaming
 
-  // Instead of passing the method a request and callback, we pass it a request and get a Readable stream object back.  
+  // Instead of passing the method a request and callback, we pass it a request and get a Readable stream object back
+  //  with .on('data', callback) and .on('end', callback) methods.
   if (reqResObj.method === 'SERVER_STREAMING') {
-
     /*
-  var call = stub.listFeatures(rectangle);
+  var call = client.listFeatures(rectangle);
   call.on('data', function(feature) {
       console.log('Found feature called "' + feature.name + '" at ' +
           feature.location.latitude/COORD_FACTOR + ', ' +
@@ -47,6 +47,61 @@ export const GRPCController = (event: any, reqResObj: any) => {
     // process status
   });
   */
+  }
+
+  // if Client Streaming we pass the method a callback and get back a Writable
+  if (reqResObj.method === 'CLIENT_STREAMING') {
+    /* var call = client.recordRoute(function(error, stats) {
+  if (error) {
+    callback(error);
+  }
+  console.log('Finished trip with', stats.point_count, 'points');
+  console.log('Passed', stats.feature_count, 'features');
+  console.log('Travelled', stats.distance, 'meters');
+  console.log('It took', stats.elapsed_time, 'seconds');
+});
+function pointSender(lat, lng) {
+  return function(callback) {
+    console.log('Visiting point ' + lat/COORD_FACTOR + ', ' +
+        lng/COORD_FACTOR);
+    call.write({
+      latitude: lat,
+      longitude: lng
+    });
+    _.delay(callback, _.random(500, 1500));
+  };
+}
+var point_senders = [];
+for (var i = 0; i < num_points; i++) {
+  var rand_point = feature_list[_.random(0, feature_list.length - 1)];
+  point_senders[i] = pointSender(rand_point.location.latitude,
+                                 rand_point.location.longitude);
+}
+async.series(point_senders, function() {
+  call.end();
+}); */
+  }
+
+  // bidirectional streaming
+  // Finally, let’s look at our bidirectional streaming RPC routeChat().
+  //In this case, we just pass a context to the method and get back a Duplex stream object,
+  //which we can use to both write and read messages.
+  if (reqResObj.method === 'BIDIRECTIONAL_STREAMING') {
+    /*var call = client.routeChat();
+  call.on('data', function(note) {
+    console.log('Got message "' + note.message + '" at ' +
+        note.location.latitude/COORD_FACTOR + ', ' +
+        note.location.longitude/COORD_FACTOR);
+  }
+ call.write({
+    location: {
+      latitude: 0,
+      longitude: 0
+    },
+ })
+ call.on('end', function() {});
+ call.end();
+ */
   }
 };
 //
