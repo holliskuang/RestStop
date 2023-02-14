@@ -5,7 +5,14 @@ import path from 'path';
 
 // one function that opens GRPC connection and sends the response
 export function GRPCController(event: any, reqResObj: any) {
-  // service // package name // rpc // url // query
+  /* let reqResObj: {
+    method: any;
+    responseMode: any;
+    id: any;
+    url: any;
+    filePath: any;
+    service: any;
+}*/
 
   // to create client, we need ProtoPath, URL , packageDescriptor
 
@@ -28,23 +35,30 @@ export function GRPCController(event: any, reqResObj: any) {
     grpcLibrary.credentials.createInsecure()
   );
 
-  console.log(client);
+  if (client) {
+    console.log('client created');
+    reqResObj.connectionStatus = 'connected';
+    event.sender.send('gRPCserverMessage', reqResObj);
+  }
   // if Simple RPC
-  if (reqResObj.method === 'SIMPLE_RPC') {
-    /*client.method = (param, function(err, response) {
-      if (err) {
-        console.log(err);
-      } else {
-        // send response to front end to display
-        console.log(response);
-      }
-    }*/
+  if (reqResObj.service.type === 'UNARY') {
+    // call the method on the client
+    client.service.name =
+      (param,
+      function (err, response) {
+        if (err) {
+          console.log(err);
+        } else {
+          // send response to front end to display
+          console.log(response);
+        }
+      });
   }
   // if Server Streaming
 
   // Instead of passing the method a request and callback, we pass it a request and get a Readable stream object back
   //  with .on('data', callback) and .on('end', callback) methods.
-  if (reqResObj.method === 'SERVER_STREAMING') {
+  if (reqResObj.method === 'SERVER_STREAM') {
     /*
   var call = client.listFeatures(rectangle);
   call.on('data', function(feature) {
@@ -65,7 +79,7 @@ export function GRPCController(event: any, reqResObj: any) {
   }
 
   // if Client Streaming we pass the method a callback and get back a Writable
-  if (reqResObj.method === 'CLIENT_STREAMING') {
+  if (reqResObj.method === 'CLIENT_STREAM') {
     /* var call = client.recordRoute(function(error, stats) {
   if (error) {
     callback(error);
@@ -101,7 +115,7 @@ async.series(point_senders, function() {
   // Finally, let’s look at our bidirectional streaming RPC routeChat().
   //In this case, we just pass a context to the method and get back a Duplex stream object,
   //which we can use to both write and read messages.
-  if (reqResObj.method === 'BIDIRECTIONAL_STREAMING') {
+  if (reqResObj.method === 'BIDIRECTIONAL') {
     /*var call = client.routeChat();
   call.on('data', function(note) {
     console.log('Got message "' + note.message + '" at ' +

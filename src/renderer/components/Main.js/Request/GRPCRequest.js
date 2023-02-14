@@ -38,7 +38,6 @@ export default function WSRequest() {
 
   // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {
-   
     // Disconnect an existing websocket if it exists and save the reqres to history
     if (response.connectionStatus === 'open') {
       api.send('closeWebSocket', response);
@@ -63,7 +62,6 @@ export default function WSRequest() {
       api.send('grpcConnect', reqResObj);
     }
   }
-  console.log('METHOD', reqState.method);
   // retrieve url from redux
   const retrieveUrl = () => {
     const url = reqState.url;
