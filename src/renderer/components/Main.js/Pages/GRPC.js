@@ -33,9 +33,12 @@ export default function GRPC() {
   }, []);
   const api = window.api.ipcRenderer;
 
-  api.receive('gRPCserverMessage', (event, arg) => {
-    console.log('gRPCserverMessage', arg);
-    dispatch(setResponse(arg));
+  api.receive('gRPCserverMessage', (event, message) => {
+    console.log('message', message);
+    console.log('response', response);
+    let responseCopy = { ...response };
+    //responseCopy.chatlog.push(message);
+    dispatch(setResponse(responseCopy));
   });
 
   api.receive('protoFileParsed', (event, data) => {

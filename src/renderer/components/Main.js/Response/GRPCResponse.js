@@ -7,25 +7,28 @@ import { Input } from 'react-chat-elements';
 import { Button } from 'react-chat-elements';
 import { ipcRenderer } from 'electron';
 import { setResponse } from 'renderer/state/currentReqRes';
+import { useDispatch } from 'react-redux';
+import { setGRPCChatLog } from 'renderer/state/currentReqRes';
 
 export default function GRPCResponse() {
   const api = window.api.ipcRenderer;
   const [message, setMessage] = React.useState('');
   const [chatLogState, setChatLogState] = React.useState([]);
   const reqResObj = useSelector((state) => state.currentReqRes.response);
+  const dispatch = useDispatch();
+  const chatLog = useSelector((state) => state.currentReqRes.gRPCChatLog);
   /* Array that is mapped , following below format: pos, type,text,time */
 
   let dataFiller = [];
-  if (reqResObj.chatLog) {
-    dataFiller = reqResObj.chatLog.map((message) => {
-      return {
-        position: message[2] === 'server' ? 'left' : 'right',
-        type: 'text',
-        text: message[0],
-        date: message[1],
-      };
-    });
-  }
+
+  dataFiller = chatLog.map((message) => {
+    return {
+      position: message[2] === 'server' ? 'left' : 'right',
+      type: 'text',
+      text: message[0],
+      date: message[1],
+    };
+  });
 
   React.useEffect(() => {
     setChatLogState(dataFiller);
@@ -51,12 +54,10 @@ export default function GRPCResponse() {
       <Button
         text={'Send'}
         onClick={() => {
-          console.log('sending object', message);
-          if (reqResObj.chatLog) {
-            const responseCopy = { ...response };
-            responseCopy.chatLog.push([message, new Date(), 'client']);
-            dispatch(setResponse(responseCopy));
-          }
+          let newChatLog = [...chatLog];
+          newChatLog.push([message, new Date(), 'client']);
+          dispatch(setGRPCChatLog(newChatLog));
+
           try {
             api.send('grpcMessage', JSON.parse(message));
           } catch (e) {

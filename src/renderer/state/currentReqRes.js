@@ -22,6 +22,7 @@ const initialState = {
   rpcs: [],
   service: '',
   filePath: '',
+  gRPCChatLog: [],
 };
 
 const currentReqRes = createSlice({
@@ -79,6 +80,9 @@ const currentReqRes = createSlice({
     setFilePath: (state, action) => {
       state.filePath = action.payload;
     },
+    setGRPCChatLog: (state, action) => {
+      state.gRPCChatLog = action.payload;
+    }
   },
 });
 
@@ -100,5 +104,6 @@ export const {
   setRpcs,
   setService,
   setFilePath,
+  setGRPCChatLog,
 } = currentReqRes.actions;
 export default currentReqRes.reducer;

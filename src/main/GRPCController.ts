@@ -40,7 +40,7 @@ export function GRPCController(event: any, reqResObj: any) {
   if (client) {
     console.log('client created');
     reqResObj.connectionStatus = 'connected';
-    event.sender.send('gRPCserverMessage', reqResObj);
+    event.sender.send('gRPCserverMessage', 'Connected to server');
   }
   // if Simple RPC
   if (reqResObj.service.type === 'UNARY') {
@@ -56,8 +56,7 @@ export function GRPCController(event: any, reqResObj: any) {
         } else {
           // send response to front end to display
           console.log(response);
-          reqResObj.chatlog.push(response);
-          event.sender.send('gRPCserverMessage', reqResObj);
+          event.sender.send('gRPCserverMessage', response);
         }
       });
     });
