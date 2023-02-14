@@ -35,13 +35,10 @@ export default function WSRequest() {
   const api = window.api.ipcRenderer;
   const currentFolder = useSelector((state) => state.currentReqRes.folder);
   let response = useSelector((state) => state.currentReqRes.response);
+
   // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {
-    // IF URL NOT WS, THROW ERROR AND RETURN
-    if (!reqState.url.startsWith('ws')) {
-      alert('URL must be WS');
-      return;
-    }
+   
     // Disconnect an existing websocket if it exists and save the reqres to history
     if (response.connectionStatus === 'open') {
       api.send('closeWebSocket', response);
@@ -52,15 +49,18 @@ export default function WSRequest() {
       saveRequestToDB(responseCopy.id, responseCopy, currentFolder);
     } else {
       // oprn a new websocket
-      dispatch(setResponseMode('WS'));
+      dispatch(setResponseMode('gRPC'));
       event.preventDefault();
       let reqResObj = {};
       reqResObj.method = reqState.method;
       reqResObj.responseMode = reqState.responseMode;
       reqResObj.id = uuid();
       reqResObj.url = retrieveUrl();
+      reqResObj.filePath = reqState.filePath;
+      reqResObj.service = reqState.service;
+      reqResObj.body= reqState.body;
       dispatch(setResponse(reqResObj));
-      api.send('openWebSocket', reqResObj);
+      api.send('grpcConnect', reqResObj);
       // console.log('reqAndRes', reqAndRes);
     }
   }

@@ -4,7 +4,7 @@ import fs from 'fs';
 import path from 'path';
 
 // one function that opens GRPC connection and sends the response
-export const GRPCController = (event: any, reqResObj: any) => {
+export function GRPCController(event: any, reqResObj: any) {
   // service // package name // rpc // url // query
 
   // to create client, we need ProtoPath, URL , packageDescriptor
@@ -12,18 +12,21 @@ export const GRPCController = (event: any, reqResObj: any) => {
   // on front end, rpc method needs to be identified so we know which method for the client to call
 
   // to call service we create a stub/client
-  let packageDefinition = protoLoader.loadSync{ reqResObj.filePath, {
+  let packageDefinition = protoLoader.loadSync(reqResObj.filePath, {
     keepCase: true,
     longs: String,
     enums: String,
     defaults: true,
     oneofs: true,
-  }};
-  let routeguide = grpcLibrary.loadPackageDefinition(packageDefinition).routeguide;
+  });
+  let routeguide =
+    grpcLibrary.loadPackageDefinition(packageDefinition).routeguide;
 
   // create a client with the service url
-  let client = new routeguide.RouteGuide(reqResObj.url, grpcLibrary.credentials.createInsecure());
-
+  let client = new routeguide.RouteGuide(
+    reqResObj.url,
+    grpcLibrary.credentials.createInsecure()
+  );
 
   // if Simple RPC
   if (reqResObj.method === 'SIMPLE_RPC') {
@@ -114,7 +117,7 @@ async.series(point_senders, function() {
  call.end();
  */
   }
-};
+}
 //
 
 // parse through filepath to get proto file

@@ -14,8 +14,6 @@ export default function GRPCProtoBox() {
 
   const dispatch = useDispatch();
 
-  // convert the body type to the correct language extension
-  // Also a hack to get the text/plain content type to work
   let languageExtensionConverter = {
     'application/javascript': javascript(),
   };

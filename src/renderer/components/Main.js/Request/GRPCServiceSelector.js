@@ -5,6 +5,7 @@ import ListSubheader from '@mui/material/ListSubheader';
 import { setBodyType } from 'renderer/state/currentReqRes';
 import { useDispatch, useSelector } from 'react-redux';
 import InputLabel from '@mui/material/InputLabel';
+import { setService } from 'renderer/state/currentReqRes';
 
 // This is the selector for the Service Method of the GRPC request
 
@@ -25,9 +26,9 @@ export default function GRPCServiceSelector() {
       <Select
         label="Content Type"
         defaultValue="text/plain"
-        value={reqState.bodyType}
+        value={reqState.service}
         onChange={(event) => {
-          dispatch(setBodyType(event.target.value));
+          dispatch(setService(event.target.value));
         }}
       >
         {rpcs.map((rpc) => {

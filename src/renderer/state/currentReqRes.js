@@ -20,6 +20,7 @@ const initialState = {
   connectionStatus: 'Closed',
   filedata: '',
   rpcs: [],
+  service: '',
 };
 
 const currentReqRes = createSlice({
@@ -71,6 +72,9 @@ const currentReqRes = createSlice({
     setRpcs: (state, action) => {
       state.rpcs = action.payload;
     },
+    setService: (state, action) => {
+      state.service = action.payload;
+    },
   },
 });
 
@@ -90,5 +94,6 @@ export const {
   setConnectionStatus,
   setFileData,
   setRpcs,
+  setService,
 } = currentReqRes.actions;
 export default currentReqRes.reducer;

@@ -32,9 +32,8 @@ export default function GRPC() {
   api.receive('gRPCserverMessage', (event, arg) => {
     dispatch(setResponse(arg));
   });
-  
+
   api.receive('protoFileParsed', (event, data) => {
-    console.log(data);
     dispatch(setFileData(data.filedata));
     dispatch(setRpcs(data.rpcs));
   });
