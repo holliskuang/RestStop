@@ -8,7 +8,7 @@ import { Button } from 'react-chat-elements';
 import { ipcRenderer } from 'electron';
 import { setResponse } from 'renderer/state/currentReqRes';
 
-export default function WSResponse() {
+export default function SSEResponse() {
   const api = window.api.ipcRenderer;
   const [message, setMessage] = React.useState('');
   const [chatLogState, setChatLogState] = React.useState([]);

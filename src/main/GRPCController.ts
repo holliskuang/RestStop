@@ -1,5 +1,6 @@
 const protoLoader = require('@grpc/proto-loader');
 const grpcLibrary = require('@grpc/grpc-js');
+import { ipcMain } from 'electron';
 import fs from 'fs';
 import path from 'path';
 
@@ -43,9 +44,10 @@ export function GRPCController(event: any, reqResObj: any) {
   // if Simple RPC
   if (reqResObj.service.type === 'UNARY') {
     // call the method on the client
-    client.service.name =
-      (param,
-      function (err, response) {
+
+    ipcMain.on('grpcRequest', (event, param) => {
+      let call = reqResObj.service.name;
+      client[call](param, function (err, response) {
         if (err) {
           console.log(err);
         } else {
@@ -53,6 +55,7 @@ export function GRPCController(event: any, reqResObj: any) {
           console.log(response);
         }
       });
+    });
   }
   // if Server Streaming
 

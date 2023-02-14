@@ -16,8 +16,11 @@ import {
   setResponseMode,
   setFileData,
   setRpcs,
-  setFilePath
+  setFilePath,
+  setResponse,
 } from '../../../state/currentReqRes.js';
+import gRPCResponse from '../Response/GRPCResponse';
+import WSResponse from '../Response/WSResponse';
 
 export default function GRPC() {
   const mode = useSelector((state) => state.light.mode);
@@ -38,7 +41,7 @@ export default function GRPC() {
     dispatch(setFileData(data.filedata));
     dispatch(setRpcs(data.rpcs));
     dispatch(setFilePath(data.filePath));
-    console.log('data',data);
+    console.log('data', data);
   });
   return (
     <Box>

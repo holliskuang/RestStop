@@ -10,24 +10,24 @@ import {
   setUrl,
   setResponse,
   setResponseMode,
+  setFileData,
+  setRpcs,
+  setService,
+  setFilePath,
+  setReqBody,
 } from '../../../state/currentReqRes.js';
 import { Button, TextField } from '@mui/material';
 import HeaderBox from './HeaderBox';
 import { v4 as uuid } from 'uuid';
-import ReqBodyTextBox from './ReqBodyTextBox';
-import ReqBodyTextBoxSelector from './ReqBodyTextBoxSelector';
-import Response from '../Response/Response';
 import { addReqRes } from 'renderer/state/historyReqRes.js';
 import { saveRequestToDB } from '../Dashboard/DashboardController.js';
 import { db } from 'renderer/db.js';
 import TestBox from './TestBox.js';
 import chai from 'chai';
-import GraphQL from '../Pages/GraphQL.js';
-import GQLVariableBox from './GQLVariableBox.js';
-import WSResponse from '../Response/WSResponse.js';
 import GRPCProtoBox from './GRPCProtoBox.js';
 import GRPCServiceSelector from './GRPCServiceSelector.js';
 import FileUploadSingle from '../Widgets/Upload.js';
+import GRPCResponse from '../Response/GRPCResponse.js';
 
 export default function WSRequest() {
   const dispatch = useDispatch();
@@ -71,11 +71,6 @@ export default function WSRequest() {
   const retrieveMethod = () => {
     const method = reqState.method;
     return method;
-  };
-
-  /// handle change in text box update redux
-  const textBoxHandleChange = (event) => {
-    dispatch(setReqBody(event.target.value));
   };
 
   return (
@@ -125,7 +120,7 @@ export default function WSRequest() {
         <FileUploadSingle />
         <GRPCServiceSelector />
         <GRPCProtoBox />
-        <Response />
+        <GRPCResponse />
       </FormControl>
     </div>
   );

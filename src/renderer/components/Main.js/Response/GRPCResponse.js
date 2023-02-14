@@ -14,7 +14,7 @@ export default function WSResponse() {
   const [chatLogState, setChatLogState] = React.useState([]);
   const reqResObj = useSelector((state) => state.currentReqRes.response);
   /* Array that is mapped , following below format: pos, type,text,time */
-  
+
   let dataFiller = [];
   if (reqResObj.chatLog) {
     dataFiller = reqResObj.chatLog.map((message) => {
@@ -33,6 +33,7 @@ export default function WSResponse() {
 
   return (
     <div>
+        HELLO!
       <MessageList
         className="message-list"
         lockable={true}
@@ -52,7 +53,7 @@ export default function WSResponse() {
         text={'Send'}
         onClick={() => {
           console.log('sending object', reqResObj);
-          api.send('gRPCclientMessage', message, reqResObj);
+          api.send('clientMessage', message, reqResObj);
         }}
         title="Send"
       />
