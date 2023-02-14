@@ -27,6 +27,7 @@ import GQLVariableBox from './GQLVariableBox.js';
 import WSResponse from '../Response/WSResponse.js';
 import GRPCProtoBox from './GRPCProtoBox.js';
 import GRPCServiceSelector from './GRPCServiceSelector.js';
+import FileUploadSingle from '../Widgets/Upload.js';
 
 export default function WSRequest() {
   const dispatch = useDispatch();
@@ -124,6 +125,7 @@ export default function WSRequest() {
             ? 'Disconnect'
             : 'Connect'}
         </Button>
+        <FileUploadSingle />
         <GRPCServiceSelector />
         <GRPCProtoBox />
         <Response />

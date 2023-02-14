@@ -12,11 +12,18 @@ export const GRPCController = (event: any, reqResObj: any) => {
   // on front end, rpc method needs to be identified so we know which method for the client to call
 
   // to call service we create a stub/client
+  let packageDefinition = protoLoader.loadSync{ reqResObj.filePath, {
+    keepCase: true,
+    longs: String,
+    enums: String,
+    defaults: true,
+    oneofs: true,
+  }};
+  let routeguide = grpcLibrary.loadPackageDefinition(packageDefinition).routeguide;
 
-  /* const client = new routeguide.RouteGuide(
-    'localhost:50051',
-    grpc.credentials.createInsecure()
-  );*/
+  // create a client with the service url
+  let client = new routeguide.RouteGuide(reqResObj.url, grpcLibrary.credentials.createInsecure());
+
 
   // if Simple RPC
   if (reqResObj.method === 'SIMPLE_RPC') {

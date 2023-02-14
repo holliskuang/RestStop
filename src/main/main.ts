@@ -18,7 +18,7 @@ import { handleRequest } from './util';
 import { GQLFetch } from './GraphQLController';
 import { WebSocketController } from './WebsocketController';
 import { SSEController } from './SSEController';
-import { parseProtoFile } from './GRPCController';
+import { GRPCController, parseProtoFile } from './GRPCController';
 
 class AppUpdater {
   constructor() {
@@ -152,6 +152,10 @@ const createWindow = async () => {
   // GRPC File Upload Event Listener
   ipcMain.on('grpcFileUpload', async (event, filePath) => {
     parseProtoFile(event, filePath);
+  });
+
+  ipcMain.on('grpcConnect', async (event, reqResObj) => {
+    GRPCController(event, reqResObj);
   });
 };
 

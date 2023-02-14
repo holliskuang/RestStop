@@ -122,7 +122,7 @@ export default function WSRequest() {
             ? 'Disconnect'
             : 'Connect'}
         </Button>
-        <Response />
+        <WSResponse />
       </FormControl>
     </div>
   );

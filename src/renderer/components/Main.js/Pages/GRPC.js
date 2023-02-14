@@ -29,6 +29,10 @@ export default function GRPC() {
   }, []);
   const api = window.api.ipcRenderer;
 
+  api.receive('gRPCserverMessage', (event, arg) => {
+    dispatch(setResponse(arg));
+  });
+  
   api.receive('protoFileParsed', (event, data) => {
     console.log(data);
     dispatch(setFileData(data.filedata));
@@ -40,7 +44,6 @@ export default function GRPC() {
         <CssBaseline />
         <NavBar></NavBar>
         <GRPCRequest />
-        <FileUploadSingle />
         <Dashboard />
       </ThemeProvider>
     </Box>
