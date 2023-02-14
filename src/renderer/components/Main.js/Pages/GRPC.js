@@ -34,7 +34,7 @@ export default function GRPC() {
     dispatch(setMethod('gRPC'));
     dispatch(setResponseMode('gRPC'));
   }, []);
-  
+
   const api = window.api.ipcRenderer;
 
   api.receive('gRPCserverMessage', (event, message) => {
@@ -49,6 +49,13 @@ export default function GRPC() {
     dispatch(setRpcs(data.rpcs));
     dispatch(setFilePath(data.filePath));
   });
+
+  api.receive('gRPCConnection', (event, connection) => {
+    let newResponse = { ...response };
+    newResponse.connectionStatus = connection;
+    dispatch(setResponse(newResponse));
+  });
+
   return (
     <Box>
       <ThemeProvider theme={theme}>

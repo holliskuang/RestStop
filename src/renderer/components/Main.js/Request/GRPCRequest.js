@@ -35,14 +35,15 @@ export default function WSRequest() {
   const api = window.api.ipcRenderer;
   const currentFolder = useSelector((state) => state.currentReqRes.folder);
   let response = useSelector((state) => state.currentReqRes.response);
-
+  console.log('response', response);
   // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {
     // Disconnect an existing websocket if it exists and save the reqres to history
-    if (response.connectionStatus === 'open') {
-      api.send('closeWebSocket', response);
+    if (response.connectionStatus === true) {
+      event.preventDefault();
+      api.send('gRPCdisconnect');
       const responseCopy = { ...response };
-      responseCopy.connectionStatus = 'closed';
+      responseCopy.connectionStatus = false;
       dispatch(setResponse(responseCopy));
       dispatch(addReqRes(responseCopy));
       saveRequestToDB(responseCopy.id, responseCopy, currentFolder);
@@ -114,7 +115,7 @@ export default function WSRequest() {
           }}
           onClick={handleSubmit}
         >
-          {reqState.response.connectionStatus == 'open'
+          {reqState.response.connectionStatus == true
             ? 'Disconnect'
             : 'Connect'}
         </Button>

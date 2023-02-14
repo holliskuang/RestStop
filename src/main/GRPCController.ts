@@ -39,9 +39,19 @@ export function GRPCController(event: any, reqResObj: any) {
     grpcLibrary.credentials.createInsecure()
   );
 
+  // close connection if already open
+  ipcMain.on('gRPCdisconnect', (event) => {
+    event.sender.send('gRPCConnection', false);
+    event.sender.send('gRPCserverMessage', 'Disconnected from server');
+    client.close();
+    console.log(client);
+    console.log('client closed');
+    ipcMain.removeAllListeners('gRPCserverMessage');
+  });
+
   if (client) {
     console.log('client created');
-    reqResObj.connectionStatus = 'connected';
+    event.sender.send('gRPCConnection', true);
     event.sender.send('gRPCserverMessage', 'Connected to server');
   }
   // if Simple RPC
