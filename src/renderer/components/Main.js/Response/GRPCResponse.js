@@ -52,7 +52,11 @@ export default function GRPCResponse() {
         text={'Send'}
         onClick={() => {
           console.log('sending object', message);
-          api.send('grpcMessage', message);
+         try{
+            api.send('grpcMessage', JSON.parse(message));
+          } catch(e) {
+            api.send('grpcMessage', message);
+          }
         }}
         title="Send"
       />
