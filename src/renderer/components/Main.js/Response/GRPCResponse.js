@@ -8,7 +8,7 @@ import { Button } from 'react-chat-elements';
 import { ipcRenderer } from 'electron';
 import { setResponse } from 'renderer/state/currentReqRes';
 
-export default function WSResponse() {
+export default function GRPCResponse() {
   const api = window.api.ipcRenderer;
   const [message, setMessage] = React.useState('');
   const [chatLogState, setChatLogState] = React.useState([]);
@@ -33,7 +33,6 @@ export default function WSResponse() {
 
   return (
     <div>
-        HELLO!
       <MessageList
         className="message-list"
         lockable={true}
@@ -52,8 +51,8 @@ export default function WSResponse() {
       <Button
         text={'Send'}
         onClick={() => {
-          console.log('sending object', reqResObj);
-          api.send('clientMessage', message, reqResObj);
+          console.log('sending object', message);
+          api.send('grpcMessage', message);
         }}
         title="Send"
       />

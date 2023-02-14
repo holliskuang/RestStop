@@ -32,7 +32,7 @@ export function GRPCController(event: any, reqResObj: any) {
 
   // create a client with the service url
   let client = new routeguide.RouteGuide(
-    reqResObj.url,
+    'localhost:50051',
     grpcLibrary.credentials.createInsecure()
   );
 
@@ -45,18 +45,27 @@ export function GRPCController(event: any, reqResObj: any) {
   if (reqResObj.service.type === 'UNARY') {
     // call the method on the client
 
-    ipcMain.on('grpcRequest', (event, param) => {
-      let call = reqResObj.service.name;
-      client[call](param, function (err, response) {
+    //   ipcMain.on('grpcMessage', (event, param) => {
+    let call = reqResObj.service.name;
+
+    client[call](
+      {
+        latitude: '412950425',
+        longitude: '-741077389',
+      },
+      (err, response) => {
         if (err) {
           console.log(err);
+          event.sender.send('gRPCserverMessage', err);
         } else {
           // send response to front end to display
           console.log(response);
         }
-      });
-    });
+      }
+    );
   }
+  //  });
+  // }
   // if Server Streaming
 
   // Instead of passing the method a request and callback, we pass it a request and get a Readable stream object back

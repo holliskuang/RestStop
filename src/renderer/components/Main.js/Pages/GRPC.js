@@ -34,6 +34,7 @@ export default function GRPC() {
   const api = window.api.ipcRenderer;
 
   api.receive('gRPCserverMessage', (event, arg) => {
+    console.log('gRPCserverMessage', arg);
     dispatch(setResponse(arg));
   });
 
