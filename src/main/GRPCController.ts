@@ -6,6 +6,8 @@ import path from 'path';
 
 // one function that opens GRPC connection and sends the response
 export function GRPCController(event: any, reqResObj: any) {
+  // remove all listeners for this event
+  ipcMain.removeAllListeners('grpcMessage');
   /* let reqResObj: {
     method: any;
     responseMode: any;
@@ -51,8 +53,8 @@ export function GRPCController(event: any, reqResObj: any) {
 
       client[call](param, (err, response) => {
         if (err) {
-          console.log(err);
-          event.sender.send('gRPCserverMessage', err);
+          console.log(err.message);
+          event.sender.send('gRPCserverMessage', err.message);
         } else {
           // send response to front end to display
           console.log(response);

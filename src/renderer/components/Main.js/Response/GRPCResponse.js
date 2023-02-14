@@ -32,7 +32,7 @@ export default function GRPCResponse() {
 
   React.useEffect(() => {
     setChatLogState(dataFiller);
-  }, [reqResObj]);
+  }, [chatLog]);
 
   return (
     <div>
@@ -57,7 +57,6 @@ export default function GRPCResponse() {
           let newChatLog = [...chatLog];
           newChatLog.push([message, new Date(), 'client']);
           dispatch(setGRPCChatLog(newChatLog));
-
           try {
             api.send('grpcMessage', JSON.parse(message));
           } catch (e) {

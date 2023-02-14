@@ -18,6 +18,7 @@ import {
   setRpcs,
   setFilePath,
   setResponse,
+  setGRPCChatLog,
 } from '../../../state/currentReqRes.js';
 import gRPCResponse from '../Response/GRPCResponse';
 import WSResponse from '../Response/WSResponse';
@@ -27,25 +28,26 @@ export default function GRPC() {
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
   const dispatch = useDispatch();
   const response = useSelector((state) => state.currentReqRes.response);
+  const chatlog = useSelector((state) => state.currentReqRes.gRPCChatLog);
+  console.log('chatlog', chatlog);
   useEffect(() => {
     dispatch(setMethod('gRPC'));
     dispatch(setResponseMode('gRPC'));
   }, []);
+  
   const api = window.api.ipcRenderer;
 
   api.receive('gRPCserverMessage', (event, message) => {
-    console.log('message', message);
-    console.log('response', response);
-    let responseCopy = { ...response };
-    //responseCopy.chatlog.push(message);
-    dispatch(setResponse(responseCopy));
+    let newChatLog = [...chatlog];
+    // format message to be string
+    newChatLog.push([JSON.stringify(message), new Date(), 'server']);
+    dispatch(setGRPCChatLog(newChatLog));
   });
 
   api.receive('protoFileParsed', (event, data) => {
     dispatch(setFileData(data.filedata));
     dispatch(setRpcs(data.rpcs));
     dispatch(setFilePath(data.filePath));
-    console.log('data', data);
   });
   return (
     <Box>
