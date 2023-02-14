@@ -58,10 +58,9 @@ export default function WSRequest() {
       reqResObj.url = retrieveUrl();
       reqResObj.filePath = reqState.filePath;
       reqResObj.service = reqState.service;
-      reqResObj.body= reqState.body;
       dispatch(setResponse(reqResObj));
+      console.log('reqResObj', reqResObj);
       api.send('grpcConnect', reqResObj);
-      // console.log('reqAndRes', reqAndRes);
     }
   }
   console.log('METHOD', reqState.method);

@@ -33,7 +33,7 @@ export default function GRPCServiceSelector() {
       >
         {rpcs.map((rpc) => {
           return (
-            <MenuItem key={rpc.name} value={rpc.name}>
+            <MenuItem key={rpc.name} value={rpc}>
               {rpc.name}
             </MenuItem>
           );
