@@ -16,6 +16,7 @@ import {
   setResponseMode,
   setFileData,
   setRpcs,
+  setFilePath
 } from '../../../state/currentReqRes.js';
 
 export default function GRPC() {
@@ -36,6 +37,8 @@ export default function GRPC() {
   api.receive('protoFileParsed', (event, data) => {
     dispatch(setFileData(data.filedata));
     dispatch(setRpcs(data.rpcs));
+    dispatch(setFilePath(data.filePath));
+    console.log('data',data);
   });
   return (
     <Box>

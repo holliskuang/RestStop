@@ -21,6 +21,7 @@ const initialState = {
   filedata: '',
   rpcs: [],
   service: '',
+  filePath: '',
 };
 
 const currentReqRes = createSlice({
@@ -75,6 +76,9 @@ const currentReqRes = createSlice({
     setService: (state, action) => {
       state.service = action.payload;
     },
+    setFilePath: (state, action) => {
+      state.filePath = action.payload;
+    },
   },
 });
 
@@ -95,5 +99,6 @@ export const {
   setFileData,
   setRpcs,
   setService,
+  setFilePath,
 } = currentReqRes.actions;
 export default currentReqRes.reducer;

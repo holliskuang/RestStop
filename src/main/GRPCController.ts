@@ -10,7 +10,7 @@ export function GRPCController(event: any, reqResObj: any) {
   // to create client, we need ProtoPath, URL , packageDescriptor
 
   // on front end, rpc method needs to be identified so we know which method for the client to call
-
+  console.log(reqResObj);
   // to call service we create a stub/client
   let packageDefinition = protoLoader.loadSync(reqResObj.filePath, {
     keepCase: true,
@@ -28,6 +28,7 @@ export function GRPCController(event: any, reqResObj: any) {
     grpcLibrary.credentials.createInsecure()
   );
 
+  console.log(client);
   // if Simple RPC
   if (reqResObj.method === 'SIMPLE_RPC') {
     /*client.method = (param, function(err, response) {
