@@ -57,6 +57,7 @@ export default function WSRequest() {
       reqResObj.url = retrieveUrl();
       reqResObj.filePath = reqState.filePath;
       reqResObj.service = reqState.service;
+      reqResObj.chatlog = [];
       dispatch(setResponse(reqResObj));
       console.log('reqResObj', reqResObj);
       api.send('grpcConnect', reqResObj);

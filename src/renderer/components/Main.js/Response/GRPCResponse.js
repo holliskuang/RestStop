@@ -52,9 +52,14 @@ export default function GRPCResponse() {
         text={'Send'}
         onClick={() => {
           console.log('sending object', message);
-         try{
+          if (reqResObj.chatLog) {
+            const responseCopy = { ...response };
+            responseCopy.chatLog.push([message, new Date(), 'client']);
+            dispatch(setResponse(responseCopy));
+          }
+          try {
             api.send('grpcMessage', JSON.parse(message));
-          } catch(e) {
+          } catch (e) {
             api.send('grpcMessage', message);
           }
         }}

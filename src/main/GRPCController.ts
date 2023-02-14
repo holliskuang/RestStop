@@ -13,6 +13,7 @@ export function GRPCController(event: any, reqResObj: any) {
     url: any;
     filePath: any;
     service: any;
+    chatlog: any;
 }*/
 
   // to create client, we need ProtoPath, URL , packageDescriptor
@@ -55,6 +56,8 @@ export function GRPCController(event: any, reqResObj: any) {
         } else {
           // send response to front end to display
           console.log(response);
+          reqResObj.chatlog.push(response);
+          event.sender.send('gRPCserverMessage', reqResObj);
         }
       });
     });
