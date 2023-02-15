@@ -63,9 +63,9 @@ export const GRPCController = {
     //  if (reqResObj.service.type === 'UNARY') {
     // call the method on the client
 
-    let call = service.name;
-    console.log('inside UnaryCall', call);
-    client[call](param, (err, response) => {
+    let method = service.name;
+
+    client[method](param, (err, response) => {
       if (err) {
         console.log(err.message);
         event.sender.send('gRPCserverMessage', err.message);
@@ -78,63 +78,47 @@ export const GRPCController = {
   },
   // if Server Streaming
 
-  serverStream: (event, reqResObj) => {
+  ServerStreamCall: (event, service, param) => {
     // Instead of passing the method a request and callback, we pass it a request and get a Readable stream object back
     //  with .on('data', callback) and .on('end', callback) methods.
-    if (reqResObj.method === 'SERVER_STREAM') {
-      /*
-  var call = client.listFeatures(rectangle);
-  call.on('data', function(feature) {
-      console.log('Found feature called "' + feature.name + '" at ' +
-          feature.location.latitude/COORD_FACTOR + ', ' +
-          feature.location.longitude/COORD_FACTOR);
-  });
-  call.on('end', function() {
-    // The server has finished sending
-  });
-  call.on('error', function(e) {
-    // An error has occurred and the stream has been closed.
-  });
-  call.on('status', function(status) {
-    // process status
-  });
-  */
-    }
+
+    let client = GRPCController.client;
+    let method = service.name;
+    var call = client[method](param);
+    console.log('inside server stream call', call);
+    call.on('data', function (data) {
+      // process data
+      console.log(data);
+      event.sender.send('gRPCserverMessage', data);
+    });
+    call.on('end', function () {
+      // The server has finished sending
+      event.sender.send('gRPCserverMessage', 'Stream End');
+    });
+    call.on('error', function (e) {
+      // An error has occurred and the stream has been closed.
+      event.sender.send('gRPCserverMessage', e.message);
+    });
   },
 
-  clientStream: (event, reqResObj) => {
+  ClientStreamCall: (event, service, param) => {
     // if Client Streaming we pass the method a callback and get back a Writable
-    if (reqResObj.method === 'CLIENT_STREAM') {
-      /* var call = client.recordRoute(function(error, stats) {
-  if (error) {
-    callback(error);
-  }
-  console.log('Finished trip with', stats.point_count, 'points');
-  console.log('Passed', stats.feature_count, 'features');
-  console.log('Travelled', stats.distance, 'meters');
-  console.log('It took', stats.elapsed_time, 'seconds');
-});
-function pointSender(lat, lng) {
-  return function(callback) {
-    console.log('Visiting point ' + lat/COORD_FACTOR + ', ' +
-        lng/COORD_FACTOR);
-    call.write({
-      latitude: lat,
-      longitude: lng
+
+    let client = GRPCController.client;
+    let method = service.name;
+    var call = client[method](function (error, data) {
+      if (error) {
+        event.sender.send('gRPCserverMessage', error.message);
+      } else {
+        event.sender.send('gRPCserverMessage', data);
+      }
     });
-    _.delay(callback, _.random(500, 1500));
-  };
-}
-var point_senders = [];
-for (var i = 0; i < num_points; i++) {
-  var rand_point = feature_list[_.random(0, feature_list.length - 1)];
-  point_senders[i] = pointSender(rand_point.location.latitude,
-                                 rand_point.location.longitude);
-}
-async.series(point_senders, function() {
-  call.end();
-}); */
-    }
+    call.write(
+      param
+    );
+    ipcMain.on('gRPCEndStreaming', (event) => {
+      call.end();
+    });
   },
 
   bidirectional: (event, reqResObj) => {

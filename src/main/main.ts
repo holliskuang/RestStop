@@ -19,6 +19,7 @@ import { GQLFetch } from './GraphQLController';
 import { WebSocketController } from './WebsocketController';
 import { SSEController } from './SSEController';
 import { GRPCController, parseProtoFile } from './GRPCController';
+import GRPC from 'renderer/components/Main.js/Pages/GRPC';
 
 class AppUpdater {
   constructor() {
@@ -165,10 +166,18 @@ const createWindow = async () => {
       GRPCController.UnaryCall(event, service, param);
       console.log('Unary is Recognized');
     } 
+    
+    else if (service.type === 'SERVER STREAM') {
+      GRPCController.ServerStreamCall(event, service, param);
+      console.log('Server Streaming is Recognized');
+    }
+    else if (service.type === 'CLIENT STREAM') {
+      if (!GRPCController.client) {
+      GRPCController.ClientStreamCall(event, service, param);
+      }
+      console.log('Client Streaming is Recognized');
+    }
 
-
-    // if Server Streaming
-    // if Client Streaming
     // if Bidirectional Streaming
   });
 };

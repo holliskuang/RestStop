@@ -18,7 +18,7 @@ export default function GRPCResponse() {
   const dispatch = useDispatch();
   const chatLog = useSelector((state) => state.currentReqRes.gRPCChatLog);
   const service = useSelector((state) => state.currentReqRes.service);
-  console.log('service',service);
+  console.log('service', service);
   /* Array that is mapped , following below format: pos, type,text,time */
 
   let dataFiller = [];
@@ -61,6 +61,16 @@ export default function GRPCResponse() {
           setMessage(event.target.value);
         }}
       />
+      {/* Button that appears for client Streaming Methods to end the stream*/}
+      {service.type === 'CLIENT STREAM' && (
+        <Button
+          text={'End Stream'}
+          onClick={() => {
+            api.send('gRPCEndStreaming');
+          }}
+          title="End Stream"
+        />
+      )}
       <Button
         text={'Send'}
         onClick={() => {
