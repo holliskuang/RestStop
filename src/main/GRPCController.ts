@@ -7,6 +7,7 @@ import path from 'path';
 // one function that opens GRPC connection and sends the response
 export const GRPCController = {
   client: null,
+  currentSteam: null,
   openGRPCConnection: (event, reqResObj) => {
     // remove all listeners for this event
     ipcMain.removeAllListeners('grpcMessage');
@@ -106,28 +107,38 @@ export const GRPCController = {
 
     let client = GRPCController.client;
     let method = service.name;
-    var call = client[method](function (error, data) {
-      if (error) {
-        event.sender.send('gRPCserverMessage', error.message);
-      } else {
-        event.sender.send('gRPCserverMessage', data);
-      }
-    });
-    call.write(
-      param
-    );
-    ipcMain.on('gRPCEndStreaming', (event) => {
-      call.end();
-    });
+    let call = GRPCController.currentSteam;
+    // if event listeners are already listening, skip adding another one
+    if (ipcMain.listenerCount('gRPCEndStreaming') === 0) {
+      console.log('inside creation call, adding listener');
+      call = client[method](function (error, data) {
+        if (error) {
+          event.sender.send('gRPCserverMessage', error.message);
+        } else {
+          event.sender.send('gRPCserverMessage', data);
+        }
+      });
+      GRPCController.currentSteam = call;
+      ipcMain.on('gRPCEndStreaming', (event) => {
+        call.end();
+        GRPCController.currentSteam = null;
+        ipcMain.removeAllListeners('gRPCEndStreaming');
+      });
+    }
+    // regardless of whether we are already listening or not, we need to write to the stream
+    console.log('writing to stream');
+    call.write(param);
   },
 
-  bidirectional: (event, reqResObj) => {
+  Bidirectional: (event, service, param) => {
     // bidirectional streaming
     // Finally, let’s look at our bidirectional streaming RPC routeChat().
     //In this case, we just pass a context to the method and get back a Duplex stream object,
     //which we can use to both write and read messages.
-    if (reqResObj.method === 'BIDIRECTIONAL') {
-      /*var call = client.routeChat();
+    let client = GRPCController.client;
+    let method = service.name;
+    let call = GRPCController.currentSteam;
+    /*var call = client.routeChat();
   call.on('data', function(note) {
     console.log('Got message "' + note.message + '" at ' +
         note.location.latitude/COORD_FACTOR + ', ' +
@@ -142,7 +153,6 @@ export const GRPCController = {
  call.on('end', function() {});
  call.end();
  */
-    }
   },
 };
 //

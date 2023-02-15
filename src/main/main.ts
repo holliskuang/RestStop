@@ -169,16 +169,15 @@ const createWindow = async () => {
     
     else if (service.type === 'SERVER STREAM') {
       GRPCController.ServerStreamCall(event, service, param);
-      console.log('Server Streaming is Recognized');
     }
     else if (service.type === 'CLIENT STREAM') {
-      if (!GRPCController.client) {
       GRPCController.ClientStreamCall(event, service, param);
-      }
-      console.log('Client Streaming is Recognized');
     }
 
     // if Bidirectional Streaming
+    else if (service.type === 'BIDIRECTIONAL') {
+      GRPCController.Bidirectional(event, service, param);
+    }
   });
 };
 
