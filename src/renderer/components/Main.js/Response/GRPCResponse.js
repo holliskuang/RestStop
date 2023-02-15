@@ -17,6 +17,8 @@ export default function GRPCResponse() {
   const reqResObj = useSelector((state) => state.currentReqRes.response);
   const dispatch = useDispatch();
   const chatLog = useSelector((state) => state.currentReqRes.gRPCChatLog);
+  const service = useSelector((state) => state.currentReqRes.service);
+  console.log('service',service);
   /* Array that is mapped , following below format: pos, type,text,time */
 
   let dataFiller = [];
@@ -66,9 +68,10 @@ export default function GRPCResponse() {
           newChatLog.push([message, new Date(), 'client']);
           dispatch(setGRPCChatLog(newChatLog));
           try {
-            api.send('grpcMessage', JSON.parse(message));
+            api.send('grpcClientMessage', service, JSON.parse(message));
+            console.log('grpc Called');
           } catch (e) {
-            api.send('grpcMessage', message);
+            api.send('grpcClientMessage', service, message);
           }
         }}
         title="Send"

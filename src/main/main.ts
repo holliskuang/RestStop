@@ -157,6 +157,20 @@ const createWindow = async () => {
   ipcMain.on('grpcConnect', async (event, reqResObj) => {
     GRPCController.openGRPCConnection(event, reqResObj);
   });
+
+  ipcMain.on('grpcClientMessage', async (event, service, param) => {
+    // if Unary
+
+    if (service.type === 'UNARY') {
+      GRPCController.UnaryCall(event, service, param);
+      console.log('Unary is Recognized');
+    } 
+
+
+    // if Server Streaming
+    // if Client Streaming
+    // if Bidirectional Streaming
+  });
 };
 
 /**

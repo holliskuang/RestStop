@@ -5,13 +5,13 @@ import fs from 'fs';
 import path from 'path';
 
 // one function that opens GRPC connection and sends the response
-export const GRPCController ={
+export const GRPCController = {
   client: null,
   openGRPCConnection: (event, reqResObj) => {
-  // remove all listeners for this event
-  ipcMain.removeAllListeners('grpcMessage');
-  ipcMain.removeAllListeners('gRPCdisconnect');
-  /* let reqResObj: {
+    // remove all listeners for this event
+    ipcMain.removeAllListeners('grpcMessage');
+    ipcMain.removeAllListeners('gRPCdisconnect');
+    /* let reqResObj: {
     method: any;
     responseMode: any;
     id: any;
@@ -21,69 +21,68 @@ export const GRPCController ={
     chatlog: any;
   }*/
 
-  // to create client, we need ProtoPath, URL , packageDescriptor
+    // to create client, we need ProtoPath, URL , packageDescriptor
 
-  // on front end, rpc method needs to be identified so we know which method for the client to call
-  console.log(reqResObj);
-  // to call service we create a stub/client
-  let packageDefinition = protoLoader.loadSync(reqResObj.filePath, {
-    keepCase: true,
-    longs: String,
-    enums: String,
-    defaults: true,
-    oneofs: true,
-  });
-  let routeguide =
-    grpcLibrary.loadPackageDefinition(packageDefinition).routeguide;
+    // on front end, rpc method needs to be identified so we know which method for the client to call
+    console.log(reqResObj);
+    // to call service we create a stub/client
+    let packageDefinition = protoLoader.loadSync(reqResObj.filePath, {
+      keepCase: true,
+      longs: String,
+      enums: String,
+      defaults: true,
+      oneofs: true,
+    });
+    let routeguide =
+      grpcLibrary.loadPackageDefinition(packageDefinition).routeguide;
 
-  // create a client with the service url
-  let client = new routeguide.RouteGuide(
-    reqResObj.url.toString(),
-    grpcLibrary.credentials.createInsecure()
-  );
+    // create a client with the service url
+    let client = new routeguide.RouteGuide(
+      reqResObj.url.toString(),
+      grpcLibrary.credentials.createInsecure()
+    );
 
-  // close connection if already open
-  ipcMain.on('gRPCdisconnect', (event) => {
-    event.sender.send('gRPCConnection', false);
-    event.sender.send('gRPCserverMessage', 'Disconnected from server');
-    client.close();
-  });
-  if (client) {
-    console.log('client created');
-    event.sender.send('gRPCConnection', true);
-    event.sender.send('gRPCserverMessage', 'Connected to server');
-  }
+    GRPCController.client = client;
 
+    // close connection if already open
+    ipcMain.on('gRPCdisconnect', (event) => {
+      event.sender.send('gRPCConnection', false);
+      event.sender.send('gRPCserverMessage', 'Disconnected from server');
+      client.close();
+    });
+    if (client) {
+      console.log('client created');
+      event.sender.send('gRPCConnection', true);
+      event.sender.send('gRPCserverMessage', 'Connected to server');
+    }
   },
 
   // if Simple RPC
-  UnaryCall: (event, reqResObj) => {
-  if (reqResObj.service.type === 'UNARY') {
+  UnaryCall: (event, service, param) => {
+    let client = GRPCController.client;
+    //  if (reqResObj.service.type === 'UNARY') {
     // call the method on the client
 
-    ipcMain.on('grpcMessage', (event, param) => {
-      let call = reqResObj.service.name;
-
-      client[call](param, (err, response) => {
-        if (err) {
-          console.log(err.message);
-          event.sender.send('gRPCserverMessage', err.message);
-        } else {
-          // send response to front end to display
-          console.log(response);
-          event.sender.send('gRPCserverMessage', response);
-        }
-      });
+    let call = service.name;
+    console.log('inside UnaryCall', call);
+    client[call](param, (err, response) => {
+      if (err) {
+        console.log(err.message);
+        event.sender.send('gRPCserverMessage', err.message);
+      } else {
+        // send response to front end to display
+        console.log(response);
+        event.sender.send('gRPCserverMessage', response);
+      }
     });
-  }
-  }
+  },
   // if Server Streaming
 
   serverStream: (event, reqResObj) => {
-  // Instead of passing the method a request and callback, we pass it a request and get a Readable stream object back
-  //  with .on('data', callback) and .on('end', callback) methods.
-  if (reqResObj.method === 'SERVER_STREAM') {
-    /*
+    // Instead of passing the method a request and callback, we pass it a request and get a Readable stream object back
+    //  with .on('data', callback) and .on('end', callback) methods.
+    if (reqResObj.method === 'SERVER_STREAM') {
+      /*
   var call = client.listFeatures(rectangle);
   call.on('data', function(feature) {
       console.log('Found feature called "' + feature.name + '" at ' +
@@ -100,13 +99,13 @@ export const GRPCController ={
     // process status
   });
   */
-  }
+    }
   },
 
   clientStream: (event, reqResObj) => {
-  // if Client Streaming we pass the method a callback and get back a Writable
-  if (reqResObj.method === 'CLIENT_STREAM') {
-    /* var call = client.recordRoute(function(error, stats) {
+    // if Client Streaming we pass the method a callback and get back a Writable
+    if (reqResObj.method === 'CLIENT_STREAM') {
+      /* var call = client.recordRoute(function(error, stats) {
   if (error) {
     callback(error);
   }
@@ -135,16 +134,16 @@ for (var i = 0; i < num_points; i++) {
 async.series(point_senders, function() {
   call.end();
 }); */
-  }
+    }
   },
 
   bidirectional: (event, reqResObj) => {
-  // bidirectional streaming
-  // Finally, let’s look at our bidirectional streaming RPC routeChat().
-  //In this case, we just pass a context to the method and get back a Duplex stream object,
-  //which we can use to both write and read messages.
-  if (reqResObj.method === 'BIDIRECTIONAL') {
-    /*var call = client.routeChat();
+    // bidirectional streaming
+    // Finally, let’s look at our bidirectional streaming RPC routeChat().
+    //In this case, we just pass a context to the method and get back a Duplex stream object,
+    //which we can use to both write and read messages.
+    if (reqResObj.method === 'BIDIRECTIONAL') {
+      /*var call = client.routeChat();
   call.on('data', function(note) {
     console.log('Got message "' + note.message + '" at ' +
         note.location.latitude/COORD_FACTOR + ', ' +
@@ -159,9 +158,9 @@ async.series(point_senders, function() {
  call.on('end', function() {});
  call.end();
  */
-  }
-}
-},
+    }
+  },
+};
 //
 
 // parse through filepath to get proto file
