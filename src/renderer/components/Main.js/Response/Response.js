@@ -11,6 +11,8 @@ import ResponseHeaders from './ResponseHeaders';
 import ResponseCookies from './ResponseCookies';
 import ResponseTest from './ResponseTest';
 import WSResponse from './WSResponse';
+import GRPCResponse from './GRPCResponse';
+import SSEResponse from './SSEResponse';
 
 export default function Response() {
   const [value, setValue] = React.useState('body');
@@ -21,6 +23,12 @@ export default function Response() {
   const responseMode = reqState.responseMode;
   // If response mode is WS, return WSResponse component
   if (responseMode === 'WS') return <WSResponse />;
+  // If response is in GRPC mode, return GRPCResponse component
+  if (responseMode === 'gRPC') return <GRPCResponse />;
+
+  // If response is in SSE mode, return SSEResponse component
+  if (responseMode === 'SSE') return <SSEResponse />;
+
   return (
     <Box sx={{ width: '100%', typography: 'body1' }}>
       <Typography variant="h3">

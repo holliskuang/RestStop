@@ -28,6 +28,7 @@ import GRPCProtoBox from './GRPCProtoBox.js';
 import GRPCServiceSelector from './GRPCServiceSelector.js';
 import FileUploadSingle from '../Widgets/Upload.js';
 import GRPCResponse from '../Response/GRPCResponse.js';
+import Response from '../Response/Response.js';
 
 export default function WSRequest() {
   const dispatch = useDispatch();
@@ -45,7 +46,8 @@ export default function WSRequest() {
       api.send('gRPCdisconnect');
       const responseCopy = { ...response };
       responseCopy.connectionStatus = false;
-      responseCopy.chatLog=chatlog;
+      responseCopy.chatlog=chatlog;
+      console.log('responseCopy', responseCopy);
       dispatch(setResponse(responseCopy));
       dispatch(addReqRes(responseCopy));
       saveRequestToDB(responseCopy.id, responseCopy, currentFolder);
@@ -124,7 +126,7 @@ export default function WSRequest() {
         <FileUploadSingle />
         <GRPCServiceSelector />
         <GRPCProtoBox />
-        <GRPCResponse />
+        <Response/>
       </FormControl>
     </div>
   );

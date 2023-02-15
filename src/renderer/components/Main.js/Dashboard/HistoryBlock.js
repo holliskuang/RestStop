@@ -25,7 +25,7 @@ export default function HistoryBlock(props) {
   // Blocks that will be mapped using UUID as key
   // Each block will have a button to remove it from the history
   // Each block will have a button to see the response by overwriting the current response in the redux store
-console.log('props',props);
+  console.log('props', props);
   return (
     <div>
       <Card>
@@ -52,7 +52,6 @@ console.log('props',props);
           </Button>
           <Button
             onClick={() => {
-      
               dispatch(setResponseMode(props.reqResInfo.object.responseMode));
               dispatch(setResponse(props.reqResInfo.object));
             }}

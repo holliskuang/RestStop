@@ -20,7 +20,7 @@ import Response from '../Response/Response';
 import { addReqRes } from 'renderer/state/historyReqRes.js';
 import { saveRequestToDB } from '../Dashboard/DashboardController.js';
 import { db } from 'renderer/db.js';
-import SSEResponse from '../Response/SSEResponse.js';
+import Response from '../Response/Response';
 
 export default function SSERequest() {
   const dispatch = useDispatch();
@@ -129,7 +129,7 @@ export default function SSERequest() {
         </Button>
 
         <HeaderBox />
-        <SSEResponse />
+        <Response/>
       </FormControl>
     </div>
   );

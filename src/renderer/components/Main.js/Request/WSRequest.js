@@ -24,7 +24,6 @@ import TestBox from './TestBox.js';
 import chai from 'chai';
 import GraphQL from '../Pages/GraphQL.js';
 import GQLVariableBox from './GQLVariableBox.js';
-import WSResponse from '../Response/WSResponse.js';
 
 export default function WSRequest() {
   const dispatch = useDispatch();
@@ -122,7 +121,7 @@ export default function WSRequest() {
             ? 'Disconnect'
             : 'Connect'}
         </Button>
-        <WSResponse />
+        <Response />
       </FormControl>
     </div>
   );
