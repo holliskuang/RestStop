@@ -8,6 +8,7 @@ import path from 'path';
 export function GRPCController(event: any, reqResObj: any) {
   // remove all listeners for this event
   ipcMain.removeAllListeners('grpcMessage');
+  ipcMain.removeAllListeners('gRPCdisconnect');
   /* let reqResObj: {
     method: any;
     responseMode: any;
@@ -44,11 +45,7 @@ export function GRPCController(event: any, reqResObj: any) {
     event.sender.send('gRPCConnection', false);
     event.sender.send('gRPCserverMessage', 'Disconnected from server');
     client.close();
-    console.log(client);
-    console.log('client closed');
-    ipcMain.removeAllListeners('gRPCserverMessage');
   });
-
   if (client) {
     console.log('client created');
     event.sender.send('gRPCConnection', true);

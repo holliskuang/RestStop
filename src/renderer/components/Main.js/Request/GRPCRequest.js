@@ -35,6 +35,7 @@ export default function WSRequest() {
   const api = window.api.ipcRenderer;
   const currentFolder = useSelector((state) => state.currentReqRes.folder);
   let response = useSelector((state) => state.currentReqRes.response);
+  let chatlog = useSelector((state) => state.currentReqRes.gRPCChatLog);
   console.log('response', response);
   // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {
@@ -44,6 +45,7 @@ export default function WSRequest() {
       api.send('gRPCdisconnect');
       const responseCopy = { ...response };
       responseCopy.connectionStatus = false;
+      responseCopy.chatLog=chatlog;
       dispatch(setResponse(responseCopy));
       dispatch(addReqRes(responseCopy));
       saveRequestToDB(responseCopy.id, responseCopy, currentFolder);

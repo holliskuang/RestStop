@@ -35,7 +35,15 @@ export default function GRPCResponse() {
   }, [chatLog]);
 
   return (
-    <div>
+    // div with max Height of 200px
+    <div
+      style={{
+        maxHeight: '200px',
+        overflow: 'auto',
+        borderRadius: '10px',
+        padding: '10px',
+      }}
+    >
       <MessageList
         className="message-list"
         lockable={true}
