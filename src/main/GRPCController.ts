@@ -132,27 +132,25 @@ export const GRPCController = {
 
   Bidirectional: (event, service, param) => {
     // bidirectional streaming
-    // Finally, let’s look at our bidirectional streaming RPC routeChat().
     //In this case, we just pass a context to the method and get back a Duplex stream object,
     //which we can use to both write and read messages.
     let client = GRPCController.client;
     let method = service.name;
-    let call = GRPCController.currentSteam;
-    /*var call = client.routeChat();
-  call.on('data', function(note) {
-    console.log('Got message "' + note.message + '" at ' +
-        note.location.latitude/COORD_FACTOR + ', ' +
-        note.location.longitude/COORD_FACTOR);
-  }
- call.write({
-    location: {
-      latitude: 0,
-      longitude: 0
-    },
- })
- call.on('end', function() {});
- call.end();
- */
+    //let call = GRPCController.currentSteam;
+
+    let call = client[method];
+
+    call.on('data', function (data) {
+      // process data
+      console.log(data);
+      event.sender.send('gRPCserverMessage', data);
+    });
+    call.write(param);
+
+    call.on('end', function () {
+      // The server has finished sending
+      event.sender.send('gRPCserverMessage', 'Stream End');
+    });
   },
 };
 //
