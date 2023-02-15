@@ -5,7 +5,9 @@ import fs from 'fs';
 import path from 'path';
 
 // one function that opens GRPC connection and sends the response
-export function GRPCController(event: any, reqResObj: any) {
+export const GRPCController ={
+  client: null,
+  openGRPCConnection: (event, reqResObj) => {
   // remove all listeners for this event
   ipcMain.removeAllListeners('grpcMessage');
   ipcMain.removeAllListeners('gRPCdisconnect');
@@ -17,7 +19,7 @@ export function GRPCController(event: any, reqResObj: any) {
     filePath: any;
     service: any;
     chatlog: any;
-}*/
+  }*/
 
   // to create client, we need ProtoPath, URL , packageDescriptor
 
@@ -51,7 +53,11 @@ export function GRPCController(event: any, reqResObj: any) {
     event.sender.send('gRPCConnection', true);
     event.sender.send('gRPCserverMessage', 'Connected to server');
   }
+
+  },
+
   // if Simple RPC
+  UnaryCall: (event, reqResObj) => {
   if (reqResObj.service.type === 'UNARY') {
     // call the method on the client
 
@@ -70,8 +76,10 @@ export function GRPCController(event: any, reqResObj: any) {
       });
     });
   }
+  }
   // if Server Streaming
 
+  serverStream: (event, reqResObj) => {
   // Instead of passing the method a request and callback, we pass it a request and get a Readable stream object back
   //  with .on('data', callback) and .on('end', callback) methods.
   if (reqResObj.method === 'SERVER_STREAM') {
@@ -93,7 +101,9 @@ export function GRPCController(event: any, reqResObj: any) {
   });
   */
   }
+  },
 
+  clientStream: (event, reqResObj) => {
   // if Client Streaming we pass the method a callback and get back a Writable
   if (reqResObj.method === 'CLIENT_STREAM') {
     /* var call = client.recordRoute(function(error, stats) {
@@ -126,7 +136,9 @@ async.series(point_senders, function() {
   call.end();
 }); */
   }
+  },
 
+  bidirectional: (event, reqResObj) => {
   // bidirectional streaming
   // Finally, let’s look at our bidirectional streaming RPC routeChat().
   //In this case, we just pass a context to the method and get back a Duplex stream object,
@@ -149,6 +161,7 @@ async.series(point_senders, function() {
  */
   }
 }
+},
 //
 
 // parse through filepath to get proto file

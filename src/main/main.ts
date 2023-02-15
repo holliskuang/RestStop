@@ -155,7 +155,7 @@ const createWindow = async () => {
   });
 
   ipcMain.on('grpcConnect', async (event, reqResObj) => {
-    GRPCController(event, reqResObj);
+    GRPCController.openGRPCConnection(event, reqResObj);
   });
 };
 
