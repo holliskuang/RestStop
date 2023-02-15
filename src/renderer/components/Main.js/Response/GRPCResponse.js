@@ -62,7 +62,8 @@ export default function GRPCResponse() {
         }}
       />
       {/* Button that appears for client Streaming Methods to end the stream*/}
-      {service.type === 'CLIENT STREAM' && (
+      {(service.type === 'CLIENT STREAM' ||
+        service.type === 'BIDIRECTIONAL') && (
         <Button
           text={'End Stream'}
           onClick={() => {

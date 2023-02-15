@@ -7,11 +7,12 @@ import path from 'path';
 // one function that opens GRPC connection and sends the response
 export const GRPCController = {
   client: null,
-  currentSteam: null,
+  currentStream: null,
   openGRPCConnection: (event, reqResObj) => {
     // remove all listeners for this event
     ipcMain.removeAllListeners('grpcMessage');
     ipcMain.removeAllListeners('gRPCdisconnect');
+    ipcMain.removeAllListeners('gRPCEndStreaming');
     /* let reqResObj: {
     method: any;
     responseMode: any;
@@ -107,7 +108,7 @@ export const GRPCController = {
 
     let client = GRPCController.client;
     let method = service.name;
-    let call = GRPCController.currentSteam;
+    let call = GRPCController.currentStream;
     // if event listeners are already listening, skip adding another one
     if (ipcMain.listenerCount('gRPCEndStreaming') === 0) {
       console.log('inside creation call, adding listener');
@@ -118,10 +119,10 @@ export const GRPCController = {
           event.sender.send('gRPCserverMessage', data);
         }
       });
-      GRPCController.currentSteam = call;
+      GRPCController.currentStream = call;
       ipcMain.on('gRPCEndStreaming', (event) => {
         call.end();
-        GRPCController.currentSteam = null;
+        GRPCController.currentStream = null;
         ipcMain.removeAllListeners('gRPCEndStreaming');
       });
     }
@@ -136,21 +137,29 @@ export const GRPCController = {
     //which we can use to both write and read messages.
     let client = GRPCController.client;
     let method = service.name;
-    //let call = GRPCController.currentSteam;
+    let call = GRPCController.currentStream;
+    if (ipcMain.listenerCount('gRPCEndStreaming') === 0) {
+      call = client[method]();
+      GRPCController.currentStream = call;
 
-    let call = client[method];
+      call.on('data', function (data) {
+        // process data
+        console.log(data);
+        event.sender.send('gRPCserverMessage', data);
+      });
+      call.on('end', function () {
+        // The server has finished sending
+        GRPCController.currentStream = null;
+        event.sender.send('gRPCserverMessage', 'Stream End');
+      });
 
-    call.on('data', function (data) {
-      // process data
-      console.log(data);
-      event.sender.send('gRPCserverMessage', data);
-    });
+      ipcMain.on('gRPCEndStreaming', (event) => {
+        call.end();
+        GRPCController.currentStream = null;
+        ipcMain.removeAllListeners('gRPCEndStreaming');
+      });
+    }
     call.write(param);
-
-    call.on('end', function () {
-      // The server has finished sending
-      event.sender.send('gRPCserverMessage', 'Stream End');
-    });
   },
 };
 //
