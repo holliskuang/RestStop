@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 import { setMethod } from '../../../state/currentReqRes.js';
 import { useEffect } from 'react';
 import { setResponseMode } from '../../../state/currentReqRes.js';
-
+import { width } from '@mui/system';
 
 export default function HTTP() {
   const mode = useSelector((state) => state.light.mode);
@@ -20,17 +20,24 @@ export default function HTTP() {
   useEffect(() => {
     dispatch(setMethod('GET'));
     dispatch(setResponseMode('HTTP'));
-   
   }, []);
 
   return (
-    <Box>
+    <Box
+      sx={{
+        height: '100%',
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+      }}
+    >
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <NavBar></NavBar>
-        <Request></Request>
-        
         <Dashboard />
+        <Box sx={{ display: 'flex', width: '70%', flexDirection: 'column' }}>
+          <Request />
+        </Box>
       </ThemeProvider>
     </Box>
   );

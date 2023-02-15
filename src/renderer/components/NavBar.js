@@ -34,7 +34,7 @@ export default function NavBar() {
   }
 
   return (
-    <AppBar>
+    <AppBar sx={{minWidth:'100%'}}>
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-around' }}>
         <Typography variant="h6" className="title">
           REST Client

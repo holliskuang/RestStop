@@ -96,7 +96,7 @@ export default function Request() {
         fullWidth
         sx={{
           display: 'flex',
-          flexDirection: 'row',
+          flexDirection: 'column',
           justifyContent: 'space-around',
         }}
       >
