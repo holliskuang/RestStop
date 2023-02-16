@@ -24,6 +24,7 @@ export default function ReqBodyTextBoxSelector() {
         onChange={(event) => {
           dispatch(setBodyType(event.target.value));
         }}
+      
       >
         <MenuItem value="text/plain">text/plain</MenuItem>
         <MenuItem value="text/html">text/html</MenuItem>

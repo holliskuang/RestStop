@@ -22,7 +22,9 @@ export default function TestBox() {
 
   return (
     <Box sx={{m:'5%'}}>
-      <Typography variant='h4'> Test Suite </Typography>
+      <Typography variant='h4'sx={{
+        mb:'10px'
+      }}> Test Suite </Typography>
       <CodeMirror
         extensions={[
           languageExtensionConverter['application/javascript'],
@@ -32,7 +34,7 @@ export default function TestBox() {
         readOnly={false}
         theme={materialDark}
         width="100%"
-        height="100%"
+        height='10vh'
         // onChange event handler is used to update the state of the request body
         onChange={(editor, data, value) => {
           dispatch(setTest(editor.toString()));

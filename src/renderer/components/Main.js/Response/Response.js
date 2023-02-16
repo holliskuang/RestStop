@@ -30,7 +30,7 @@ export default function Response() {
   if (responseMode === 'SSE') return <SSEResponse />;
 
   return (
-    <Box sx={{ width: '100%', typography: 'body1', height:'50%'}}>
+    <Box sx={{ width: '100%', typography: 'body1', pr:'2.5%', pl:'2.5%'}}>
       <Typography variant="h3">
         Status:{reqState.response.responseStatus}
       </Typography>

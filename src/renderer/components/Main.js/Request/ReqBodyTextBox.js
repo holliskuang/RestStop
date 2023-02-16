@@ -18,7 +18,7 @@ import ReqBodyTextBoxSelector from './ReqBodyTextBoxSelector';
 
 export default function ReqBodyTextBox() {
   const reqState = useSelector((state) => state.currentReqRes);
-  
+
   const dispatch = useDispatch();
   let value = reqState.body;
   let bodyType = reqState.bodyType;
@@ -34,27 +34,34 @@ export default function ReqBodyTextBox() {
   };
 
   return (
-    <Box sx={{
-      m: '5%'
-    }}>
-      <Typography variant="h5"> Request Body</Typography>
-      <ReqBodyTextBoxSelector />
-      <CodeMirror
-        extensions={[
-          languageExtensionConverter[bodyType],
-          EditorView.lineWrapping,
-        ]}
-        placeholder="Enter body here"
-        value={reqState.body}
-        readOnly={false}
-        theme={materialDark}
-        minWidth="300px"
-        // onChange event handler is used to update the state of the request body
-        onChange={(editor, data, value) => {
-          dispatch(setBody(editor.toString()));
-    
-        }}
-      ></CodeMirror>
+    <Box
+      sx={{
+        m: '5%',
+      }}
+    >
+      <Box sx={{ width: '100%', display: 'flex', flexDirection: 'row' }}>
+        <Typography variant="h4" sx={{ alignSelf: 'center', mr:'20px' }}>
+          Request Body
+        </Typography>
+        <ReqBodyTextBoxSelector />
+      </Box>
+      <Box sx={{ width: '100%' }}>
+        <CodeMirror
+          extensions={[
+            languageExtensionConverter[bodyType],
+            EditorView.lineWrapping,
+          ]}
+          placeholder="Enter body here"
+          value={reqState.body}
+          readOnly={false}
+          theme={materialDark}
+          height="20vh"
+          // onChange event handler is used to update the state of the request body
+          onChange={(editor, data, value) => {
+            dispatch(setBody(editor.toString()));
+          }}
+        />
+      </Box>
     </Box>
   );
 }

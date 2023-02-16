@@ -99,10 +99,15 @@ export default function Request() {
           display: 'flex',
           flexDirection: 'row-wrap',
           justifyContent: 'center',
-          mt: '20px',
         }}
       >
-        <Box>
+        <Box
+          sx={{
+            height: '45vh',
+            overflowY: 'scroll',
+            mt: '20px',
+          }}
+        >
           <Box
             sx={{
               display: 'flex',
@@ -129,7 +134,7 @@ export default function Request() {
             <TextField
               id="outlined-basic"
               label="URL"
-              variant="outlined"
+              variant="filled"
               placeholder="https://example.com"
               value={reqState.url}
               onChange={(event) => {
@@ -168,7 +173,14 @@ export default function Request() {
           )}
           <TestBox />
         </Box>
-        <Response></Response>
+        <Box
+          sx={{
+            height: '45vh',
+            overflowY: 'scroll',
+          }}
+        >
+          <Response></Response>
+        </Box>
       </FormControl>
     </div>
   );
