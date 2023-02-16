@@ -85,7 +85,7 @@ export default function Dashboard() {
           </Box>
           <TabPanel value="collections">
             <FolderSelect />
-            <Card sx={{ display: 'flex', bgcolor: 'transparent' }}>
+            <Card sx={{ display: 'flex', bgcolor: 'transparent' , mt:'20px' }}>
               <FormDialog action="add">Add Folder</FormDialog>
               <Button
                 variant="outlined"

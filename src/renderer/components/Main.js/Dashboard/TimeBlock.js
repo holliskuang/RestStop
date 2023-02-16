@@ -12,7 +12,7 @@ export default function TimeBlock(props) {
   const date = props.time;
   return (
     <div>
-      <Card>
+      <Card sx={{mt:'10px'}}>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {props.reqResInfo.object.method}
