@@ -10,7 +10,6 @@ import PowerIcon from '@mui/icons-material/Power';
 import SettingsInputAntennaIcon from '@mui/icons-material/SettingsInputAntenna';
 import WebhookIcon from '@mui/icons-material/Webhook';
 import { Link } from "react-router-dom";
-
 import React, { useState } from 'react';
 
 export default function NavBar() {
@@ -35,10 +34,12 @@ export default function NavBar() {
 
   return (
     <AppBar sx={{minWidth:'100%'}}>
-      <Toolbar sx={{ display: 'flex', justifyContent: 'space-around' }}>
-        <Typography variant="h6" className="title">
-          REST Client
-        </Typography>
+      <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+    
+      <img style= {{width:'70px', height:'40px'}} src='https://res.cloudinary.com/dd97ovnmi/image/upload/v1676516183/restLogo_qwj20k.png'/>
+
+     
+       
         <div className="grow" />
         <div className="nav-buttons">
           
@@ -49,6 +50,7 @@ export default function NavBar() {
       variant="outlined"
       endIcon={<page.endIcon/>}
       onClick={ReduxPageUpdate}
+      sx={{mr:'10px', ml:'10px', width:'130px'}}
      >
     {page.name}
      </Button>))} 
@@ -58,6 +60,7 @@ export default function NavBar() {
             variant="outlined"
             onClick={handleModeChange}
             endIcon={<Brightness4Icon />}
+            sx={{mr:'10px', ml:'10px'}}
           >
             {mode === 'light' ? 'Dark' : 'Light'} Mode
           </Button>
