@@ -35,9 +35,19 @@ export default function WebSocket() {
     <Box>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <NavBar></NavBar>
-        <WSRequest />
-        <Dashboard />
+        <NavBar />
+        <Box
+          sx={{
+            mt: '64px',
+            height: '100%',
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'row',
+          }}
+        >
+          <Dashboard />
+          <WSRequest />
+        </Box>
       </ThemeProvider>
     </Box>
   );

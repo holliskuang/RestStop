@@ -11,7 +11,7 @@ import {
   setResponse,
   setResponseMode,
 } from '../../../state/currentReqRes.js';
-import { Button, TextField } from '@mui/material';
+import { Button, TextField, Box } from '@mui/material';
 import HeaderBox from './HeaderBox';
 import { v4 as uuid } from 'uuid';
 import ReqBodyTextBox from './ReqBodyTextBox';
@@ -78,51 +78,83 @@ export default function WSRequest() {
   };
 
   return (
-    <div className="request">
+    <Box
+      sx={{
+        width: '70%',
+      }}
+    >
       <FormControl
         fullWidth
         sx={{
           display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-around',
+          flexDirection: 'row-wrap',
+          justifyContent: 'center',
         }}
       >
-        <InputLabel id="restReq">Req</InputLabel>
-        <Select
-          labelId="restReqlabel"
-          id="restReq"
-          value={reqState.method}
-          label="REST"
-          onChange={(event) => {
-            dispatch(setMethod(event.target.value));
-          }}
-        >
-          <MenuItem value="WS">WS</MenuItem>
-        </Select>
-        <TextField
-          id="outlined-basic"
-          label="URL"
-          variant="outlined"
-          placeholder="wss://example.com"
-          value={reqState.url}
-          onChange={(event) => {
-            dispatch(setUrl(event.target.value));
-          }}
-        ></TextField>
-        <Button
-          variant="outlined"
-          type="submit"
+        <Box
           sx={{
-            color: 'white',
+            height: '45vh',
+            overflowY: 'scroll',
+            mt: '20px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
-          onClick={handleSubmit}
         >
-          {reqState.response.connectionStatus == 'open'
-            ? 'Disconnect'
-            : 'Connect'}
-        </Button>
-        <Response />
+          <Box
+            sx={{
+              display: 'flex',
+              width: '100%',
+              flexDirection: 'row',
+              justifyContent: 'center',
+            }}
+          >
+            <Select
+              value={reqState.method}
+              onChange={(event) => {
+                dispatch(setMethod(event.target.value));
+              }}
+              sx={{ width: '10%' }}
+            >
+              <MenuItem value="WS">WS</MenuItem>
+            </Select>
+            <TextField
+              id="outlined-basic"
+              label="URL"
+              variant="filled"
+              placeholder="wss://example.com"
+              value={reqState.url}
+              onChange={(event) => {
+                dispatch(setUrl(event.target.value));
+              }}
+              sx={{ width: '80%' }}
+            />
+          </Box>
+          <Button
+            variant="outlined"
+            type="submit"
+            sx={{
+              color: 'white',
+              mt: '20px',
+            }}
+            onClick={handleSubmit}
+          >
+            {reqState.response.connectionStatus == 'open'
+              ? 'Disconnect'
+              : 'Connect'}
+          </Button>
+        </Box>
+        <Box
+          sx={{
+            height: '45vh',
+            overflowY: 'scroll',
+            backgroundColor: 'whitesmoke',
+          }}
+        >
+          <Response />
+        </Box>
       </FormControl>
-    </div>
+    </Box>
   );
 }
