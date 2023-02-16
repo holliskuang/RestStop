@@ -48,14 +48,13 @@ export default function Dashboard() {
     return await db.history.toArray();
   });
 
-
   // get all folders and requests from db, filter requests by current folder
   const allRequests = useLiveQuery(async () => {
     return await db.collections.toArray();
   });
 
   if (!allRequests || !allHistory) {
-    return <CircularProgress />
+    return <CircularProgress />;
   } else {
     // wait for allRequests to be populated, then filter by current folder
     const requests = allRequests.filter(
@@ -66,21 +65,21 @@ export default function Dashboard() {
         <Typography variant="h3"></Typography>
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <TabList onChange={handleChange} aria-label="lab API tabs example">
+            <TabList onChange={handleChange}  sx={{
+              display:'flex',
+              flexDirection:'column'
+            }}>
               <Tab
                 icon={<FolderOutlinedIcon />}
                 label="Collections"
                 value="collections"
-              />
-              <Tab
-                icon={<ScheduleSendOutlinedIcon />}
-                label="Schedule"
-                value="schedule"
+                sx={{width:'30%'}}
               />
               <Tab
                 icon={<AccessTimeOutlinedIcon />}
                 label="History"
                 value="history"
+                sx={{width:'30%'}}
               />
             </TabList>
           </Box>

@@ -11,6 +11,7 @@ import { EditorView } from '@codemirror/view';
 import { materialDark } from '@uiw/codemirror-theme-material';
 import { useSelector, useDispatch } from 'react-redux';
 import { setResponse } from 'renderer/state/currentReqRes';
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 
 // This is the component that renders the request body text box
 // Utilize  the CodeMirror component to render the text box
@@ -29,7 +30,6 @@ export default function ResponseBody() {
     // update the body whenever a subscription response is received whether it is an update or an error
 
     dispatch(setResponse({ ...reqState.response, responseBody: `${message}` }));
-    
   });
 
   //if graphql mode is on, convert the JSON body to a string
@@ -49,7 +49,14 @@ export default function ResponseBody() {
 
   return (
     <Box>
-      <Typography variant="h5"> Response Body</Typography>
+      <Typography variant="h5">
+        Status:    
+        {reqState.response.responseStatus ? (
+          reqState.response.responseStatus
+        ) : (
+         <RadioButtonUncheckedIcon sx={{ fontSize: 'small' }} />
+        )}
+      </Typography>
       <CodeMirror
         extensions={[
           languageExtensionConverter[bodyType],
@@ -58,7 +65,7 @@ export default function ResponseBody() {
         value={value}
         readOnly={true}
         theme={materialDark}
-        maxHeight="300px"
+        height="25vh"
       ></CodeMirror>
     </Box>
   );

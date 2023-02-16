@@ -29,7 +29,7 @@ export default function BasicTable() {
   }
   return (
     <TableContainer
-      sx={{ height: '300px', overflowY: 'scroll' }}
+      sx={{ height: '30vh' }}
       component={Paper}
     >
       <Table aria-label="simple table">

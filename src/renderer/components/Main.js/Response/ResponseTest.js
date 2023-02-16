@@ -15,16 +15,32 @@ export default function ResponseTest() {
       sx={{
         display: 'flex',
         flexWrap: 'wrap',
-        backgroundColor: 'alternate.main',
-        justifyContent: ' space-between',
-        minHeight: '200px',
+        backgroundColor: '#121212',
+        justifyContent: 'flex-start',
+        height: '30vh',
       }}
     >
-      <Box sx={{ width: '50%', display: 'flex', justifyContent: 'center' }}>
+      <Box
+        sx={{
+          width: '40%',
+          display: 'flex',
+          justifyContent: 'flex-start',
+          m: '20px',
+          maxHeight: '1vh'
+        }}
+      >
         {' '}
         Test
       </Box>
-      <Box sx={{ width: '50%', display: 'flex', justifyContent: 'center' }}>
+      <Box
+        sx={{
+          width: '40%',
+          display: 'flex',
+          justifyContent: 'flex-start',
+          m: '20px',
+          maxHeight:'1vh'
+        }}
+      >
         {' '}
         Response
       </Box>
@@ -34,15 +50,15 @@ export default function ResponseTest() {
             backgroundColor: response ? '#54B435' : '#FF6464',
             display: 'flex',
             flexWrap: 'wrap',
-            justifyContent: 'space-between',
+            justifyContent: 'flex-start',
             width: '100%',
           }}
         >
-          <Box sx={{ width: '50%', display: 'flex', justifyContent: 'center' }}>
+          <Box sx={{ m: '20px', width: '40%', display: 'flex', justifyContent: 'flex-start' }}>
             {test}
           </Box>
 
-          <Box sx={{ width: '50%', display: 'flex', justifyContent: 'center' }}>
+          <Box sx={{ m: '20px', width: '40%', display: 'flex', justifyContent: 'flex-start' }}>
             {response ? 'Success' : 'Failed'}
           </Box>
         </Paper>

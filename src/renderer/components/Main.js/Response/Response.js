@@ -30,10 +30,8 @@ export default function Response() {
   if (responseMode === 'SSE') return <SSEResponse />;
 
   return (
-    <Box sx={{ width: '100%', typography: 'body1', pr:'2.5%', pl:'2.5%'}}>
-      <Typography variant="h3">
-        Status:{reqState.response.responseStatus}
-      </Typography>
+    <Box sx={{ width: '100%', typography: 'body1', pr: '2.5%', pl: '2.5%' }}>
+      <Typography variant="h4" sx={{ml:'2.5%'}}> Response </Typography>
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <TabList onChange={handleChange} aria-label="lab API tabs example">
