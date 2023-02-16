@@ -21,24 +21,33 @@ export default function GQLVariableBox() {
   };
 
   return (
-    <Box>
-      <Typography variant="h5"> Request Body</Typography>
-      <Typography> Content Type</Typography>
-      <CodeMirror
-        extensions={[
-          languageExtensionConverter['application/javascript'],
-          EditorView.lineWrapping,
-        ]}
-        placeholder="Enter your variables in JSON format"
-        value={reqState.variables}
-        readOnly={false}
-        theme={materialDark}
-        minWidth="100%"
-        // onChange event handler is used to update the state of the request body
-        onChange={(editor, data, value) => {
-          dispatch(setVariables(editor.toString()));
-        }}
-      ></CodeMirror>
+    <Box
+      sx={{
+        m: '5%',
+      }}
+    >
+      <Box sx={{ width: '100%', display: 'flex-wrap', flexDirection: 'row' }}>
+        <Typography variant="h4" sx={{ alignSelf: 'center', mr: '20px' , mb:'10px' }}>
+          Variables
+        </Typography>
+        <Box sx={{ width: '100%' }}>
+          <CodeMirror
+            extensions={[
+              languageExtensionConverter['application/javascript'],
+              EditorView.lineWrapping,
+            ]}
+            placeholder="Enter your variables in JSON format"
+            value={reqState.variables}
+            readOnly={false}
+            theme={materialDark}
+            height="20vh"
+            // onChange event handler is used to update the state of the request body
+            onChange={(editor, data, value) => {
+              dispatch(setVariables(editor.toString()));
+            }}
+          />
+        </Box>
+      </Box>
     </Box>
   );
 }

@@ -11,7 +11,7 @@ import {
   setResponse,
   setResponseMode,
 } from '../../../state/currentReqRes.js';
-import { Button, TextField } from '@mui/material';
+import { Button, TextField , Box} from '@mui/material';
 import HeaderBox from './HeaderBox';
 import { v4 as uuid } from 'uuid';
 import ReqBodyTextBox from './ReqBodyTextBox';
@@ -92,7 +92,9 @@ export default function Request() {
   };
 
   return (
-    <div className="request">
+    <Box sx={{
+      width: '70%',
+    }}>
       <FormControl
         fullWidth
         sx={{
@@ -182,6 +184,6 @@ export default function Request() {
           <Response></Response>
         </Box>
       </FormControl>
-    </div>
+    </Box>
   );
 }

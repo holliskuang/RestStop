@@ -37,9 +37,7 @@ export default function HTTP() {
           }}
         >
           <Dashboard />
-          <Box sx={{ display: 'flex', width: '70%', flexDirection: 'column' }}>
-            <Request />
-          </Box>
+          <Request />
         </Box>
       </ThemeProvider>
     </Box>

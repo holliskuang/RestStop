@@ -11,7 +11,7 @@ import {
   setResponse,
   setResponseMode,
 } from '../../../state/currentReqRes.js';
-import { Button, TextField } from '@mui/material';
+import { Button, TextField, Box } from '@mui/material';
 import HeaderBox from './HeaderBox';
 import { v4 as uuid } from 'uuid';
 import ReqBodyTextBox from './ReqBodyTextBox';
@@ -105,61 +105,92 @@ export default function Request() {
   };
 
   return (
-    <div className="request">
+    <Box sx={{ width: '70%' }}>
       <FormControl
         fullWidth
         sx={{
           display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-around',
+          flexDirection: 'row-wrap',
+          justifyContent: 'center',
         }}
       >
-        <InputLabel id="restReq">Req</InputLabel>
-        <Select
-          labelId="restReqlabel"
-          id="restReq"
-          value={reqState.method}
-          label="REST"
-          onChange={(event) => {
-            dispatch(setMethod(event.target.value));
-          }}
-        >
-          <MenuItem value="QUERY">QUERY</MenuItem>
-          <MenuItem value="MUTATION">MUTATION</MenuItem>
-          <MenuItem value="SUBSCRIPTION">SUBSCRIPTION</MenuItem>
-        </Select>
-        <TextField
-          id="outlined-basic"
-          label="URL"
-          variant="outlined"
-          placeholder="https://example.com"
-          value={reqState.url}
-          onChange={(event) => {
-            dispatch(setUrl(event.target.value));
-          }}
-        ></TextField>
-        <Button
-          variant="outlined"
-          type="submit"
+        <Box
           sx={{
-            color: 'white',
+            height: '45vh',
+            overflowY: 'scroll',
+            mt: '20px',
           }}
-          onClick={handleSubmit}
         >
-          {reqState.method === 'SUBSCRIPTION' ? `Connect` : `Submit Request`}
-        </Button>
+          <Box
+            sx={{
+              display: 'flex',
+              width: '100%',
+              flexDirection: 'row',
+              justifyContent: 'center',
+            }}
+          >
+            <Select
+              labelId="restReqlabel"
+              value={reqState.method}
+              onChange={(event) => {
+                dispatch(setMethod(event.target.value));
+              }}
+              sx={{
+                width: '10%',
+              }}
+            >
+              <MenuItem value="QUERY">QUERY</MenuItem>
+              <MenuItem value="MUTATION">MUTATION</MenuItem>
+              <MenuItem value="SUBSCRIPTION">SUBSCRIPTION</MenuItem>
+            </Select>
+            <TextField
+              id="outlined-basic"
+              label="URL"
+              variant="filled"
+              placeholder="https://example.com"
+              value={reqState.url}
+              onChange={(event) => {
+                dispatch(setUrl(event.target.value));
+              }}
+              sx={{
+                width: '80%',
+              }}
+            />
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              m: '3%',
+              justifyContent: 'space-around',
+            }}
+          >
+            <HeaderBox />
+            <Button
+              variant="outlined"
+              type="submit"
+              sx={{
+                color: 'white',
+                width: '30%',
+                alignSelf: 'center',
+              }}
+              onClick={handleSubmit}
+            >
+              {reqState.method === 'SUBSCRIPTION'
+                ? `Connect`
+                : `Submit Request`}
+            </Button>
+          </Box>
 
-        <HeaderBox />
-        <GQLVariableBox />
-        <>
+          <GQLVariableBox />
+
           <ReqBodyTextBox
             onChange={textBoxHandleChange}
             value={reqState.reqBody}
           />
-        </>
-
+        </Box>
         <Response></Response>
       </FormControl>
-    </div>
+    </Box>
   );
 }

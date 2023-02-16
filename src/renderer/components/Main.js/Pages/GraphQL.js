@@ -22,14 +22,23 @@ export default function GraphQL() {
     dispatch(setResponseMode('GraphQL'));
   }, []);
 
-
   return (
     <Box>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <NavBar></NavBar>
-        <GQLRequest />
-        <Dashboard />
+        <Box
+          sx={{
+            mt: '64px',
+            height: '100%',
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'row',
+          }}
+        >
+          <Dashboard />
+          <GQLRequest />
+        </Box>
       </ThemeProvider>
     </Box>
   );

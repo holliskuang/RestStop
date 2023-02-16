@@ -65,27 +65,24 @@ export default function Dashboard() {
         <Typography variant="h3"></Typography>
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <TabList onChange={handleChange}  sx={{
-              display:'flex',
-              flexDirection:'column'
-            }}>
+            <TabList onChange={handleChange} aria-label="lab API tabs example">
               <Tab
                 icon={<FolderOutlinedIcon />}
                 label="Collections"
                 value="collections"
-                sx={{width:'30%'}}
+                sx={{ width: '30%' }}
               />
               <Tab
                 icon={<AccessTimeOutlinedIcon />}
                 label="History"
                 value="history"
-                sx={{width:'30%'}}
+                sx={{ width: '30%' }}
               />
             </TabList>
           </Box>
           <TabPanel value="collections">
             <FolderSelect />
-            <Card sx={{ display: 'flex', bgcolor: 'transparent' , mt:'20px' }}>
+            <Card sx={{ display: 'flex', bgcolor: 'transparent', mt: '20px' }}>
               <FormDialog action="add">Add Folder</FormDialog>
               <Button
                 variant="outlined"
@@ -118,7 +115,7 @@ export default function Dashboard() {
               return <HistoryBlock key={request.id} reqResInfo={request} />;
             })}
           </TabPanel>
-          <TabPanel value="schedule"></TabPanel>
+      
           <TabPanel value="history">
             {allHistory.map((request) => {
               return (
