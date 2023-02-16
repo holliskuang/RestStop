@@ -11,6 +11,7 @@ import { EditorView } from '@codemirror/view';
 import { materialDark } from '@uiw/codemirror-theme-material';
 import { useSelector, useDispatch } from 'react-redux';
 import { setBody } from 'renderer/state/currentReqRes';
+import ReqBodyTextBoxSelector from './ReqBodyTextBoxSelector';
 
 // This is the component that renders the request body text box
 // Utilize  the CodeMirror component to render the text box
@@ -33,9 +34,11 @@ export default function ReqBodyTextBox() {
   };
 
   return (
-    <Box>
+    <Box sx={{
+      m: '5%'
+    }}>
       <Typography variant="h5"> Request Body</Typography>
-      <Typography> Content Type</Typography>
+      <ReqBodyTextBoxSelector />
       <CodeMirror
         extensions={[
           languageExtensionConverter[bodyType],

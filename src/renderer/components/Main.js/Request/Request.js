@@ -22,6 +22,7 @@ import { saveRequestToDB } from '../Dashboard/DashboardController.js';
 import { db } from 'renderer/db.js';
 import TestBox from './TestBox.js';
 import chai from 'chai';
+import Box from '@mui/material/Box';
 
 export default function Request() {
   const dispatch = useDispatch();
@@ -96,58 +97,77 @@ export default function Request() {
         fullWidth
         sx={{
           display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-around',
+          flexDirection: 'row-wrap',
+          justifyContent: 'center',
+          mt: '20px',
         }}
       >
-        <InputLabel id="restReq">Req</InputLabel>
-        <Select
-          labelId="restReqlabel"
-          id="restReq"
-          value={reqState.method}
-          label="REST"
-          onChange={(event) => {
-            dispatch(setMethod(event.target.value));
-          }}
-        >
-          <MenuItem value="GET">GET</MenuItem>
-          <MenuItem value="POST">POST</MenuItem>
-          <MenuItem value="PUT">PUT</MenuItem>
-          <MenuItem value="PATCH">PATCH</MenuItem>
-          <MenuItem value="DELETE">DELETE</MenuItem>
-        </Select>
-        <TextField
-          id="outlined-basic"
-          label="URL"
-          variant="outlined"
-          placeholder="https://example.com"
-          value={reqState.url}
-          onChange={(event) => {
-            dispatch(setUrl(event.target.value));
-          }}
-        ></TextField>
-        <Button
-          variant="outlined"
-          type="submit"
-          sx={{
-            color: 'white',
-          }}
-          onClick={handleSubmit}
-        >
-          Submit Request
-        </Button>
-
-        <HeaderBox />
-        {reqState.method === 'GET' ? null : (
-          <>
-            <ReqBodyTextBoxSelector />
+        <Box>
+          <Box
+            sx={{
+              display: 'flex',
+              width: '100%',
+              flexDirection: 'row',
+              justifyContent: 'center',
+            }}
+          >
+            <Select
+              value={reqState.method}
+              onChange={(event) => {
+                dispatch(setMethod(event.target.value));
+              }}
+              sx={{
+                width: '10%',
+              }}
+            >
+              <MenuItem value="GET">GET</MenuItem>
+              <MenuItem value="POST">POST</MenuItem>
+              <MenuItem value="PUT">PUT</MenuItem>
+              <MenuItem value="PATCH">PATCH</MenuItem>
+              <MenuItem value="DELETE">DELETE</MenuItem>
+            </Select>
+            <TextField
+              id="outlined-basic"
+              label="URL"
+              variant="outlined"
+              placeholder="https://example.com"
+              value={reqState.url}
+              onChange={(event) => {
+                dispatch(setUrl(event.target.value));
+              }}
+              sx={{ width: '80%' }}
+            />
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              m: '3%',
+              justifyContent: 'space-around',
+            }}
+          >
+            <HeaderBox />
+            <Button
+              variant="outlined"
+              type="submit"
+              sx={{
+                color: 'white',
+                width: '30%',
+                alignSelf: 'center',
+              }}
+              onClick={handleSubmit}
+            >
+              Submit Request
+            </Button>
+          </Box>
+          {reqState.method === 'GET' ? null : (
             <ReqBodyTextBox
               onChange={textBoxHandleChange}
               value={reqState.reqBody}
             />
-          </>
-        )}
-        <TestBox />
+          )}
+          <TestBox />
+        </Box>
         <Response></Response>
       </FormControl>
     </div>

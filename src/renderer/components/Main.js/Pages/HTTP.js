@@ -23,20 +23,23 @@ export default function HTTP() {
   }, []);
 
   return (
-    <Box
-      sx={{
-        height: '100%',
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'row',
-      }}
-    >
+    <Box>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <NavBar></NavBar>
-        <Dashboard />
-        <Box sx={{ display: 'flex', width: '70%', flexDirection: 'column' }}>
-          <Request />
+        <Box
+          sx={{
+            mt: '64px',
+            height: '100%',
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'row',
+          }}
+        >
+          <Dashboard />
+          <Box sx={{ display: 'flex', width: '70%', flexDirection: 'column' }}>
+            <Request />
+          </Box>
         </Box>
       </ThemeProvider>
     </Box>

@@ -58,6 +58,7 @@ export default function HeaderBox() {
   };
   return (
     <Box>
+      Headers
       <IconButton onClick={addHeader}>
         <AddBoxOutlinedIcon />
       </IconButton>
