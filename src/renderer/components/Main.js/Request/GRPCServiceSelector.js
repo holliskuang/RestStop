@@ -20,7 +20,9 @@ export default function GRPCServiceSelector() {
   console.log(rpcs);
 
   return (
-    <FormControl>
+    <FormControl sx={{
+      width:'30%'
+    }}>
       <InputLabel id="Content Type">Methods</InputLabel>
 
       <Select

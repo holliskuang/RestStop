@@ -1,6 +1,8 @@
 import { ChangeEvent, useState } from 'react';
 import React from 'react';
 import fs from 'fs';
+import { Box, Button, Input, Typography } from '@mui/material';
+import CloudUploadOutlinedIcon from '@mui/icons-material/CloudUploadOutlined';
 
 function FileUploadSingle() {
   const api = window.api.ipcRenderer;
@@ -8,12 +10,11 @@ function FileUploadSingle() {
 
   const handleFileChange = (e) => {
     // if file does not end with  a .proto it is not a proto file, return
-    if (!e.target.files || !e.target.files[0].name.endsWith('.proto')) {
-      alert('Please upload a .proto file');
-      return;
+    if (e.target.files[0]) {
+      if (!e.target.files || !e.target.files[0].name.endsWith('.proto')) {
+        alert('Please upload a .proto file');
+      } else setFile(e.target.files[0]);
     }
-
-    setFile(e.target.files[0]);
   };
 
   const handleUploadClick = () => {
@@ -34,13 +35,26 @@ function FileUploadSingle() {
   };
 
   return (
-    <div>
-      <input type="file" onChange={handleFileChange} />
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'row ',
+        justifyContent: 'space-around',
+        width: '60%',
+      }}
+    >
+      <Input type="file" onChange={handleFileChange} />
 
-      <div>{file && `${file.name} - ${file.type}`}</div>
-
-      <button onClick={handleUploadClick}>Upload</button>
-    </div>
+      <Button
+        variant="filledTonal"
+        endIcon={<CloudUploadOutlinedIcon fontSize="large" />}
+        onClick={handleUploadClick}
+        sx={{ height: '70px', width: '100px' }}
+        style={{ fontSize: '15px' }}
+      >
+        Upload
+      </Button>
+    </Box>
   );
 }
 

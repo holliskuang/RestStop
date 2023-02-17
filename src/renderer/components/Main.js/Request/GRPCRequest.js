@@ -5,6 +5,7 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import { Box } from '@mui/material';
 import {
   setMethod,
   setUrl,
@@ -46,7 +47,7 @@ export default function WSRequest() {
       api.send('gRPCdisconnect');
       const responseCopy = { ...response };
       responseCopy.connectionStatus = false;
-      responseCopy.chatlog=chatlog;
+      responseCopy.chatlog = chatlog;
       console.log('responseCopy', responseCopy);
       dispatch(setResponse(responseCopy));
       dispatch(addReqRes(responseCopy));
@@ -80,54 +81,125 @@ export default function WSRequest() {
   };
 
   return (
-    <div className="request">
+    <Box
+      sx={{
+        width: '70%',
+      }}
+    >
       <FormControl
         fullWidth
         sx={{
           display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-around',
+          flexDirection: 'row-wrap',
+          justifyContent: 'center',
         }}
       >
-        <InputLabel id="restReq">Req</InputLabel>
-        <Select
-          labelId="restReqlabel"
-          id="restReq"
-          value={reqState.method}
-          label="REST"
-          onChange={(event) => {
-            dispatch(setMethod(event.target.value));
-          }}
-        >
-          <MenuItem value="gRPC">gRPC</MenuItem>
-        </Select>
-        <TextField
-          id="outlined-basic"
-          label="URL"
-          variant="outlined"
-          placeholder="wss://example.com"
-          value={reqState.url}
-          onChange={(event) => {
-            dispatch(setUrl(event.target.value));
-          }}
-        ></TextField>
-        <Button
-          variant="outlined"
-          type="submit"
+        <Box
           sx={{
-            color: 'white',
+            height: '45vh',
+            overflowY: 'auto',
+            pt: '20px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+            width: '100%',
           }}
-          onClick={handleSubmit}
         >
-          {reqState.response.connectionStatus == true
-            ? 'Disconnect'
-            : 'Connect'}
-        </Button>
-        <FileUploadSingle />
-        <GRPCServiceSelector />
-        <GRPCProtoBox />
-        <Response/>
+          <Box
+            sx={{
+              display: 'flex',
+              width: '100%',
+              flexDirection: 'row',
+              justifyContent: 'center',
+            }}
+          >
+            <Select
+              value={reqState.method}
+              onChange={(event) => {
+                dispatch(setMethod(event.target.value));
+              }}
+              sx={{ width: '10%' }}
+            >
+              <MenuItem value="gRPC">gRPC</MenuItem>
+            </Select>
+            <TextField
+              id="outlined-basic"
+              label="URL"
+              variant="filled"
+              placeholder="https://example.com"
+              value={reqState.url}
+              onChange={(event) => {
+                dispatch(setUrl(event.target.value));
+              }}
+              sx={{ width: '80%' }}
+            />
+          </Box>
+
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              pt: '30px',
+              width: '90%',
+            }}
+          >
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                width: '70%',
+                justifyContent: 'space-around',
+                alignItems: 'baseline',
+              }}
+            >
+              <FileUploadSingle />
+              <GRPCServiceSelector />
+            </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '30%',
+              }}
+            >
+              <Button
+                variant="outlined"
+                type="submit"
+                sx={{
+                  color: 'white',
+                  width: '50%',
+                  height: '70%',
+                }}
+                onClick={handleSubmit}
+              >
+                {reqState.response.connectionStatus == true
+                  ? 'Disconnect'
+                  : 'Connect'}
+              </Button>
+            </Box>
+          </Box>
+          <Box
+            sx={{
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'row',
+            }}
+          >
+            <GRPCProtoBox />
+          </Box>
+        </Box>
+        <Box
+          sx={{
+            height: '45vh',
+            overflowY: 'auto',
+            backgroundColor: 'whitesmoke',
+          }}
+        >
+          <Response />
+        </Box>
       </FormControl>
-    </div>
+    </Box>
   );
 }

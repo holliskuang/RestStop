@@ -61,8 +61,18 @@ export default function GRPC() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <NavBar></NavBar>
-        <GRPCRequest />
-        <Dashboard />
+        <Box
+          sx={{
+            mt: '64px',
+            height: '100%',
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'row',
+          }}
+        >
+          <Dashboard />
+          <GRPCRequest />
+        </Box>
       </ThemeProvider>
     </Box>
   );

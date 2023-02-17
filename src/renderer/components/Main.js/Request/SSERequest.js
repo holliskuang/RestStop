@@ -104,7 +104,7 @@ export default function SSERequest() {
           sx={{
             height: '45vh',
             overflowY: 'auto',
-            mt: '20px',
+            pt: '20px',
             display: 'flex',
             flexDirection: 'column',
           }}
