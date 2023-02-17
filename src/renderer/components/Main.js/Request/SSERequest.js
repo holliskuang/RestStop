@@ -5,6 +5,7 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import { Box } from '@mui/material';
 import {
   setMethod,
   setUrl,
@@ -86,51 +87,93 @@ export default function SSERequest() {
   };
 
   return (
-    <div className="request">
+    <Box
+      sx={{
+        width: '70%',
+      }}
+    >
       <FormControl
         fullWidth
         sx={{
           display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-around',
+          flexDirection: 'row-wrap',
+          justifyContent: 'center',
         }}
       >
-        <InputLabel id="restReq">Req</InputLabel>
-        <Select
-          labelId="restReqlabel"
-          id="restReq"
-          value={reqState.method}
-          label="REST"
-          onChange={(event) => {
-            dispatch(setMethod(event.target.value));
-          }}
-        >
-          <MenuItem value="SSE">SSE</MenuItem>
-        </Select>
-        <TextField
-          id="outlined-basic"
-          label="URL"
-          variant="outlined"
-          placeholder="https://example.com"
-          value={reqState.url}
-          onChange={(event) => {
-            dispatch(setUrl(event.target.value));
-          }}
-        ></TextField>
-        <Button
-          variant="outlined"
-          type="submit"
+        <Box
           sx={{
-            color: 'white',
+            height: '45vh',
+            overflowY: 'auto',
+            mt: '20px',
+            display: 'flex',
+            flexDirection: 'column',
           }}
-          onClick={handleSubmit}
         >
-          {response.connectionStatus === 'open' ? 'Disconnect' : 'Connect'}
-        </Button>
-
-        <HeaderBox />
-        <Response/>
+          <Box
+            sx={{
+              display: 'flex',
+              width: '100%',
+              flexDirection: 'row',
+              justifyContent: 'center',
+            }}
+          >
+            <Select
+              value={reqState.method}
+              onChange={(event) => {
+                dispatch(setMethod(event.target.value));
+              }}
+              sx={{
+                width: '10%',
+              }}
+            >
+              <MenuItem value="SSE">SSE</MenuItem>
+            </Select>
+            <TextField
+              id="outlined-basic"
+              label="URL"
+              variant="filled"
+              placeholder="https://example.com"
+              value={reqState.url}
+              onChange={(event) => {
+                dispatch(setUrl(event.target.value));
+              }}
+              sx={{
+                width: '80%',
+              }}
+            />
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              m: '3%',
+              justifyContent: 'space-around',
+            }}
+          >
+            <HeaderBox />
+            <Button
+              variant="outlined"
+              type="submit"
+              sx={{
+                color: 'white',
+                width: '30%',
+                alignSelf: 'center',
+              }}
+              onClick={handleSubmit}
+            >
+              {response.connectionStatus === 'open' ? 'Disconnect' : 'Connect'}
+            </Button>
+          </Box>
+        </Box>
+        <Box
+          sx={{
+            height: '45vh',
+            overflowY: 'scroll',
+          }}
+        >
+          <Response />
+        </Box>
       </FormControl>
-    </div>
+    </Box>
   );
 }

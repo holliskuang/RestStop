@@ -48,7 +48,17 @@ export default function WSResponse() {
       <Typography variant="h4" sx={{ mt: '2.5%', ml: '2.5%', color: 'black' }}>
         Response
       </Typography>
-      <Box sx={{ m: '2.5%', overflowY: 'auto' }}>
+      <Box
+        sx={{
+          m: '2.5%',
+          overflowY: 'auto',
+          borderRadius: '4px',
+          borderStyle: 'solid',
+          borderColor: 'black',
+          borderWidth: '1px',
+          height:'85%'
+        }}
+      >
         <MessageList
           className="message-list"
           lockable={true}
@@ -57,25 +67,24 @@ export default function WSResponse() {
           notchStyle={{ fill: 'transparent' }}
         />
       </Box>
-      <Input
-        placeholder="Type here..."
-        multiline={true}
-        onChange={() => {
-          setMessage(event.target.value);
-        }}
-        sx={{
-          width: '70%',
-        }}
-      />
-      <Button
-        text={'Send'}
-        onClick={() => {
-          console.log('sending object', reqResObj);
-          api.send('clientMessage', message, reqResObj);
-        }}
-        title="Send"
-        sx={{ width: '10%' }}
-      />
+      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+        <Input
+          placeholder="Type here..."
+          multiline={true}
+          onChange={() => {
+            setMessage(event.target.value);
+          }}
+        />
+        <Button
+          text={'Send'}
+          onClick={() => {
+            console.log('sending object', reqResObj);
+            api.send('clientMessage', message, reqResObj);
+          }}
+          title="Send"
+          sx={{ alignSelf: 'flex-end', fontSize: '20px' }}
+        />
+      </Box>
     </Box>
   );
 }

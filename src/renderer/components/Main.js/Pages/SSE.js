@@ -37,8 +37,18 @@ export default function SSE() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <NavBar></NavBar>
-        <SSERequest />
-        <Dashboard />
+        <Box
+          sx={{
+            mt: '64px',
+            height: '100%',
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'row',
+          }}
+        >
+          <Dashboard />
+          <SSERequest />
+        </Box>
       </ThemeProvider>
     </Box>
   );
