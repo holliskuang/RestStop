@@ -37,12 +37,12 @@ export default function WSResponse() {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-between',
-        height: '100%',
+        height: '50vh',
         width: '100%',
         typography: 'body1',
         pr: '2.5%',
         pl: '2.5%',
+        overflowY: 'scroll',
       }}
     >
       <Typography variant="h4" sx={{ mt: '2.5%', ml: '2.5%', color: 'black' }}>
@@ -56,7 +56,7 @@ export default function WSResponse() {
           borderStyle: 'solid',
           borderColor: 'black',
           borderWidth: '1px',
-          height:'85%'
+          height:'23vh'
         }}
       >
         <MessageList

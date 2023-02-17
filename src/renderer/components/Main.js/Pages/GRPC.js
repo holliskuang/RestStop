@@ -63,7 +63,7 @@ export default function GRPC() {
         <NavBar></NavBar>
         <Box
           sx={{
-            mt: '64px',
+            mt: '8.5vh',
             height: '100%',
             width: '100%',
             display: 'flex',

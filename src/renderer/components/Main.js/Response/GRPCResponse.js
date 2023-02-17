@@ -44,8 +44,7 @@ export default function GRPCResponse() {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-between',
-        height: '100%',
+        height: '50vh',
         width: '100%',
         typography: 'body1',
         pr: '2.5%',
@@ -63,10 +62,10 @@ export default function GRPCResponse() {
           borderStyle: 'solid',
           borderColor: 'black',
           borderWidth: '1px',
-          height: '90%',
+          height: '23vh',
           overflow: 'auto',
           borderRadius: '10px',
-          padding: '10px',
+       
         }}
       >
         <MessageList

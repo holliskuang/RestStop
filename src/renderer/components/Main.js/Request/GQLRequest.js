@@ -116,9 +116,8 @@ export default function Request() {
       >
         <Box
           sx={{
-            height: '45vh',
+            height: '50vh',
             overflowY: 'scroll',
-            pt: '20px',
           }}
         >
           <Box
@@ -189,7 +188,9 @@ export default function Request() {
             value={reqState.reqBody}
           />
         </Box>
-        <Response></Response>
+        <Box sx={{height:'50vh', overflowY:'auto'}}>
+        <Response/>
+        </Box>
       </FormControl>
     </Box>
   );

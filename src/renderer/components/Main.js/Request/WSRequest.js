@@ -93,9 +93,8 @@ export default function WSRequest() {
       >
         <Box
           sx={{
-            height: '45vh',
+            height: '50vh',
             overflowY: 'auto',
-            pt: '20px',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -147,7 +146,7 @@ export default function WSRequest() {
         </Box>
         <Box
           sx={{
-            height: '45vh',
+            height: '50vh',
             overflowY:'auto',
             backgroundColor: 'whitesmoke',
           }}

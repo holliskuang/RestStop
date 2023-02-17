@@ -102,9 +102,8 @@ export default function SSERequest() {
       >
         <Box
           sx={{
-            height: '45vh',
+            height: '50vh',
             overflowY: 'auto',
-            pt: '20px',
             display: 'flex',
             flexDirection: 'column',
           }}
@@ -167,7 +166,7 @@ export default function SSERequest() {
         </Box>
         <Box
           sx={{
-            height: '45vh',
+            height: '50vh',
             overflowY: 'scroll',
           }}
         >

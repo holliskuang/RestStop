@@ -37,7 +37,6 @@ export default function SSEResponse() {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-between',
         height: '100%',
         width: '100%',
         typography: 'body1',
@@ -57,7 +56,7 @@ export default function SSEResponse() {
           borderStyle: 'solid',
           borderColor: 'black',
           borderWidth: '1px',
-          height: '85%',
+          height: '30vh',
         }}
       >
         <MessageList

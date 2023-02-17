@@ -99,7 +99,6 @@ export default function WSRequest() {
           sx={{
             maxHeight: '50vh',
             overflowY: 'auto',
-            pt: '8.5vh',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',

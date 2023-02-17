@@ -61,7 +61,7 @@ export default function Dashboard() {
       (request) => request.folder === currentFolder
     );
     return (
-      <Box sx={{ width: '30%', typography: 'body1', pt:'8.5vh' }}>
+      <Box sx={{ width: '30%', typography: 'body1' }}>
         <Typography variant="h3"></Typography>
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>

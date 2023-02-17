@@ -105,9 +105,8 @@ export default function Request() {
       >
         <Box
           sx={{
-            height: '45vh',
+            height: '50vh',
             overflowY: 'scroll',
-            pt: '20px',
           }}
         >
           <Box
@@ -177,7 +176,7 @@ export default function Request() {
         </Box>
         <Box
           sx={{
-            height: '45vh',
+            height: '50vh',
             overflowY: 'scroll',
           }}
         >
