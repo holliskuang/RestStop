@@ -9,6 +9,7 @@ export const WebSocketController = {
     console.log('websocket', this.websocket);
     reqResObj.connectionStatus = 'connecting';
     reqResObj.chatLog = [];
+    // what if it doesn't connect?
     ws.on('open', function open() {
       reqResObj.connectionStatus = 'open';
       event.sender.send('serverMessage', reqResObj);
