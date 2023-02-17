@@ -40,7 +40,7 @@ export default function ReqBodyTextBox() {
       }}
     >
       <Box sx={{ width: '100%', display: 'flex', flexDirection: 'row' }}>
-        <Typography variant="h4" sx={{ alignSelf: 'center', mr:'20px' }}>
+        <Typography variant="h4" sx={{ alignSelf: 'center', mr: '20px' }}>
           Request Body
         </Typography>
         <ReqBodyTextBoxSelector />

@@ -5,6 +5,7 @@ import { MessageList } from 'react-chat-elements';
 import { MessageBox } from 'react-chat-elements';
 import { Input } from 'react-chat-elements';
 import { Button } from 'react-chat-elements';
+import {Box, Typography} from '@mui/material'
 import { ipcRenderer } from 'electron';
 import { setResponse } from 'renderer/state/currentReqRes';
 import { useDispatch } from 'react-redux';
@@ -38,22 +39,45 @@ export default function GRPCResponse() {
 
   return (
     // div with max Height of 200px
-    <div
-      style={{
-        maxHeight: '200px',
-        overflow: 'auto',
-        borderRadius: '10px',
-        padding: '10px',
+
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        height: '100%',
+        width: '100%',
+        typography: 'body1',
+        pr: '2.5%',
+        pl: '2.5%',
       }}
     >
-      <MessageList
-        className="message-list"
-        lockable={true}
-        toBottomHeight={'100%'}
-        dataSource={chatLogState}
-        messageBoxStyles={{ backgroundColor: 'transparent' }}
-        notchStyle={{ fill: 'transparent' }}
-      />
+      <Typography variant="h4" sx={{ mt: '2.5%', ml: '2.5%', color: 'black' }}>
+        Response
+      </Typography>
+      <Box
+        sx={{
+          m: '2.5%',
+          overflowY: 'auto',
+          borderRadius: '4px',
+          borderStyle: 'solid',
+          borderColor: 'black',
+          borderWidth: '1px',
+          height: '90%',
+          overflow: 'auto',
+          borderRadius: '10px',
+          padding: '10px',
+        }}
+      >
+        <MessageList
+          className="message-list"
+          lockable={true}
+          toBottomHeight={'100%'}
+          dataSource={chatLogState}
+          messageBoxStyles={{ backgroundColor: 'transparent' }}
+          notchStyle={{ fill: 'transparent' }}
+        />
+      </Box>
       <Input
         placeholder="Type here..."
         multiline={true}
@@ -87,6 +111,6 @@ export default function GRPCResponse() {
         }}
         title="Send"
       />
-    </div>
+    </Box>
   );
 }

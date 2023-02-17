@@ -20,20 +20,21 @@ export default function GRPCProtoBox() {
 
   return (
     <Box sx={{ m: '5%' }}>
-      <Typography variant="h4"> Service Definition </Typography>
-      <Box sx={{ width: '100%' }}>
-        <CodeMirror
-          extensions={[
-            languageExtensionConverter['application/javascript'],
-            EditorView.lineWrapping,
-          ]}
-          placeholder="Import your proto file"
-          value={reqState.filedata}
-          readOnly={true}
-          theme={materialDark}
-          height="20vh"
-          width='100%'
-        />
+      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+        <Typography variant="h4" sx={{width:'100%'}}> Service Definition </Typography>
+        <Box sx={{ width: '100%' }}>
+          <CodeMirror
+            extensions={[
+              languageExtensionConverter['application/javascript'],
+              EditorView.lineWrapping,
+            ]}
+            placeholder="Import your proto file"
+            value={reqState.filedata}
+            readOnly={true}
+            theme={materialDark}
+            height="20vh"
+          />
+        </Box>
       </Box>
     </Box>
   );

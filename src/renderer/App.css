@@ -16,6 +16,12 @@ body {
   overflow-y: hidden;
 }
 
+.MuiButton-root {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 button {
   background-color: white;
   padding: 10px 20px;
@@ -51,7 +57,6 @@ a:hover {
   text-decoration: none;
 }
 
-.css-heg063-MuiTabs-flexContainer{
+.css-heg063-MuiTabs-flexContainer {
   justify-content: center;
 }
-
