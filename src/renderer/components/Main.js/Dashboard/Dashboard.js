@@ -68,7 +68,8 @@ export default function Dashboard(props) {
           width: '30%',
           typography: 'body1',
           pt: '5%',
-          backgroundColor: theme.palette.background.dashboard
+          backgroundColor: theme.palette.background.dashboard,
+          maxHeight: '100%',
         }}
       >
         <Typography variant="h3"></Typography>
@@ -120,12 +121,25 @@ export default function Dashboard(props) {
               </Button>
             </Card>
 
-            {requests.map((request) => {
-              return <HistoryBlock key={request.id} reqResInfo={request} />;
-            })}
+            <Box
+              sx={{
+                overflowY: 'auto',
+                maxHeight: '65vh',
+              }}
+            >
+              {requests.map((request) => {
+                return <HistoryBlock key={request.id} reqResInfo={request} />;
+              })}
+            </Box>
           </TabPanel>
 
-          <TabPanel value="history">
+          <TabPanel
+            value="history"
+            sx={{
+              overflowY: 'auto',
+              maxHeight: '80vh',
+            }}
+          >
             {allHistory.map((request) => {
               return (
                 <TimeBlock

@@ -42,7 +42,7 @@ export default function Response() {
         backgroundColor: theme.palette.background.response,
       }}
     >
-      <Typography variant="h3" sx={{ pt: '1%',ml: '2.5%' }}>
+      <Typography variant="h3" sx={{ pt: '3%',ml: '2.5%' }}>
         {' '}
         Response{' '}
       </Typography>
