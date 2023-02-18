@@ -39,13 +39,15 @@ export default function Response() {
         typography: 'body1',
         pr: '2.5%',
         pl: '2.5%',
-        backgroundColor: theme.palette.background.response,
+    
       }}
     >
-      <Typography variant="h3" sx={{ pt: '3%',ml: '2.5%' }}>
-        {' '}
-        Response{' '}
-      </Typography>
+      <Box sx={{display:'flex', justifyContent:'center', pt:'2%'}}>
+        <Typography variant="h3" sx={{ ml: '2.5%', alignText: 'center' }}>
+          {' '}
+          Response{' '}
+        </Typography>
+      </Box>
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <TabList onChange={handleChange} aria-label="lab API tabs example">

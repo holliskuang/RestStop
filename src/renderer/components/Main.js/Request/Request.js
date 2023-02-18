@@ -11,7 +11,7 @@ import {
   setResponse,
   setResponseMode,
 } from '../../../state/currentReqRes.js';
-import { Button, TextField , Box} from '@mui/material';
+import { Button, TextField, Box } from '@mui/material';
 import HeaderBox from './HeaderBox';
 import { v4 as uuid } from 'uuid';
 import ReqBodyTextBox from './ReqBodyTextBox';
@@ -23,6 +23,7 @@ import { db } from 'renderer/db.js';
 import TestBox from './TestBox.js';
 import chai from 'chai';
 import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
 
 export default function Request() {
   const dispatch = useDispatch();
@@ -92,9 +93,11 @@ export default function Request() {
   };
 
   return (
-    <Box sx={{
-      width: '70%',
-    }}>
+    <Box
+      sx={{
+        width: '70%',
+      }}
+    >
       <FormControl
         fullWidth
         sx={{
@@ -115,7 +118,7 @@ export default function Request() {
               width: '100%',
               flexDirection: 'row',
               justifyContent: 'center',
-              pt:'8.5%'
+              pt: '8.5%',
             }}
           >
             <Select
@@ -174,6 +177,7 @@ export default function Request() {
             />
           )}
           <TestBox />
+          <Divider/>
         </Box>
         <Box
           sx={{

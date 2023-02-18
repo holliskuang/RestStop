@@ -17,7 +17,7 @@ export default function ResponseTest() {
         flexWrap: 'wrap',
         backgroundColor: '#121212',
         justifyContent: 'flex-start',
-        height: '30vh',
+        height: '26vh',
       }}
     >
       <Box

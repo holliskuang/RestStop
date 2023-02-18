@@ -33,7 +33,7 @@ export default function NavBar() {
   }
 
   return (
-    <AppBar sx={{minWidth:'100%', height:'8vh'}}>
+    <AppBar sx={{minWidth:'100%', height:'8vh' }}>
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
     
       <img style= {{width:'70px', height:'40px'}} src='https://res.cloudinary.com/dd97ovnmi/image/upload/v1676516183/restLogo_qwj20k.png'/>

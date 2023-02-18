@@ -65,7 +65,7 @@ export default function ResponseBody() {
         value={value}
         readOnly={true}
         theme={materialDark}
-        height="25vh"
+        height="26vh"
       ></CodeMirror>
     </Box>
   );
