@@ -105,7 +105,7 @@ export default function Request() {
       >
         <Box
           sx={{
-            height: '50vh',
+            height: '55vh',
             overflowY: 'scroll',
           }}
         >
@@ -115,6 +115,7 @@ export default function Request() {
               width: '100%',
               flexDirection: 'row',
               justifyContent: 'center',
+              pt:'8.5%'
             }}
           >
             <Select
@@ -176,7 +177,7 @@ export default function Request() {
         </Box>
         <Box
           sx={{
-            height: '50vh',
+            height: '45vh',
             overflowY: 'scroll',
           }}
         >

@@ -84,7 +84,7 @@ export default function WSRequest() {
     <Box
       sx={{
         width: '70%',
-        height:'100%'
+        height: '100%',
       }}
     >
       <FormControl
@@ -97,7 +97,7 @@ export default function WSRequest() {
       >
         <Box
           sx={{
-            maxHeight: '50vh',
+            maxHeight: '55vh',
             overflowY: 'auto',
             display: 'flex',
             flexDirection: 'column',
@@ -112,7 +112,7 @@ export default function WSRequest() {
               width: '100%',
               flexDirection: 'row',
               justifyContent: 'center',
-            
+              pt: '8.5%',
             }}
           >
             <Select
@@ -193,7 +193,7 @@ export default function WSRequest() {
         </Box>
         <Box
           sx={{
-            height:'50vh',
+            height: '45vh',
             overflowY: 'auto',
             backgroundColor: 'whitesmoke',
           }}

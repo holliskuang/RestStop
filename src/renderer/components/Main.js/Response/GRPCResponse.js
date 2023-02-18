@@ -59,11 +59,10 @@ export default function GRPCResponse() {
         sx={{
           m: '1%',
           overflowY: 'auto',
-          borderRadius: '4px',
           borderStyle: 'solid',
           borderColor: 'black',
           borderWidth: '1px',
-          height: '50%',
+          height: '60%',
           borderRadius: '10px',
         }}
       >
@@ -80,7 +79,7 @@ export default function GRPCResponse() {
       <Input
         placeholder="Type here..."
         multiline={true}
-        maxHeight={100}
+        maxHeight={60}
         onChange={() => {
           setMessage(event.target.value);
         }}

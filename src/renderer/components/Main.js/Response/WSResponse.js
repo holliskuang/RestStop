@@ -37,7 +37,7 @@ export default function WSResponse() {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        height: '50vh',
+        height: '100%',
         width: '100%',
         typography: 'body1',
         pr: '2.5%',
@@ -52,11 +52,12 @@ export default function WSResponse() {
         sx={{
           m: '1%',
           overflowY: 'auto',
-          borderRadius: '4px',
+          borderRadius: '10px',
           borderStyle: 'solid',
           borderColor: 'black',
           borderWidth: '1px',
-          height: '23vh',
+          height: '60%',
+          
         }}
       >
         <MessageList
@@ -71,7 +72,7 @@ export default function WSResponse() {
         <Input
           placeholder="Type here..."
           multiline={true}
-          maxHeight={100}
+          maxHeight={60}
           onChange={() => {
             setMessage(event.target.value);
           }}
