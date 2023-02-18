@@ -24,6 +24,7 @@ import TestBox from './TestBox.js';
 import chai from 'chai';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
+import { useTheme } from '@emotion/react';
 
 export default function Request() {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ export default function Request() {
   const api = window.api.ipcRenderer;
   const currentFolder = useSelector((state) => state.currentReqRes.folder);
   let assert = chai.assert;
+  const theme=useTheme();
   // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {
     // IF URL NOT HTTP, THROW ERROR AND RETURN
@@ -52,7 +54,7 @@ export default function Request() {
     dispatch(setResponse(reqAndRes));
     dispatch(addReqRes(reqAndRes));
     saveRequestToDB(reqAndRes.id, reqAndRes, currentFolder);
-    console.log(reqAndRes);
+
   }
 
   // retrieve body from redux
@@ -96,6 +98,7 @@ export default function Request() {
     <Box
       sx={{
         width: '70%',
+       backgroundColor: theme.palette.background.request
       }}
     >
       <FormControl
@@ -177,9 +180,8 @@ export default function Request() {
             />
           )}
           <TestBox />
-         
         </Box>
-        <Divider/>
+        <Divider />
         <Box
           sx={{
             height: '45vh',

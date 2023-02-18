@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Divider, Typography } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import { Box, display } from '@mui/system';
 import { useSelector } from 'react-redux';
@@ -15,35 +15,47 @@ export default function ResponseTest() {
       sx={{
         display: 'flex',
         flexWrap: 'wrap',
-        backgroundColor: '#121212',
         justifyContent: 'flex-start',
         height: '26vh',
       }}
     >
       <Box
         sx={{
-          width: '40%',
+          height: '15%',
           display: 'flex',
-          justifyContent: 'flex-start',
-          m: '20px',
-          maxHeight: '1vh'
+          width: '100%',
+          pt: '2%',
+          pl: '2%',
+          bottomBorder: '1px solid black',
         }}
       >
-        {' '}
-        Test
+        <Box
+          sx={{
+            width: '50%',
+            display: 'flex',
+            justifyContent: 'flex-start',
+
+            maxHeight: '1vh',
+          }}
+        >
+          {' '}
+          Test
+        </Box>
+        <Box
+          sx={{
+            width: '50%',
+            display: 'flex',
+            justifyContent: 'flex-start',
+
+            maxHeight: '1vh',
+          }}
+        >
+          {' '}
+          Response
+        </Box>
       </Box>
-      <Box
-        sx={{
-          width: '40%',
-          display: 'flex',
-          justifyContent: 'flex-start',
-          m: '20px',
-          maxHeight:'1vh'
-        }}
-      >
-        {' '}
-        Response
-      </Box>
+      <<Divider sx={{ width: '100%', color: 'black' }} />>
+
       {response !== undefined ? (
         <Paper
           sx={{
@@ -54,15 +66,32 @@ export default function ResponseTest() {
             width: '100%',
           }}
         >
-          <Box sx={{ m: '20px', width: '40%', display: 'flex', justifyContent: 'flex-start' }}>
+          <Box
+            sx={{
+              m: '20px',
+              width: '40%',
+              display: 'flex',
+              justifyContent: 'flex-start',
+            }}
+          >
             {test}
           </Box>
 
-          <Box sx={{ m: '20px', width: '40%', display: 'flex', justifyContent: 'flex-start' }}>
+          <Box
+            sx={{
+              m: '20px',
+              width: '40%',
+              display: 'flex',
+              justifyContent: 'flex-start',
+            }}
+          >
             {response ? 'Success' : 'Failed'}
           </Box>
         </Paper>
-      ) : null}
+      ) : (
+        <Box sx={{ minHeight: '70%' }}>
+        </Box>
+      )}
     </Paper>
   );
 }

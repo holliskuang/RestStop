@@ -51,7 +51,7 @@ export const themeSettings = (mode: any) => {
             },
             background: {
               dashboard: '#16151A',
-              request: '#2B2B33',
+              request: '#22262D',
               response: '#22262D',
             },
           }
@@ -70,8 +70,9 @@ export const themeSettings = (mode: any) => {
               light: colorTokens.grey[50],
             },
             background: {
-              default: colorTokens.grey[10],
-              alt: colorTokens.grey[0],
+              dashboard: 'whitesmoke',
+              request: '#DCDCDC',
+              response: '#DCDCDC',
             },
           }),
     },
