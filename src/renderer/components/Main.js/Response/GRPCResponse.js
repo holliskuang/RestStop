@@ -5,7 +5,7 @@ import { MessageList } from 'react-chat-elements';
 import { MessageBox } from 'react-chat-elements';
 import { Input } from 'react-chat-elements';
 import { Button } from 'react-chat-elements';
-import {Box, Typography} from '@mui/material'
+import { Box, Typography } from '@mui/material';
 import { ipcRenderer } from 'electron';
 import { setResponse } from 'renderer/state/currentReqRes';
 import { useDispatch } from 'react-redux';
@@ -44,11 +44,12 @@ export default function GRPCResponse() {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        height: '50vh',
+        height: '100%',
         width: '100%',
         typography: 'body1',
         pr: '2.5%',
         pl: '2.5%',
+        overflowY: 'scroll',
       }}
     >
       <Typography variant="h4" sx={{ mt: '2.5%', ml: '2.5%', color: 'black' }}>
@@ -56,16 +57,14 @@ export default function GRPCResponse() {
       </Typography>
       <Box
         sx={{
-          m: '2.5%',
+          m: '1%',
           overflowY: 'auto',
           borderRadius: '4px',
           borderStyle: 'solid',
           borderColor: 'black',
           borderWidth: '1px',
-          height: '23vh',
-          overflow: 'auto',
+          height: '50%',
           borderRadius: '10px',
-       
         }}
       >
         <MessageList
@@ -77,9 +76,11 @@ export default function GRPCResponse() {
           notchStyle={{ fill: 'transparent' }}
         />
       </Box>
+
       <Input
         placeholder="Type here..."
         multiline={true}
+        maxHeight={100}
         onChange={() => {
           setMessage(event.target.value);
         }}

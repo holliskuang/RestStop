@@ -50,13 +50,13 @@ export default function WSResponse() {
       </Typography>
       <Box
         sx={{
-          m: '2.5%',
+          m: '1%',
           overflowY: 'auto',
           borderRadius: '4px',
           borderStyle: 'solid',
           borderColor: 'black',
           borderWidth: '1px',
-          height:'23vh'
+          height: '23vh',
         }}
       >
         <MessageList
@@ -71,6 +71,7 @@ export default function WSResponse() {
         <Input
           placeholder="Type here..."
           multiline={true}
+          maxHeight={100}
           onChange={() => {
             setMessage(event.target.value);
           }}
