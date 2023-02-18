@@ -39,10 +39,9 @@ export default function Response() {
         typography: 'body1',
         pr: '2.5%',
         pl: '2.5%',
-    
       }}
     >
-      <Box sx={{display:'flex', justifyContent:'center', pt:'2%'}}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', pt: '2%' }}>
         <Typography variant="h3" sx={{ ml: '2.5%', alignText: 'center' }}>
           {' '}
           Response{' '}
@@ -64,21 +63,60 @@ export default function Response() {
           {responseMode === 'HTTP' ? (
             <ResponseHeaders />
           ) : (
-            'Headers are only available in HTTP mode'
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <img
+                style={{ width: '35%', height: '60%', marginBottom: '4%' }}
+                src="https://res.cloudinary.com/dd97ovnmi/image/upload/v1676516183/restLogo_qwj20k.png"
+              />
+              Headers are only available in HTTP mode
+            </Box>
           )}
         </TabPanel>
         <TabPanel value="cookies">
           {responseMode === 'HTTP' ? (
             <ResponseCookies />
           ) : (
-            'Cookies are only available in HTTP mode'
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <img
+                style={{ width: '35%', height: '60%', marginBottom: '4%' }}
+                src="https://res.cloudinary.com/dd97ovnmi/image/upload/v1676516183/restLogo_qwj20k.png"
+              />
+              Cookies are only available in HTTP mode
+            </Box>
           )}
         </TabPanel>
         <TabPanel value="tests">
           {responseMode === 'HTTP' ? (
             <ResponseTest />
           ) : (
-            'Tests are only available in HTTP mode'
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <img
+                style={{ width: '35%', height: '60%', marginBottom: '4%' }}
+                src="https://res.cloudinary.com/dd97ovnmi/image/upload/v1676516183/restLogo_qwj20k.png"
+              />
+              Tests are only available in HTTP mode
+            </Box>
           )}
         </TabPanel>
       </TabContext>
