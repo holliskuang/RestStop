@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import { Box } from '@mui/material';
@@ -181,13 +180,7 @@ export default function WSRequest() {
               </Button>
             </Box>
           </Box>
-          <Box
-            sx={{
-              width: '100%',
-              display: 'flex',
-              flexDirection: 'row',
-            }}
-          >
+          <Box sx={{ width: '100%' }}>
             <GRPCProtoBox />
           </Box>
         </Box>

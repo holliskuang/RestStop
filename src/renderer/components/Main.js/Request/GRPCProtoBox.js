@@ -20,8 +20,14 @@ export default function GRPCProtoBox() {
 
   return (
     <Box sx={{ m: '5%' }}>
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <Typography variant="h4" sx={{width:'100%'}}> Service Definition </Typography>
+      <Typography variant="h4"> Service Definition </Typography>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'flex-start',
+        }}
+      >
         <Box sx={{ width: '100%' }}>
           <CodeMirror
             extensions={[
