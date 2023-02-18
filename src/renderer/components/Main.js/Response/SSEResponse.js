@@ -42,19 +42,20 @@ export default function SSEResponse() {
         typography: 'body1',
         pr: '2.5%',
         pl: '2.5%',
-        backgroundColor: 'whitesmoke',
       }}
     >
-      <Typography variant="h4" sx={{ mt: '2.5%', ml: '2.5%', color: 'black' }}>
-        Response
-      </Typography>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Typography variant="h3" sx={{ mt: '2.5%', color: 'whitw' }}>
+          Response
+        </Typography>
+      </Box>
       <Box
         sx={{
           m: '2.5%',
           overflowY: 'auto',
           borderRadius: '4px',
           borderStyle: 'solid',
-          borderColor: 'black',
+          borderColor: 'white',
           borderWidth: '1px',
           height: '30vh',
         }}

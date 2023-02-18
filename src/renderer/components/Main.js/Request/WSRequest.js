@@ -24,6 +24,7 @@ import TestBox from './TestBox.js';
 import chai from 'chai';
 import GraphQL from '../Pages/GraphQL.js';
 import GQLVariableBox from './GQLVariableBox.js';
+import Divider from '@mui/material/Divider';
 
 export default function WSRequest() {
   const dispatch = useDispatch();
@@ -145,11 +146,11 @@ export default function WSRequest() {
               : 'Connect'}
           </Button>
         </Box>
+        <Divider />
         <Box
           sx={{
             height: '45vh',
             overflowY: 'auto',
-            backgroundColor: 'whitesmoke',
           }}
         >
           <Response />

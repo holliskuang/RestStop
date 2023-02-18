@@ -5,6 +5,7 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import Divider from '@mui/material/Divider';
 import {
   setMethod,
   setUrl,
@@ -189,6 +190,7 @@ export default function Request() {
             value={reqState.reqBody}
           />
         </Box>
+        <Divider/>
         <Box sx={{height:'45vh', overflowY:'auto'}}>
         <Response/>
         </Box>

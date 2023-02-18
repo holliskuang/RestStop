@@ -52,15 +52,20 @@ export default function GRPCResponse() {
         overflowY: 'scroll',
       }}
     >
-      <Typography variant="h4" sx={{ mt: '2.5%', ml: '2.5%', color: 'black' }}>
-        Response
-      </Typography>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Typography
+          variant="h4"
+          sx={{ mt: '2.5%', ml: '2.5%', color: 'white' }}
+        >
+          Response
+        </Typography>
+      </Box>
       <Box
         sx={{
           m: '1%',
           overflowY: 'auto',
           borderStyle: 'solid',
-          borderColor: 'black',
+          borderColor: 'white',
           borderWidth: '1px',
           height: '60%',
           borderRadius: '10px',
@@ -80,6 +85,7 @@ export default function GRPCResponse() {
         placeholder="Type here..."
         multiline={true}
         maxHeight={60}
+        value={message}
         onChange={() => {
           setMessage(event.target.value);
         }}

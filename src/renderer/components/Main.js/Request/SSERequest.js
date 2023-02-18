@@ -22,6 +22,7 @@ import { addReqRes } from 'renderer/state/historyReqRes.js';
 import { saveRequestToDB } from '../Dashboard/DashboardController.js';
 import { db } from 'renderer/db.js';
 import Response from '../Response/Response';
+import Divider from '@mui/material/Divider';
 
 export default function SSERequest() {
   const dispatch = useDispatch();
@@ -165,6 +166,7 @@ export default function SSERequest() {
             </Button>
           </Box>
         </Box>
+        <Divider/>
         <Box
           sx={{
             height: '45vh',

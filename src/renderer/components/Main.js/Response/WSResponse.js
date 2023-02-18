@@ -45,19 +45,20 @@ export default function WSResponse() {
         overflowY: 'scroll',
       }}
     >
-      <Typography variant="h4" sx={{ mt: '2.5%', ml: '2.5%', color: 'black' }}>
-        Response
-      </Typography>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Typography variant="h4" sx={{ m: '1.5%', color: 'white' }}>
+          Response
+        </Typography>
+      </Box>
       <Box
         sx={{
           m: '1%',
           overflowY: 'auto',
           borderRadius: '10px',
           borderStyle: 'solid',
-          borderColor: 'black',
+          borderColor: 'white',
           borderWidth: '1px',
           height: '60%',
-          
         }}
       >
         <MessageList

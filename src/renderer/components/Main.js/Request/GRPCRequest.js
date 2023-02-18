@@ -29,6 +29,7 @@ import GRPCServiceSelector from './GRPCServiceSelector.js';
 import FileUploadSingle from '../Widgets/Upload.js';
 import GRPCResponse from '../Response/GRPCResponse.js';
 import Response from '../Response/Response.js';
+import Divider from '@mui/material/Divider';
 
 export default function WSRequest() {
   const dispatch = useDispatch();
@@ -184,11 +185,11 @@ export default function WSRequest() {
             <GRPCProtoBox />
           </Box>
         </Box>
+        <Divider/>
         <Box
           sx={{
             height: '45vh',
             overflowY: 'auto',
-            backgroundColor: 'whitesmoke',
           }}
         >
           <Response />
