@@ -34,10 +34,12 @@ import FolderSelect from './FolderSelect';
 import { getFoldersFromDB } from './DashboardController';
 import { setFolder } from '../../../state/currentReqRes';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useTheme } from '@mui/material/styles';
 
-export default function Dashboard() {
+export default function Dashboard(props) {
   const [value, setValue] = React.useState('collections');
   const dispatch = useDispatch();
+  const theme = useTheme();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -61,7 +63,14 @@ export default function Dashboard() {
       (request) => request.folder === currentFolder
     );
     return (
-      <Box sx={{ width: '30%', typography: 'body1', pt:'5%' }}>
+      <Box
+        sx={{
+          width: '30%',
+          typography: 'body1',
+          pt: '5%',
+          backgroundColor: theme.palette.background.dashboard
+        }}
+      >
         <Typography variant="h3"></Typography>
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -115,7 +124,7 @@ export default function Dashboard() {
               return <HistoryBlock key={request.id} reqResInfo={request} />;
             })}
           </TabPanel>
-      
+
           <TabPanel value="history">
             {allHistory.map((request) => {
               return (

@@ -13,6 +13,7 @@ import { useEffect } from 'react';
 import { setResponseMode } from '../../../state/currentReqRes.js';
 import { width } from '@mui/system';
 
+
 export default function HTTP() {
   const mode = useSelector((state) => state.light.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
@@ -29,7 +30,6 @@ export default function HTTP() {
         <NavBar></NavBar>
         <Box
           sx={{
-        
             height: '100%',
             width: '100%',
             display: 'flex',

@@ -13,6 +13,7 @@ import ResponseTest from './ResponseTest';
 import WSResponse from './WSResponse';
 import GRPCResponse from './GRPCResponse';
 import SSEResponse from './SSEResponse';
+import { useTheme } from '@mui/material/styles';
 
 export default function Response() {
   const [value, setValue] = React.useState('body');
@@ -21,6 +22,7 @@ export default function Response() {
     setValue(newValue);
   };
   const responseMode = reqState.responseMode;
+  const theme = useTheme();
   // If response mode is WS, return WSResponse component
   if (responseMode === 'WS') return <WSResponse />;
   // If response is in GRPC mode, return GRPCResponse component
@@ -30,8 +32,20 @@ export default function Response() {
   if (responseMode === 'SSE') return <SSEResponse />;
 
   return (
-    <Box sx={{ width: '100%', typography: 'body1', pr: '2.5%', pl: '2.5%' }}>
-      <Typography variant="h4" sx={{ml:'2.5%'}}> Response </Typography>
+    <Box
+      sx={{
+        width: '100%',
+        height: '100%',
+        typography: 'body1',
+        pr: '2.5%',
+        pl: '2.5%',
+        backgroundColor: theme.palette.background.response,
+      }}
+    >
+      <Typography variant="h3" sx={{ pt: '1%',ml: '2.5%' }}>
+        {' '}
+        Response{' '}
+      </Typography>
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <TabList onChange={handleChange} aria-label="lab API tabs example">

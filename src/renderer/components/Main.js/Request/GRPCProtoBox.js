@@ -26,6 +26,7 @@ export default function GRPCProtoBox() {
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'flex-start',
+          mt: '1%',
         }}
       >
         <Box sx={{ width: '100%' }}>
