@@ -51,7 +51,6 @@ export default function Request() {
     }
 
     dispatch(setResponseMode('GraphQL'));
-    console.log('reqState', reqState.responseMode);
     event.preventDefault();
     let reqResObj = {};
     reqResObj.responseMode = reqState.responseMode;

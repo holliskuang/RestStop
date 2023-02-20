@@ -35,14 +35,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function WSRequest() {
-  if (!reqState.url.startsWith('http')) {
-    toast('🦄 URL Must be HTTP!', {
-      position: 'bottom-right',
-      autoClose: 5000,
-      theme: 'light',
-    });
-    return;
-  }
   const dispatch = useDispatch();
   const reqState = useSelector((state) => state.currentReqRes);
   const lightMode = useSelector((state) => state.light.mode);
@@ -54,6 +46,14 @@ export default function WSRequest() {
   console.log('response', response);
   // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {
+    if (!reqState.url.startsWith('http')) {
+      toast('🦄 URL Must be HTTP!', {
+        position: 'bottom-right',
+        autoClose: 5000,
+        theme: 'light',
+      });
+      return;
+    }
     // Disconnect an existing websocket if it exists and save the reqres to history
     if (response.connectionStatus === true) {
       event.preventDefault();
