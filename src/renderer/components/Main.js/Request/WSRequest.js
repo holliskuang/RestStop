@@ -29,6 +29,7 @@ import Divider from '@mui/material/Divider';
 export default function WSRequest() {
   const dispatch = useDispatch();
   const reqState = useSelector((state) => state.currentReqRes);
+  const lightMode = useSelector((state) => state.light.mode);
   const api = window.api.ipcRenderer;
   const currentFolder = useSelector((state) => state.currentReqRes.folder);
   let response = useSelector((state) => state.currentReqRes.response);
@@ -136,7 +137,7 @@ export default function WSRequest() {
             variant="outlined"
             type="submit"
             sx={{
-              color: 'white',
+              color: lightMode === 'dark' ? 'white' : 'black',
               mt: '20px',
             }}
             onClick={handleSubmit}

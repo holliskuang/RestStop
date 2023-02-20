@@ -29,6 +29,8 @@ import GQLVariableBox from './GQLVariableBox.js';
 export default function Request() {
   const dispatch = useDispatch();
   const reqState = useSelector((state) => state.currentReqRes);
+  const lightMode = useSelector((state) => state.light.mode);
+ 
   const api = window.api.ipcRenderer;
   const currentFolder = useSelector((state) => state.currentReqRes.folder);
   let assert = chai.assert;
@@ -171,7 +173,7 @@ export default function Request() {
               variant="outlined"
               type="submit"
               sx={{
-                color: 'white',
+                color: lightMode === 'dark' ? 'white' : 'black',
                 width: '30%',
                 alignSelf: 'center',
               }}

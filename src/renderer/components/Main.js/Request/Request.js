@@ -32,7 +32,8 @@ export default function Request() {
   const api = window.api.ipcRenderer;
   const currentFolder = useSelector((state) => state.currentReqRes.folder);
   let assert = chai.assert;
-  const theme=useTheme();
+  const lightMode = useSelector((state) => state.light.mode);
+  const theme = useTheme();
   // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {
     // IF URL NOT HTTP, THROW ERROR AND RETURN
@@ -54,7 +55,6 @@ export default function Request() {
     dispatch(setResponse(reqAndRes));
     dispatch(addReqRes(reqAndRes));
     saveRequestToDB(reqAndRes.id, reqAndRes, currentFolder);
-
   }
 
   // retrieve body from redux
@@ -98,7 +98,7 @@ export default function Request() {
     <Box
       sx={{
         width: '70%',
-       backgroundColor: theme.palette.background.request
+        backgroundColor: theme.palette.background.request,
       }}
     >
       <FormControl
@@ -164,7 +164,7 @@ export default function Request() {
               variant="outlined"
               type="submit"
               sx={{
-                color: 'white',
+                color: lightMode === 'dark' ? 'white' : 'black',
                 width: '30%',
                 alignSelf: 'center',
               }}

@@ -29,6 +29,7 @@ export default function SSERequest() {
   const reqState = useSelector((state) => state.currentReqRes);
   const api = window.api.ipcRenderer;
   const currentFolder = useSelector((state) => state.currentReqRes.folder);
+  const lightMode = useSelector((state) => state.light.mode);
   let response = useSelector((state) => state.currentReqRes.response);
   // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {
@@ -115,7 +116,7 @@ export default function SSERequest() {
               width: '100%',
               flexDirection: 'row',
               justifyContent: 'center',
-              pt:'8.5%'
+              pt: '8.5%',
             }}
           >
             <Select
@@ -156,7 +157,7 @@ export default function SSERequest() {
               variant="outlined"
               type="submit"
               sx={{
-                color: 'white',
+                color: lightMode === 'dark' ? 'white' : 'black',
                 width: '30%',
                 alignSelf: 'center',
               }}
@@ -166,7 +167,7 @@ export default function SSERequest() {
             </Button>
           </Box>
         </Box>
-        <Divider/>
+        <Divider />
         <Box
           sx={{
             height: '45vh',

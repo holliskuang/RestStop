@@ -54,8 +54,8 @@ export default function ResponseTest() {
           Response
         </Box>
       </Box>
-      <<Divider sx={{ width: '100%', color: 'black' }} />>
- 
+      <Divider sx={{ width: '100%', color: 'black' }} />
+
       {response !== undefined ? (
         <Paper
           sx={{
@@ -89,8 +89,7 @@ export default function ResponseTest() {
           </Box>
         </Paper>
       ) : (
-        <Box sx={{ minHeight: '70%' }}>
-        </Box>
+        <Box sx={{ height: '70%', width:'100%'}}> </Box>
       )}
     </Paper>
   );
