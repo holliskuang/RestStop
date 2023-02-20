@@ -68,8 +68,11 @@ export default function SSEResponse() {
           className="message-list"
           lockable={true}
           dataSource={chatLogState}
-          messageBoxStyles={{ backgroundColor: 'transparent' }}
-          notchStyle={{ fill: 'transparent' }}
+          messageBoxStyles={{
+            backgroundColor: 'whitesmoke',
+            color: 'black',
+          }}
+          notchStyle={{ fill: 'whitesmoke' }}
         />
       </Box>
     </Box>

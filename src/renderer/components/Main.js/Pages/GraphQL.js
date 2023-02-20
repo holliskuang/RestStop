@@ -9,7 +9,7 @@ import Dashboard from '../Dashboard/Dashboard';
 import { themeSettings } from '../../../themes';
 import GQLRequest from '../Request/GQLRequest';
 import { useDispatch } from 'react-redux';
-import { setMethod, setResponseMode } from '../../../state/currentReqRes.js';
+import { setMethod, setResponseMode, setResponse } from '../../../state/currentReqRes.js';
 import { ipcRenderer } from 'electron';
 
 export default function GraphQL() {
@@ -20,6 +20,7 @@ export default function GraphQL() {
   useEffect(() => {
     dispatch(setMethod('QUERY'));
     dispatch(setResponseMode('GraphQL'));
+    dispatch(setResponse({}));
   }, []);
 
   return (

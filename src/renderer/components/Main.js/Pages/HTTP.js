@@ -10,8 +10,9 @@ import { themeSettings } from '../../../themes';
 import { useDispatch } from 'react-redux';
 import { setMethod } from '../../../state/currentReqRes.js';
 import { useEffect } from 'react';
-import { setResponseMode } from '../../../state/currentReqRes.js';
+import { setResponseMode, setResponse } from '../../../state/currentReqRes.js';
 import { width } from '@mui/system';
+
 
 export default function HTTP() {
   const mode = useSelector((state) => state.light.mode);
@@ -20,6 +21,7 @@ export default function HTTP() {
   useEffect(() => {
     dispatch(setMethod('GET'));
     dispatch(setResponseMode('HTTP'));
+    dispatch(setResponse({}));
   }, []);
 
   return (

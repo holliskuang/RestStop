@@ -26,12 +26,13 @@ export default function SSE() {
   useEffect(() => {
     dispatch(setMethod('SSE'));
     dispatch(setResponseMode('SSE'));
+    dispatch(setResponse({}));
   }, []);
 
   api.receive('SSEserverMessage', (event, arg) => {
     dispatch(setResponse(arg));
   });
-  console.log('response', response);
+
   return (
     <Box>
       <ThemeProvider theme={theme}>
@@ -39,7 +40,6 @@ export default function SSE() {
         <NavBar></NavBar>
         <Box
           sx={{
-     
             height: '100%',
             width: '100%',
             display: 'flex',

@@ -26,6 +26,7 @@ export default function WebSocket() {
   useEffect(() => {
     dispatch(setMethod('WS'));
     dispatch(setResponseMode('WS'));
+    dispatch(setResponse({}));
   }, []);
 
   api.receive('serverMessage', (event, arg) => {

@@ -81,8 +81,11 @@ export default function GRPCResponse() {
           lockable={true}
           toBottomHeight={'100%'}
           dataSource={chatLogState}
-          messageBoxStyles={{ backgroundColor: 'transparent' }}
-          notchStyle={{ fill: 'transparent' }}
+          messageBoxStyles={{
+            backgroundColor: 'whitesmoke',
+            color: 'black',
+          }}
+          notchStyle={{ fill: 'whitesmoke' }}
         />
       </Box>
 
