@@ -47,11 +47,12 @@ export default function WSRequest() {
       api.send('closeWebSocket', response);
       const responseCopy = { ...response };
       responseCopy.connectionStatus = 'closed';
+
       dispatch(setResponse(responseCopy));
       dispatch(addReqRes(responseCopy));
       saveRequestToDB(responseCopy.id, responseCopy, currentFolder);
     } else {
-      // oprn a new websocket
+      // open a new websocket
       dispatch(setResponseMode('WS'));
       event.preventDefault();
       let reqResObj = {};

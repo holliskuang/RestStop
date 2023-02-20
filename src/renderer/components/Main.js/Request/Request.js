@@ -11,7 +11,7 @@ import {
   setResponse,
   setResponseMode,
 } from '../../../state/currentReqRes.js';
-import { Button, TextField, Box } from '@mui/material';
+import { Button, TextField, Box, Snackbar } from '@mui/material';
 import HeaderBox from './HeaderBox';
 import { v4 as uuid } from 'uuid';
 import ReqBodyTextBox from './ReqBodyTextBox';
@@ -25,6 +25,9 @@ import chai from 'chai';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import { useTheme } from '@emotion/react';
+import SnackBar from '../Widgets/SnackBar.js';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Request() {
   const dispatch = useDispatch();
@@ -38,7 +41,13 @@ export default function Request() {
   async function handleSubmit() {
     // IF URL NOT HTTP, THROW ERROR AND RETURN
     if (!reqState.url.startsWith('http')) {
-      alert('URL must be HTTP');
+   
+      toast('🦄 URL Must be HTTP!', {
+        position: 'bottom-right',
+        autoClose: 5000,
+        theme: 'light',
+      });
+      //alert('URL must be HTTP');
       return;
     }
     event.preventDefault();
