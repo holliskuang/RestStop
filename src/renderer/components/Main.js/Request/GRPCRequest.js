@@ -30,6 +30,7 @@ import FileUploadSingle from '../Widgets/Upload.js';
 import GRPCResponse from '../Response/GRPCResponse.js';
 import Response from '../Response/Response.js';
 import Divider from '@mui/material/Divider';
+import { useTheme } from '@emotion/react';
 
 export default function WSRequest() {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ export default function WSRequest() {
   const currentFolder = useSelector((state) => state.currentReqRes.folder);
   let response = useSelector((state) => state.currentReqRes.response);
   let chatlog = useSelector((state) => state.currentReqRes.gRPCChatLog);
+  const theme = useTheme();
   console.log('response', response);
   // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {
@@ -86,6 +88,7 @@ export default function WSRequest() {
       sx={{
         width: '70%',
         height: '100%',
+        backgroundColor: theme.palette.background.request,
       }}
     >
       <FormControl

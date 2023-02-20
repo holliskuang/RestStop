@@ -14,6 +14,7 @@ export default function SSEResponse() {
   const [message, setMessage] = React.useState('');
   const [chatLogState, setChatLogState] = React.useState([]);
   const reqResObj = useSelector((state) => state.currentReqRes.response);
+  const lightMode = useSelector((state) => state.light.mode);
   /* Array that is mapped , following below format: pos, type,text,time */
 
   let dataFiller = [];
@@ -45,7 +46,10 @@ export default function SSEResponse() {
       }}
     >
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Typography variant="h3" sx={{ mt: '2.5%', color: 'whitw' }}>
+        <Typography
+          variant="h3"
+          sx={{ mt: '2.5%', color: lightMode === 'dark' ? 'white' : 'black' }}
+        >
           Response
         </Typography>
       </Box>
@@ -55,7 +59,7 @@ export default function SSEResponse() {
           overflowY: 'auto',
           borderRadius: '4px',
           borderStyle: 'solid',
-          borderColor: 'white',
+          borderColor: lightMode === 'dark' ? 'white' : 'black',
           borderWidth: '1px',
           height: '30vh',
         }}

@@ -23,6 +23,7 @@ import { saveRequestToDB } from '../Dashboard/DashboardController.js';
 import { db } from 'renderer/db.js';
 import Response from '../Response/Response';
 import Divider from '@mui/material/Divider';
+import { useTheme } from '@emotion/react';
 
 export default function SSERequest() {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ export default function SSERequest() {
   const api = window.api.ipcRenderer;
   const currentFolder = useSelector((state) => state.currentReqRes.folder);
   const lightMode = useSelector((state) => state.light.mode);
+  const theme=useTheme();
   let response = useSelector((state) => state.currentReqRes.response);
   // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {
@@ -92,6 +94,7 @@ export default function SSERequest() {
     <Box
       sx={{
         width: '70%',
+        backgroundColor: theme.palette.background.request,
       }}
     >
       <FormControl

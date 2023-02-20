@@ -14,6 +14,7 @@ export default function WSResponse() {
   const [message, setMessage] = React.useState('');
   const [chatLogState, setChatLogState] = React.useState([]);
   const reqResObj = useSelector((state) => state.currentReqRes.response);
+  const lightMode = useSelector((state) => state.light.mode);
   /* Array that is mapped , following below format: pos, type,text,time */
 
   let dataFiller = [];
@@ -46,7 +47,10 @@ export default function WSResponse() {
       }}
     >
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Typography variant="h4" sx={{ m: '1.5%', color: 'white' }}>
+        <Typography
+          variant="h4"
+          sx={{ m: '1.5%', color: lightMode === 'dark' ? 'white' : 'black' }}
+        >
           Response
         </Typography>
       </Box>
@@ -56,7 +60,7 @@ export default function WSResponse() {
           overflowY: 'auto',
           borderRadius: '10px',
           borderStyle: 'solid',
-          borderColor: 'white',
+          borderColor: lightMode === 'dark' ? 'white' : 'black',
           borderWidth: '1px',
           height: '60%',
         }}
@@ -65,8 +69,11 @@ export default function WSResponse() {
           className="message-list"
           lockable={true}
           dataSource={chatLogState}
-          messageBoxStyles={{ backgroundColor: 'transparent' }}
-          notchStyle={{ fill: 'transparent' }}
+          messageBoxStyles={{
+            backgroundColor: 'whitesmoke',
+            color: 'black',
+          }}
+          notchStyle={{ fill: 'whitesmoke' }}
         />
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>

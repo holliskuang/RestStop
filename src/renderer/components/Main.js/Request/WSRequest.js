@@ -25,6 +25,7 @@ import chai from 'chai';
 import GraphQL from '../Pages/GraphQL.js';
 import GQLVariableBox from './GQLVariableBox.js';
 import Divider from '@mui/material/Divider';
+import { useTheme } from '@emotion/react';
 
 export default function WSRequest() {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ export default function WSRequest() {
   const lightMode = useSelector((state) => state.light.mode);
   const api = window.api.ipcRenderer;
   const currentFolder = useSelector((state) => state.currentReqRes.folder);
+  const theme = useTheme();
   let response = useSelector((state) => state.currentReqRes.response);
   // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {
@@ -83,6 +85,7 @@ export default function WSRequest() {
     <Box
       sx={{
         width: '70%',
+        backgroundColor: theme.palette.background.request,
       }}
     >
       <FormControl

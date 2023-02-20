@@ -71,8 +71,8 @@ export const themeSettings = (mode: any) => {
             },
             background: {
               dashboard: 'whitesmoke',
-              request: '#DCDCDC',
-              response: '#DCDCDC',
+              request: 'white',
+              response: 'white',
             },
           }),
     },

@@ -25,12 +25,14 @@ import TestBox from './TestBox.js';
 import chai from 'chai';
 import GraphQL from '../Pages/GraphQL.js';
 import GQLVariableBox from './GQLVariableBox.js';
+import { useTheme } from '@emotion/react';
 
 export default function Request() {
   const dispatch = useDispatch();
   const reqState = useSelector((state) => state.currentReqRes);
   const lightMode = useSelector((state) => state.light.mode);
- 
+  const theme = useTheme();
+
   const api = window.api.ipcRenderer;
   const currentFolder = useSelector((state) => state.currentReqRes.folder);
   let assert = chai.assert;
@@ -108,7 +110,9 @@ export default function Request() {
   };
 
   return (
-    <Box sx={{ width: '70%' }}>
+    <Box
+      sx={{ width: '70%', backgroundColor: theme.palette.background.request }}
+    >
       <FormControl
         fullWidth
         sx={{
@@ -129,7 +133,7 @@ export default function Request() {
               width: '100%',
               flexDirection: 'row',
               justifyContent: 'center',
-              pt:'8.5%'
+              pt: '8.5%',
             }}
           >
             <Select
@@ -192,9 +196,9 @@ export default function Request() {
             value={reqState.reqBody}
           />
         </Box>
-        <Divider/>
-        <Box sx={{height:'45vh', overflowY:'auto'}}>
-        <Response/>
+        <Divider />
+        <Box sx={{ height: '45vh', overflowY: 'auto' }}>
+          <Response />
         </Box>
       </FormControl>
     </Box>

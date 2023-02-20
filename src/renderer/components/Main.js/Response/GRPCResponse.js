@@ -19,6 +19,7 @@ export default function GRPCResponse() {
   const dispatch = useDispatch();
   const chatLog = useSelector((state) => state.currentReqRes.gRPCChatLog);
   const service = useSelector((state) => state.currentReqRes.service);
+  const lightMode = useSelector((state) => state.light.mode);
   console.log('service', service);
   /* Array that is mapped , following below format: pos, type,text,time */
 
@@ -55,7 +56,11 @@ export default function GRPCResponse() {
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <Typography
           variant="h4"
-          sx={{ mt: '2.5%', ml: '2.5%', color: 'white' }}
+          sx={{
+            mt: '2.5%',
+            ml: '2.5%',
+            color: lightMode === 'dark' ? 'white' : 'black',
+          }}
         >
           Response
         </Typography>
@@ -65,7 +70,7 @@ export default function GRPCResponse() {
           m: '1%',
           overflowY: 'auto',
           borderStyle: 'solid',
-          borderColor: 'white',
+          borderColor: lightMode === 'dark' ? 'white' : 'black',
           borderWidth: '1px',
           height: '60%',
           borderRadius: '10px',
