@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 export default function ResponseTest() {
   const reqAndRes = useSelector((state) => state.currentReqRes);
   const response = reqAndRes.response.responseTest;
+  const lightMode = useSelector((state) => state.light.mode);
   const test = reqAndRes.response.originalTest;
   console.log(response);
 
@@ -17,6 +18,8 @@ export default function ResponseTest() {
         flexWrap: 'wrap',
         justifyContent: 'flex-start',
         height: '26vh',
+        background: lightMode=='dark'?'#2d3138':'#fff',
+        fontSize: '0.75rem',
       }}
     >
       <Box
@@ -89,7 +92,14 @@ export default function ResponseTest() {
           </Box>
         </Paper>
       ) : (
-        <Box sx={{ height: '70%', width:'100%'}}> </Box>
+        <Box
+          sx={{
+            height: '70%',
+            width: '100%',
+          }}
+        >
+          {' '}
+        </Box>
       )}
     </Paper>
   );
