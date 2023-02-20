@@ -26,6 +26,8 @@ import chai from 'chai';
 import GraphQL from '../Pages/GraphQL.js';
 import GQLVariableBox from './GQLVariableBox.js';
 import { useTheme } from '@emotion/react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Request() {
   const dispatch = useDispatch();
@@ -39,6 +41,15 @@ export default function Request() {
 
   // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {
+    if (!reqState.url.startsWith('http')) {
+      toast('🦄 URL Must be HTTP!', {
+        position: 'bottom-right',
+        autoClose: 5000,
+        theme: 'light',
+      });
+      return;
+    }
+
     dispatch(setResponseMode('GraphQL'));
     console.log('reqState', reqState.responseMode);
     event.preventDefault();

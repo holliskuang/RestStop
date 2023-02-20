@@ -26,6 +26,8 @@ import GraphQL from '../Pages/GraphQL.js';
 import GQLVariableBox from './GQLVariableBox.js';
 import Divider from '@mui/material/Divider';
 import { useTheme } from '@emotion/react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function WSRequest() {
   const dispatch = useDispatch();
@@ -39,7 +41,11 @@ export default function WSRequest() {
   async function handleSubmit() {
     // IF URL NOT WS, THROW ERROR AND RETURN
     if (!reqState.url.startsWith('ws')) {
-      alert('URL must be WS');
+      toast('🦄 URL Must be WS or WSS!', {
+        position: 'bottom-right',
+        autoClose: 5000,
+        theme: 'light',
+      });
       return;
     }
     // Disconnect an existing websocket if it exists and save the reqres to history

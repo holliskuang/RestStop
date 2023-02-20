@@ -7,7 +7,7 @@ import { ToastContainer } from 'react-toastify';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
-
+// render toast as alerts stop Electron Processes
 root.render(
   <React.StrictMode>
     <Provider store={store}>

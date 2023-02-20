@@ -24,6 +24,8 @@ import { db } from 'renderer/db.js';
 import Response from '../Response/Response';
 import Divider from '@mui/material/Divider';
 import { useTheme } from '@emotion/react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function SSERequest() {
   const dispatch = useDispatch();
@@ -37,7 +39,11 @@ export default function SSERequest() {
   async function handleSubmit() {
     /// If URL not HTTP, throw error and return
     if (!reqState.url.startsWith('http')) {
-      alert('URL must be HTTP');
+      toast('🦄 URL Must be HTTP!', {
+        position: 'bottom-right',
+        autoClose: 5000,
+        theme: 'light',
+      });
       return;
     }
     // Disconnect an existing SSE if it exists and save the reqres to history

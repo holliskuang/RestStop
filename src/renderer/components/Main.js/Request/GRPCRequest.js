@@ -31,8 +31,18 @@ import GRPCResponse from '../Response/GRPCResponse.js';
 import Response from '../Response/Response.js';
 import Divider from '@mui/material/Divider';
 import { useTheme } from '@emotion/react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function WSRequest() {
+  if (!reqState.url.startsWith('http')) {
+    toast('🦄 URL Must be HTTP!', {
+      position: 'bottom-right',
+      autoClose: 5000,
+      theme: 'light',
+    });
+    return;
+  }
   const dispatch = useDispatch();
   const reqState = useSelector((state) => state.currentReqRes);
   const lightMode = useSelector((state) => state.light.mode);
