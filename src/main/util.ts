@@ -19,10 +19,25 @@ export function resolveHtmlPath(htmlFileName: string) {
 // handle Request , pull in headers and cookies and body and return response object
 export async function handleRequest(reqResObj) {
   const resHeader = {};
-  let response = await fetch(reqResObj.url, {
-    method: reqResObj.method,
-    headers: reqResObj.headers,
+  let response = await fetch(
+    reqResObj.url,
+    {
+      method: reqResObj.method,
+      headers: reqResObj.headers,
+    }
+    // handle error
+  ).catch((err) => {
+    console.log(err);
+    reqResObj['responseStatus'] = 500;
+    reqResObj['responseBody'] = err.message;
+    return reqResObj;
   });
+
+  if (reqResObj.responseStatus == 500) {
+    reqResObj['responseCookies'] = [{}];
+    reqResObj['responseHeaders'] = {};
+    return reqResObj;
+  }
 
   handleTest(reqResObj, response);
 
@@ -54,10 +69,10 @@ export async function handleRequest(reqResObj) {
 }
 
 async function handleTest(reqResObj, response) {
-  reqResObj['originalTest']= reqResObj.test;
+  reqResObj['originalTest'] = reqResObj.test;
   try {
     eval(reqResObj.test);
-    reqResObj['responseTest'] = true
+    reqResObj['responseTest'] = true;
   } catch (err) {
     reqResObj['responseTest'] = false;
     return;

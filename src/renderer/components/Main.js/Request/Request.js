@@ -37,6 +37,9 @@ export default function Request() {
   let assert = chai.assert;
   const lightMode = useSelector((state) => state.light.mode);
   const theme = useTheme();
+
+  
+  console.log(reqState)
   // Send Object to Main Process, Object gets sent back to Render, back and forth
   async function handleSubmit() {
     // IF URL NOT HTTP, THROW ERROR AND RETURN
