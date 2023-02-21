@@ -23,7 +23,6 @@ export async function GQLFetch(reqResObj, mainWindow): Promise<object> {
         timeout: 60000,
       },
     })
-  
   );
 
   // Links for URL and Headers
@@ -73,10 +72,12 @@ export async function GQLFetch(reqResObj, mainWindow): Promise<object> {
   // if subscription, we have to use the client.subscribe method
 
   if (reqResObj.method === 'SUBSCRIPTION') {
-    const observableSubscription = client.subscribe({
+    let observableSubscription;
+
+    observableSubscription = client.subscribe({
       query: gql`
         ${reqResObj.body}
-      `,
+      `,errorPolicy: 'all'
     });
 
     // subscribe to the observable
