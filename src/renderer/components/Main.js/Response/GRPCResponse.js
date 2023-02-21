@@ -98,17 +98,6 @@ export default function GRPCResponse() {
           setMessage(event.target.value);
         }}
       />
-      {/* Button that appears for client Streaming Methods to end the stream*/}
-      {(service.type === 'CLIENT STREAM' ||
-        service.type === 'BIDIRECTIONAL') && (
-        <Button
-          text={'End Stream'}
-          onClick={() => {
-            api.send('gRPCEndStreaming');
-          }}
-          title="End Stream"
-        />
-      )}
       <Button
         text={'Send'}
         onClick={() => {
@@ -124,6 +113,17 @@ export default function GRPCResponse() {
         }}
         title="Send"
       />
+      {/* Button that appears for client Streaming Methods to end the stream*/}
+      {(service.type === 'CLIENT STREAM' ||
+        service.type === 'BIDIRECTIONAL') && (
+        <Button
+          text={'End Stream'}
+          onClick={() => {
+            api.send('gRPCEndStreaming');
+          }}
+          title="End Stream"
+        />
+      )}
     </Box>
   );
 }
