@@ -152,6 +152,10 @@ export const GRPCController = {
         GRPCController.currentStream = null;
         event.sender.send('gRPCserverMessage', 'Stream End');
       });
+      call.on('error', function (e) {
+        // An error has occurred and the stream has been closed.
+        event.sender.send('gRPCserverMessage', e.message);
+      });
 
       ipcMain.on('gRPCEndStreaming', (event) => {
         call.end();
