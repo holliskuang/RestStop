@@ -23,6 +23,7 @@ export async function GQLFetch(reqResObj, mainWindow): Promise<object> {
         timeout: 60000,
       },
     })
+  
   );
 
   // Links for URL and Headers
@@ -44,11 +45,14 @@ export async function GQLFetch(reqResObj, mainWindow): Promise<object> {
           `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
         )
       );
+      reqResObj['responseBody'] = `graphQLErrors`;
+      return reqResObj;
     }
 
     if (networkError) {
       console.log(`[Network error]: ${networkError}`);
       reqResObj['responseBody'] = `networkError`;
+      return reqResObj;
     }
   });
 

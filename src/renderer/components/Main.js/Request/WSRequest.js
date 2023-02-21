@@ -66,15 +66,24 @@ export default function WSRequest() {
       reqResObj.responseMode = reqState.responseMode;
       reqResObj.id = uuid();
       reqResObj.url = retrieveUrl();
+      if (reqResObj.url === null) return;
       dispatch(setResponse(reqResObj));
       api.send('openWebSocket', reqResObj);
       // console.log('reqAndRes', reqAndRes);
     }
   }
-  console.log('METHOD', reqState.method);
+
   // retrieve url from redux
   const retrieveUrl = () => {
     const url = reqState.url;
+    if (!url.startsWith('ws://') && !url.startsWith('wss://')) {
+      toast('🦄 URL Must be WS or WSS!', {
+        position: 'bottom-right',
+        autoClose: 5000,
+        theme: 'light',
+      });
+      return null;
+    }
     return url;
   };
   // retrieve method from redux
