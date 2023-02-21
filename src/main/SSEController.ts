@@ -13,6 +13,7 @@ export const SSEController = {
     reqResObj.chatLog = [];
     sse.onopen = function open() {
       reqResObj.connectionStatus = 'open';
+      console.log('SSE connection opened');
       event.sender.send('SSEserverMessage', reqResObj);
     };
 
@@ -20,8 +21,13 @@ export const SSEController = {
     sse.onerror = function error(err) {
       reqResObj.chatLog.push([err.data, Date.now(), 'server']);
       event.sender.send('SSEserverMessage', reqResObj);
+      sse.close();
     };
     sse.onmessage = function incoming(SSEserverMessage) {
+      if (reqResObj.connectionStatus !== 'open') {
+        return;
+      }
+      reqResObj.aaaa = [SSEserverMessage.data, Date.now(), 'server'];
       reqResObj.chatLog.push([SSEserverMessage.data, Date.now(), 'server']);
       event.sender.send('SSEserverMessage', reqResObj);
     };
