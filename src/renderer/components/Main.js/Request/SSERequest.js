@@ -67,6 +67,7 @@ export default function SSERequest() {
       console.log(reqResObj);
     }
   }
+  
 
   // retrieve body from redux
   // retrieve checked headers from redux and return as object
