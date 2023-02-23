@@ -8,7 +8,8 @@ import DataObjectIcon from '@mui/icons-material/DataObject';
 import HubIcon from '@mui/icons-material/Hub';
 import PowerIcon from '@mui/icons-material/Power';
 import SettingsInputAntennaIcon from '@mui/icons-material/SettingsInputAntenna';
-import WebhookIcon from '@mui/icons-material/Webhook';
+import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
+
 import { Link } from "react-router-dom";
 import React, { useState } from 'react';
 
@@ -26,7 +27,7 @@ export default function NavBar() {
     { name: 'GraphQL', route: '/graphql', value: 'graphQL', endIcon:HubIcon },
     { name: 'WebSocket', route: '/websocket', value: 'ws', endIcon:PowerIcon},
     { name: 'SSE', route: '/sse', value: 'sse', endIcon:SettingsInputAntennaIcon },
-    { name: 'GRPC', route: '/grpc', value: 'grpc', endIcon:WebhookIcon },
+    { name: 'GRPC', route: '/grpc', value: 'grpc', endIcon:SwapHorizIcon},
   ]; 
   function ReduxPageUpdate() {
     console.log('redux page update');
