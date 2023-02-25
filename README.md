@@ -76,7 +76,7 @@ Work In Progress:
 RestStop supports all root operation types of GraphQL
 
 - `QUERY` - Request data from server, similar to `GET`
-- `MUTATION` - Modify server-side data , like `POST`,`PUT`, `PATCH`
+- `MUTATION` - Modify server-side data , like an all-in-one `POST`,`PUT`, `PATCH`, and `DELETE` 
 - `SUBSCRIPTION` - Utilize WebSockets to maintain active listening connection to Server
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
