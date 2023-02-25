@@ -43,7 +43,7 @@ The application currently supports different methods such as: </p>
   <li><strong style="color:red ">HTTP</strong></li>
   <li><strong style="color:blue ">GraphQL</strong></li>
   <li><strong style="color:green ">WebSocket</strong></li>
-  <li><strong style="color:orange ">SSE</strong></li>
+  <li><strong style="color:orange ">Server-Sent Events</strong></li>
   <li><strong style="color:indigo ">gRPC</strong></li>
 </ul>
 
@@ -71,13 +71,19 @@ Work In Progress 🚧:
 - `PATCH` - Applies partial modifications to a resource
 - `DELETE` - Deletes the specified resource.
 
-**GraphQL**
+**🕸️GraphQL**
 
 RestStop supports all root operation types of GraphQL
 
 - `QUERY` - Request data from server, similar to `GET`
 - `MUTATION` - Modify server-side data. An all-in-one `POST`,`PUT`, `PATCH`, and `DELETE` 
 - `SUBSCRIPTION` - Utilize WebSockets to maintain active listening connection to Server
+
+**🔌WebSocket**
+
+**📩Server-Sent Events**
+
+**🔛gRPC**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
