@@ -81,9 +81,19 @@ RestStop supports all root operation types of GraphQL
 
 **🔌WebSocket**
 
+Connect and Establish Bi-Directional communcation channels with WebSocket Servers.
+
 **📩Server-Sent Events**
 
+Establish an HTTP connection to receive automatic updates from a server
+
 **🔛gRPC**
+
+RestStop supports all four kinds of service method. Upload a proto file to perform Remote Procedure Calls.
+- `Unary` - Sends a request and gets a response
+- `Client Stream` - Write a sequence of messages to the server and receive a response from the server
+- `Server Stream` - Sends a request to the server and receive a sequence of messages back
+- `Bidirectional Stream` - Server and Client both exchange messages to one another 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -91,8 +101,8 @@ RestStop supports all root operation types of GraphQL
 
 ### Built With
 
+* [![Electron][Electron.js]][Electron-url]
 * [![TypeScript][TypeScript.js]][TypeScript-url]
-* [![Next][Next.js]][Next-url]
 * [![React][React.js]][React-url]
 * [![Express][Express.js]][Express-url]
 * [![MUI][MUI]][MUI-url]
@@ -231,3 +241,5 @@ Use this space to list resources you find helpful and would like to give credit 
 [MUI-url]: https://mui.com/
 [TypeScript.js]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
 [TypeScript-url]: https://www.typescriptlang.org/
+[Electron.js]:https://img.shields.io/badge/Electron-191970?style=for-the-badge&logo=Electron&logoColor=white)
+[Electron-url]: https://www.electronjs.org/
