@@ -119,14 +119,26 @@ This Folder comes with a RestStop Application Executable packaged for Windows at
 <!-- USAGE EXAMPLES -->
 ## Basic Documentation
 
-There are 5 Sections of this App:
+RestStop is split into Three Different Components: 1. Collections 2. Request 3. Response
+
+<strong><h3>Collections</h3></strong>
+<p> Collections consists of a Folder Panel and a History Panel. </p>
+  <h4>Folder</h4>
 <ul>
-  <li>Top Tracks</li> 
-  <li>Top Artists</li> 
-  <li>Recently Played </li> 
-  <li>Recently Played </li>  
-  <li>Recently Played </li>
+  <li>Folders contain the history of your previous requests and their respective responses</li>
+  <li>You can create, clear, and delete folders</li>
+  <li>When you submit a request, the request and response will be saved to your current folder</li>
+  <li>You can remove specific request/response blocks from your folder as well as see its recorded response</li>
 </ul>
+  <h4>History </h4>
+  <ul>
+  <li>History contains an absolute record of all previous requests/responses that you have created</li>
+  <li>These records also contain the timestamp at which the request was made</li>
+</ul>
+
+
+<strong><h3>Request</h3></strong>
+
 
 
 
