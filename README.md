@@ -96,20 +96,23 @@ RestStop supports all four kinds of service method. Upload a proto file to perfo
 
 
 
-If you are interested in hosting your own version of this app, you will need to create an account with [Spotify For Developers](https://developer.spotify.com/) in order to access the necessary APIs that this app utilizes.
-
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/holliskuang/RestStop.git
    ```
 2. Install NPM packages
    ```sh
    npm install
    ```
-3. Fill in Client Secret Environment Variable with what you receive from your Spotify For Developers Account. This will provide you access to Spotify Web APIs
-
-4. Replace the Redirect URI with your personal URL of choice to host the server
+3. Start the App locally
+  ```sh
+  npm start
+  ```
+4. If you are interested in turning the app into an executable, you can utilize electron-builder to package the app
+  ```sh
+  npm run packager
+  ```
 
 
 
