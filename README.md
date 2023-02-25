@@ -121,7 +121,7 @@ This Folder comes with a RestStop Application Executable packaged for Windows at
 
 RestStop is split into Three Different Components: 1. Collections 2. Request 3. Response
 
-<strong><h3>Collections</h3></strong>
+<h3><ins>Collections</ins></h3>
 <p> Collections consists of a Folder Panel and a History Panel. </p>
   <h4>Folder</h4>
 <ul>
@@ -130,14 +130,47 @@ RestStop is split into Three Different Components: 1. Collections 2. Request 3. 
   <li>When you submit a request, the request and response will be saved to your current folder</li>
   <li>You can remove specific request/response blocks from your folder as well as see its recorded response</li>
 </ul>
-  <h4>History </h4>
+  <h4>History></h4>
   <ul>
   <li>History contains an absolute record of all previous requests/responses that you have created</li>
   <li>These records also contain the timestamp at which the request was made</li>
 </ul>
 
 
-<strong><h3>Request</h3></strong>
+<h3><ins>Request</ins></h3>
+<p>The Request component will differ depending on the endpoint being served.</p>
+<p>An HTTP Request will contain:</p>
+<ul>
+  <li>Method Selector</li>
+  <li>URL</li>
+  <li>Headers</li>
+  <li>Test Suite</li>
+  <li>Request Body(If method is not GET)</li>
+</ul>
+<p>A GraphQL Request will contain:</p>
+<ul>
+  <li>Root Type Selector</li>
+  <li>URL</li>
+  <li>Headers</li>
+  <li>Variables</li>
+  <li>Test Suite</li>
+</ul>
+<p>A WebSocket Request will contain a:</p>
+<ul>
+  <li>URL</li>
+</ul>
+<p>A Server-Sent Event Request will contain:</p>
+<ul>
+  <li>URL</li>
+  <li>Headers</li>
+</ul>
+<p>A gRPC Request will contain:</p>
+<ul>
+  <li>URL</li>
+  <li>Proto File Uploader</li>
+  <li>Service Method Selector</li>
+  <li>Service Definition Display</li>
+</ul>
 
 
 
