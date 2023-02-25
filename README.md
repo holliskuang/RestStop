@@ -36,9 +36,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<p>An Open source API development application. Send out requests and quickly receive the responses you want without the bloat. </p>
+<p>An Open source API development application. Send out requests, test your API endpoints and quickly receive the responses you want without the bloat. </p>
 <p>
-The application currently supports: </p>
+The application currently supports different methods such as: </p>
 <ul>
   <li><strong style="color:red ">HTTP</strong></li>
   <li><strong style="color:blue ">GraphQL</strong></li>
@@ -50,7 +50,28 @@ The application currently supports: </p>
 Work In Progress: 
 <ul><li><strong>WebHook</strong></li></ul>
 
+## Features
 
+⭐ Minimalistic: Avoid the bloat that comes with Postman
+
+💨 Real-Time: Send and Receive messages without delay
+
+📚 DataBase: Automatically save and organize your requests/responses with the Folders System
+
+✏️ Tests : Test your HTTP calls with assertions
+
+## Supported Methods
+
+**🔥HTTP**
+
+
+- `GET` - Requests a representation of the specified resource
+- `POST` - Sends data to the server
+- `PUT` -  Creates a new resource or replaces a representation of the target resource with the request payload
+- `PATCH` - Applies partial modifications to a resource
+- `DELETE` - Deletes the specified resource.
+
+**GraphQL
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
