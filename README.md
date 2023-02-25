@@ -71,7 +71,14 @@ Work In Progress:
 - `PATCH` - Applies partial modifications to a resource
 - `DELETE` - Deletes the specified resource.
 
-**GraphQL
+**GraphQL**
+
+RestStop supports all root operation types of GraphQL
+
+- `QUERY` - Request data from server, similar to `GET`
+- `MUTATION` - Modify server-side data , like `POST`,`PUT`, `PATCH`
+- `SUBSCRIPTION` - Utilize WebSockets to maintain active listening connection to Server
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
