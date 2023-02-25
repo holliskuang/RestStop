@@ -193,13 +193,17 @@ RestStop is split into Three Different Components: 1. Collections 2. Request 3. 
 <!-- ROADMAP -->
 ## Roadmap
 
-- [x] Add Top Artists Page
-- [x] Add Top Tracks Page
-- [x] Add Recently Played Page
-- [x] Add Functionality to Create Playlist
-- [ ] Get Approval for Autherntication Quota Extension
+- [x] Light Mode
+- [x] Nav Bar
+- [x] HTTP
+- [x] GraphQL
+- [x] Chat-Log Response Component
+- [x] WebSocket
+- [x] Server-Sent Events
+- [x] gRPC 
+- [ ] WebHook
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/holliskuang/RestStop/issues) for a full list of proposed features (and known issues).
 
 
 
