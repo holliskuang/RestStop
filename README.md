@@ -36,6 +36,8 @@ Work In Progress 🚧:
 
 📚 DataBase: Automatically save and organize your requests/responses with the Folders System
 
+🌙 Color Theme: Select the theme that best suits you
+
 ✏️ Tests : Test your HTTP calls with assertions
 
 ## Supported Methods
@@ -172,6 +174,18 @@ RestStop is split into Three Different Components: 1. Collections 2. Request 3. 
   <li>Service Definition Display</li>
 </ul>
 
+<h3><ins>Response</ins></h3>
+
+<p>HTTP and GraphQL methods utilize a response component which records the Response Body, Response Headers, Response Cookies, and Test Results where applicable.</p>
+
+<p>WebSocket, Server-Sent Events, and gRPC utilize a chat-log display to visualize the messages sent to and from the server.</p>
+<ul>
+  <li>Messages are Timestamped</li>
+  <li>Messages from the Server will de displayed on the left side of the chat-log</li>
+  <li>Messages from the Client will be displayed on the right side of the chat-log</li>
+  <li>When a method allows for the Client to message the Server, a chat box with appear which will allow you to send messages</li>
+  <li>When a method allows for Client Streaming, an 'End Stream' button will appear, which will allow the server to know when you have finished streaming your message</li>
+</ul>
 
 
 
