@@ -84,7 +84,7 @@ RestStop supports all four kinds of service method. Upload a proto file to perfo
 * [![React][React.js]][React-url]
 * [![Redux][Redux]][Redux-url]
 * [![MUI][MUI]][MUI-url]
-* [![Chai.js][Chai.js][Chai-url]
+* [![Chai.js][Chai.js]][Chai-url]
 * [![Apollo-GraphQL][Apollo-GraphQL]][Apollo-GraphQL-url]
 
 
