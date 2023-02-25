@@ -94,8 +94,7 @@ RestStop supports all four kinds of service method. Upload a proto file to perfo
 <!-- GETTING STARTED -->
 ## Getting Started
 
-
-
+This Folder comes with a RestStop Application Executable packaged for Windows at the root folder. If you are running Windows, you may choose to open the app through this executable. Otherwise, you can build the app tailored to your operating system. 
 
 1. Clone the repo
    ```sh
@@ -105,7 +104,7 @@ RestStop supports all four kinds of service method. Upload a proto file to perfo
    ```sh
    npm install
    ```
-3. Start the App locally
+3. Test and Start the App locally
   ```sh
   npm start
   ```
@@ -120,17 +119,15 @@ RestStop supports all four kinds of service method. Upload a proto file to perfo
 <!-- USAGE EXAMPLES -->
 ## Basic Documentation
 
-There are 3 Sections of this Web App:
-<ul><li>Top Tracks</li> <li>Top Artists</li> <li>Recently Played </li> </ul>
+There are 5 Sections of this App:
+<ul>
+  <li>Top Tracks</li> 
+  <li>Top Artists</li> 
+  <li>Recently Played </li> 
+  <li>Recently Played </li>  
+  <li>Recently Played </li>
+</ul>
 
-<p>For the Top Tracks and Top Artists section, you have the option to select a timeframe of 
-<ul><li>All Time</li> <li>Most Recent 6 Months</li> <li>Most Recent Month</li> </ul></p>
-
-<p>When you select your section and timeframe of interest, you will receive a list of your top songs/artists. For the Top Tracks section, you will receive your top 50 tracks of the selected timeframe. For the Top Artists section, you will receive a list of your top 50 artists. For the Recently Played section, you will receive your 50 most recent tracks that you have played.</p>
-
-<p>Each of the items on the list you generate will link you to their respective Spotify page.</p>
-
-<p> You can also create a playlist from your list of songs/artists which will create a playlist directly in your Spotify Account. No extra work required! Just name your playlist and it will show up on your Spotify App.</p>
 
 
 
