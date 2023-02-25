@@ -9,28 +9,6 @@
 
 
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
-
 
 
 <!-- ABOUT THE PROJECT -->
@@ -95,7 +73,7 @@ RestStop supports all four kinds of service method. Upload a proto file to perfo
 - `Server Stream` - Sends a request to the server and receive a sequence of messages back
 - `Bidirectional Stream` - Server and Client both exchange messages to one another 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 
 
@@ -104,18 +82,18 @@ RestStop supports all four kinds of service method. Upload a proto file to perfo
 * [![Electron][Electron.js]][Electron-url]
 * [![TypeScript][TypeScript.js]][TypeScript-url]
 * [![React][React.js]][React-url]
-* [![Express][Express.js]][Express-url]
+* [![Redux][Redux]][Redux-url]
 * [![MUI][MUI]][MUI-url]
+* [![Apollo-GraphQL][Apollo-GraphQL]][Apollo-GraphQL-url]
 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This App is readily available on [Listy.dev](https://listy.dev)
+
 
 If you are interested in hosting your own version of this app, you will need to create an account with [Spotify For Developers](https://developer.spotify.com/) in order to access the necessary APIs that this app utilizes.
 
@@ -132,7 +110,6 @@ If you are interested in hosting your own version of this app, you will need to 
 
 4. Replace the Redirect URI with your personal URL of choice to host the server
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -150,7 +127,6 @@ There are 3 Sections of this Web App:
 <p>Each of the items on the list you generate will link you to their respective Spotify page.</p>
 
 <p> You can also create a playlist from your list of songs/artists which will create a playlist directly in your Spotify Account. No extra work required! Just name your playlist and it will show up on your Spotify App.</p>
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -165,7 +141,6 @@ There are 3 Sections of this Web App:
 
 See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -183,7 +158,6 @@ Don't forget to give the project a star! Thanks again!
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -192,18 +166,14 @@ Don't forget to give the project a star! Thanks again!
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- CONTACT -->
 ## Contact
 
 Hollis Kuang - kuanghollis@gmail.com
 
-Project Link: [https://github.com/holliskuang/Listy.dev](https://github.com/holliskuang/Listy.dev)
+Project Link: [https://github.com/holliskuang/RestStop](https://github.com/holliskuang/RestStop)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -212,14 +182,13 @@ Project Link: [https://github.com/holliskuang/Listy.dev](https://github.com/holl
 
 Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
 
-* [Spotify for Developers](https://developer.spotify.com/)
 * [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
 * [Img Shields](https://shields.io)
 * [GitHub Pages](https://pages.github.com)
+* [Swell](https://github.com/open-source-labs/Swell)
 * [Font Awesome](https://fontawesome.com)
 * [React Icons](https://react-icons.github.io/react-icons/search)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -235,11 +204,13 @@ Use this space to list resources you find helpful and would like to give credit 
 [Next-url]: https://nextjs.org/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
-[Express.js]: https://img.shields.io/badge/Express.js-404D59?style=for-the-badge
-[Express-url]: https://expressjs.com/
 [MUI]: https://img.shields.io/badge/Material--UI-0081CB?style=for-the-badge&logo=material-ui&logoColor=white
 [MUI-url]: https://mui.com/
 [TypeScript.js]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
 [TypeScript-url]: https://www.typescriptlang.org/
 [Electron.js]: https://img.shields.io/badge/Electron-191970?style=for-the-badge&logo=Electron&logoColor=white
 [Electron-url]: https://www.electronjs.org/
+[Redux]: https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white
+[Redux-url]: https://redux.js.org/
+[Apollo-GraphQL]: https://img.shields.io/badge/-ApolloGraphQL-311C87?style=for-the-badge&logo=apollo-graphql
+[Apollo-GraphQL-url]: https://www.apollographql.com/
