@@ -84,6 +84,7 @@ RestStop supports all four kinds of service method. Upload a proto file to perfo
 * [![React][React.js]][React-url]
 * [![Redux][Redux]][Redux-url]
 * [![MUI][MUI]][MUI-url]
+* [![Chai.js][Chai.js][Chai-url]
 * [![Apollo-GraphQL][Apollo-GraphQL]][Apollo-GraphQL-url]
 
 
@@ -214,3 +215,5 @@ Use this space to list resources you find helpful and would like to give credit 
 [Redux-url]: https://redux.js.org/
 [Apollo-GraphQL]: https://img.shields.io/badge/-ApolloGraphQL-311C87?style=for-the-badge&logo=apollo-graphql
 [Apollo-GraphQL-url]: https://www.apollographql.com/
+[Chai.js]: https://img.shields.io/static/v1?style=for-the-badge&message=Chai&color=A30701&logo=Chai&logoColor=FFFFFF&label=
+[Chai-url]: https://www.chaijs.com/
