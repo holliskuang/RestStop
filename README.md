@@ -241,5 +241,5 @@ Use this space to list resources you find helpful and would like to give credit 
 [MUI-url]: https://mui.com/
 [TypeScript.js]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
 [TypeScript-url]: https://www.typescriptlang.org/
-[Electron.js]:https://img.shields.io/badge/Electron-191970?style=for-the-badge&logo=Electron&logoColor=white)
+[Electron.js]: https://img.shields.io/badge/Electron-191970?style=for-the-badge&logo=Electron&logoColor=white
 [Electron-url]: https://www.electronjs.org/
