@@ -47,7 +47,7 @@ The application currently supports different methods such as: </p>
   <li><strong style="color:indigo ">gRPC</strong></li>
 </ul>
 
-Work In Progress: 
+Work In Progress 🚧: 
 <ul><li><strong>WebHook</strong></li></ul>
 
 ## Features
