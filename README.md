@@ -1,13 +1,8 @@
 # RestStop <img src='https://res.cloudinary.com/dd97ovnmi/image/upload/v1677132021/sleep_tryccy.png' width=40px height=40px style="margin-left:5px"> 
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-
     <img style='border:1px solid black' src="https://res.cloudinary.com/dd97ovnmi/image/upload/v1677133721/electron_nTCA3KEQ5s_podo5y.gif" >
-    
- 
- 
 </div>
 
  
